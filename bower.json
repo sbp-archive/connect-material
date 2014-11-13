@@ -1,0 +1,20 @@
+{
+  "name": "connect-material",
+  "version": "0.0.0",
+  "authors": [
+    "Victor Verhaagen <vverhaagen@schubergphilis.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "SBP",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

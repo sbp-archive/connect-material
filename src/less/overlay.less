@@ -1,0 +1,46 @@
+@import './variables.less';
+
+.material-overlay-backdrop {
+    .transition(opacity 8ms);
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 10;
+    &.hide {
+        display: none;
+        opacity: 0;
+        .transition(opacity 8s);
+    }
+}
+
+/**
+ * main overlay
+ */
+.material-overlay {
+    top: 125px;
+    z-index: 11;
+    display: block;
+    background: #fff;
+    position: relative;
+    margin: auto;
+    padding: 30px 42px;
+    border: 1px solid @gray-dark;
+    .box-shadow(0 4px 16px rgba(0,0,0,.2));
+    .material-overlay-header {
+        margin: 0 0 16px;
+        .material-overlay-header--close {
+            padding: 17px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            text-decoration: none;
+        }
+        .material-overlay-header--title {
+            
+        }
+    }
+}
