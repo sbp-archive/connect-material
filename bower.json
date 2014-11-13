@@ -4,6 +4,8 @@
   "authors": [
     "Victor Verhaagen <vverhaagen@schubergphilis.com>"
   ],
+  "description": "test",
+  "homepage": "https://github.schubergphilis.com/frontend/connect-material",
   "moduleType": [
     "amd",
     "globals"
