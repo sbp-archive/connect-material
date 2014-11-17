@@ -1,23 +1,37 @@
 @import './variables.less';
 
 .material-btn {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: 0;
+    padding: 6px;
+    margin: 0;
+    background: transparent;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
     text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9em;
+    border-radius: 3px;
+    line-height: 25px;
+    .box-shadow(0 2px 6px rgba(0,0,0,.2));
+    .transition(all 0.2s ease);
     &:hover {
         cursor: pointer;
         text-decoration: none;
+        .box-shadow(0 4px 8px rgba(0,0,0,.3));
     }
     //add button
     &.btn-add {
-        .transition(all 0.2s ease);
-        .box-shadow(0 2px 6px rgba(0,0,0,.2));
         background-color: darken(@brand-base-color,20%);
-        font-size: 0.9em;
-        text-transform: uppercase;
-        border-radius: 3px;
-        padding: 5px;
+        color: #fff;
         //hover
         &:hover{
-            .box-shadow(0 4px 8px rgba(0,0,0,.3));
             background-color: darken(@brand-base-color,15%);
         }
     }
@@ -38,7 +52,7 @@
         border: none;
         background: transparent;
         padding: 4px 10px;
-        outline: none;
+        .box-shadow(none);
         > span {
              &.round {
                 border-radius: 2px;

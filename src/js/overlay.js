@@ -22,7 +22,6 @@ define([
                 body.removeChild(elm[0]);
                 element(backdrop).addClass('hide');
             });
-            
         };
     });
 });
