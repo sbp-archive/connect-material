@@ -1,0 +1,51 @@
+@sidenav-default-width: 50%;
+
+@swift-ease-out-duration: 0.4s;
+@swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+@swift-ease-out: all @swift-ease-out-duration @swift-ease-out-timing-function;
+
+.material-drawer {
+  position: absolute;
+
+  width: @sidenav-default-width;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1001;
+  background-color: white;
+  overflow: auto;
+  .box-shadow(0 4px 16px rgba(0,0,0,.2));
+  
+  .transition(@swift-ease-out);
+
+  &.material-drawer-left {
+    transform: translate3d(-100%, 0, 0);
+    &.material-drawer-open {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &.material-drawer-right {
+    left: 100%;
+    transform: translate3d(0, 0, 0);
+    &.material-drawer-open {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }  
+}
+
+.material-drawer-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  
+  background-color: rgba(0, 0, 0, 0);
+  .transition(@swift-ease-out);
+  
+  &.material-drawer-backdrop-open {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
