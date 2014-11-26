@@ -31,6 +31,12 @@ define([
 
     module.controller('SinkCtrl', ['$scope', function($scope) {
         $scope.drawerOpened = true;
+
+        $scope.$watch('drawerOpened', function(opened) {
+            if (!opened) {                
+                alert('drawer has closed');
+            }
+        });
     }]);
 
     domReady(function() {
