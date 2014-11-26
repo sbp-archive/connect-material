@@ -1,0 +1,36 @@
+@import '../variables';
+@import '../mixins';
+
+material-item,
+.material-item {
+	display: block;
+	text-decoration: none;
+	font-weight: normal;
+	padding: 8px 24px;
+	font-size: 13px;
+	color: #333;
+	white-space: nowrap;
+	cursor: pointer;
+	position: relative;
+	vertical-align: bottom;
+    
+    &:hover {
+        background: @material-gray-light;
+    }
+
+    &.material-has-icon {
+    	padding-left: 64px;
+    }
+
+    > .material-icon {
+    	position: absolute;
+    	top: 6px;
+    	left: 24px;
+    }
+
+    > .material-text {
+		.text;
+		.unselectable;
+		line-height: 20px;
+    }
+}

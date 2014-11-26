@@ -1,0 +1,48 @@
+.arraw-popup (@left: 50%, @bgColor: #fff, @borderColor: @material-gray) {
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid @borderColor;
+    background-color: @bgColor;
+    &:after, &:before {
+        bottom: 100%;
+        left: @left;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: rgba(red(@bgColor), green(@bgColor), blue(@bgColor), 0);
+        border-bottom-color: @bgColor;
+        border-width: 13px;
+        margin-left: -13px;
+    } 
+    &:before {
+        border-color: rgba(red(@borderColor), green(@borderColor), blue(@borderColor), 0);
+        border-bottom-color: @borderColor;
+        border-width: 15px;
+        margin-left: -15px;
+    }
+}
+
+//transitions
+.transition(@transition) {
+  -webkit-transition: @transition;
+          transition: @transition;
+}
+
+//box shadow
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+.text() {
+    -webkit-font-smoothing: antialiased;
+}
+
+.unselectable() {
+    -webkit-user-select: none;    
+}

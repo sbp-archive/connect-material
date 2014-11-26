@@ -1,0 +1,46 @@
+@import '../variables';
+@import '../mixins';
+
+@import '../button/button';
+@import '../menu/menu';
+@import '../item/item';
+@import '../icon/icon';
+
+@material-sidenav-width: 200px;
+
+material-sidenav-button,
+.material-sidenav-button {
+	display: block;
+	position: relative;
+	width: @material-block-large-size;
+	height: @material-block-large-size;
+
+    > material-button,
+    > .material-button {
+        margin: 7px;
+    }
+
+	material-menu,
+	.material-menu {
+		left: 0;
+
+		.transition(transform @material-swift-ease-out);
+		transform: translateX(-@material-sidenav-width);
+
+        &.material-menu-opened {        	
+			transform: translateX(0);
+        }
+
+		material-item,
+		.material-item {
+			padding: 13px 24px;
+			font-weight: 500;
+			color: #222;
+			font-size: 14px;
+
+			&:hover {
+				color: #444;
+			}
+		}
+	}
+}

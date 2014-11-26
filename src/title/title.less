@@ -1,0 +1,36 @@
+@import '../variables';
+@import '../mixins';
+
+material-title,
+.material-title {
+	display: block;
+	text-align: left;
+	font-size: 2em;
+	color: #fff;
+	font-weight: 300;
+	padding: 0;
+	height: @material-block-large-size;
+	line-height: @material-block-large-size;
+	color: #000;
+	padding: 0 20px;
+
+    .text;
+    .unselectable;
+
+	h2 {
+		display: inline;
+		font-size: 0.7em;
+		margin-left: 20px;
+		color: @material-gray-darker;
+		font-weight: normal;
+	}
+
+	&.material-has-icon {
+	 	padding-left: @material-block-large-size;
+	 	> .material-icon {
+	 		position: absolute;
+	 		top: 20px;
+	 		left: 20px;
+	 	}
+	}
+}

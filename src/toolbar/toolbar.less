@@ -1,0 +1,34 @@
+@import '../variables';
+@import '../mixins';
+
+material-toolbar,
+.material-toolbar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	height: @material-block-large-size;
+	background-color: @material-primary-color;
+
+	> material-title,
+	> .material-title {
+		color: #fff;
+		flex: 1;
+		padding: 0;
+	}
+
+	material-button,
+	.material-button {
+		height: 50px;
+		padding: 12px;
+	}
+}
+
+material-appbar,
+.material-appbar {
+	.material-toolbar;
+	
+	background-color: @material-primary-color-dark;
+
+	.box-shadow(@material-shadow-toolbar);
+}

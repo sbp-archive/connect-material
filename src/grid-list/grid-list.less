@@ -1,0 +1,144 @@
+@import '../variables';
+@import '../mixins';
+
+// .material-grid-list {
+//     //2
+//     @media only screen and (min-width: 444px) {
+//         width: 444px; //(200 + (10 + 1) * 2) * 2
+//     }
+//     //3
+//     @media only screen and (min-width: 666px) {
+//         width: 666px; //(200 + (10 + 1) * 2) * 3
+//     }
+//     //4
+//     @media only screen and (min-width: 888px)   {
+//         width: 888px; //(200 + (10 + 1) * 2) * 4 
+//     }
+//     //5
+//     @media only screen and (min-width: 1110px) {
+//         width: 1100px; //(200 + (10 + 1) * 2) * 5
+//     }
+//     //1
+//     width: 222px; //(200 + (10 + 1) * 2) * 1
+//     margin: auto;
+
+//     /**
+//      * GRID view
+//      */
+//     &.view-grid {
+//         position: relative;
+//         //sort bar
+//         .grid-list-sortbar, .grid-hide {
+//             display: none;
+//         }
+//         //item
+//         .grid-list-item {
+//             display: block;
+//             float: left;
+//             margin: 10px;
+//             background: #fff;
+//             width: 200px;
+//             //border
+//             border-top: 1px solid @material-gray-lighter;
+//             border-right: 1px solid @material-gray;
+//             border-bottom: 1px solid @material-gray-lighter;
+//             border-left: 1px solid @material-gray;
+//             .box-shadow(0 1px 0 rgba(0,0,0,0.07));
+//             //hover
+//             &:hover{
+//                 cursor: pointer;
+//                 border-top: 1px solid lighten(@material-primary-color, 10%);
+//                 border-right: 1px solid @material-primary-color;
+//                 border-bottom: 1px solid lighten(@material-primary-color, 10%);
+//                 border-left: 1px solid @material-primary-color;
+//                 .box-shadow(0 1px 2px lighten(@material-primary-color,20%));
+//                 text-decoration: none;
+//             }
+
+//         }
+
+//         .grid-list-item--img {
+//             display: block;
+//             width: 200px;
+//             height: 200px;
+//             text-align: center;
+//             > span {
+//                 font-size: 160px;
+//                 line-height: 200px;
+//                 color: @material-primary-color;
+//             }
+//         }
+
+//         .grid-list-item--metadata {
+//             border-top: 1px solid #e2e2e2;
+//             display: block;
+//             padding: 10px 22px 14px 14px;
+//             position: relative;
+//             > h5 {
+//                 font-weight: 300;
+//             }
+//             > p {
+//                 margin: 0;
+//                 padding: 0;
+//             }
+//             > nav {
+//                 position: absolute;
+//                 right: 0px;
+//                 top: 32%;
+//             }
+//         }
+//     }
+//     /**
+//      * LIST view
+//      */
+//     &.view-list {
+//         .list-hide {
+//             display: none;
+//         }
+//         .grid-list-sortbar {
+//             clear: both;
+//             .grid-list-sortbar--item {
+//                 float: left;
+//                 display: block;
+//                 padding: 13px 0 13px 16px;
+//                 color: @material-gray-dark;
+//                 font-weight: 700;
+//                 text-decoration: none;
+//             }
+//         }
+//         .grid-list-item {
+//             position: relative;
+//             clear: both;
+//             border-bottom: 1px solid @material-gray-lighter;
+//             background: #fff;
+//             height: 48px;
+//             //cells
+//             .grid-list-item--img,
+//             .grid-list-item--metadata > *
+//              {
+//                 float: left;
+//                 display: block;
+//                 margin: 0;
+//                 padding: 13px 0 13px 16px;
+//                 font-weight: 700;
+//                 overflow: hidden;
+//             }
+//             .grid-list-item--metadata {
+//                 > nav {
+//                     right: 16px;
+//                     position: absolute;
+//                     margin: 0;
+//                     overflow: visible;
+//                     .menu-tooltip {
+//                         top: 50px;
+//                         left: -72px;
+//                     }
+//                 }
+//             }
+//             &:hover {
+//                 background: @material-gray-lighter;
+//                 cursor: pointer;
+//             }
+//         }
+//     }
+// }

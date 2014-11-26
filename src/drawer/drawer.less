@@ -1,0 +1,52 @@
+@import '../variables';
+@import '../mixins';
+
+@sidenav-default-width: 40%;
+
+material-drawer,
+.material-drawer {
+    position: absolute;
+    width: @sidenav-default-width;
+    top: 0;
+    bottom: 0;
+    z-index: 11;
+    background-color: #fff;
+    overflow: auto;
+
+    .box-shadow(@material-shadow-drawer);
+
+    .transition(transform @material-swift-ease-out);
+
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+
+    &.material-drawer-left {
+        &.material-drawer-opened {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    &.material-drawer-right {
+        left: 100%;
+        transform: translate3d(0, 0, 0);
+        &.material-drawer-opened {
+            transform: translate3d(-100%, 0, 0);
+        }
+    }  
+}
+
+.material-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    background-color: rgba(0, 0, 0, 0);
+
+    .transition(background-color @material-swift-ease-out);
+    &.material-backdrop-opened {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}

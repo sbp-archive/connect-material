@@ -1,0 +1,41 @@
+@import '../variables';
+@import '../mixins';
+
+@material-card-spacing: 12px;
+
+material-card,
+.material-card {
+	display: block;
+	background-color: white;
+	padding: @material-card-spacing;
+	margin: @material-card-spacing;
+
+	.box-shadow(@material-shadow-card);
+	border-radius: 2px;
+
+	material-toolbar,
+	.material-toolbar {
+		background-color: transparent;
+		border-bottom: 1px solid @material-gray-lighter;
+
+		material-title,
+		.material-title {
+			color: lighten(#000, 10%);
+		}
+	}
+
+	material-title,
+	.material-title {
+		display: block;
+		color: @material-primary-color-dark;
+		font-weight: 300;
+		height: 36px;
+		line-height: 36px;
+	}
+
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
