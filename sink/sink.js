@@ -29,15 +29,27 @@ define([
         'connectMaterialDirectives'
     ]);
 
-    module.controller('SinkCtrl', ['$scope', function($scope) {
-        $scope.drawerOpened = true;
+    module.controller('SinkCtrl', [
+        '$scope', 
+        'cmDrawerService',
+        function($scope, drawers) {
+            drawers.open('main').then(function() {
+                alert('drawer opened!');
 
-        $scope.$watch('drawerOpened', function(opened) {
-            if (!opened) {                
-                alert('drawer has closed');
-            }
-        });
-    }]);
+                drawers.close('main').then(function() {
+                    alert('drawer closed');
+                });
+            });
+
+            drawers.on('open', 'main', function() {
+                console.log('main drawer open event');
+            });
+
+            drawers.on('close', 'main', function() {
+                console.log('main drawer closed event');        
+            });
+        }
+    ]);
 
     domReady(function() {
         ng.bootstrap(document, ['sink']);
