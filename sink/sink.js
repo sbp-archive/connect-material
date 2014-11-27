@@ -39,15 +39,24 @@ define([
 
             $scope.openDrawer = function(id) {
                 drawers.open(id);
-            }
+            };
+
+            var hasIcons = true;
+            $scope.toggleMenuIcons = function(e) {
+                e.stopPropagation();
+                hasIcons = !hasIcons;
+            };
+            $scope.hasMenuIcons = function() {
+                return hasIcons;
+            };
 
             var modal = true;
             $scope.setModal = function(value) {
                 modal = value;
-            }
+            };
             $scope.isModal = function() {
                 return modal;
-            }
+            };
         }
     ]);
 

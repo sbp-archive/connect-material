@@ -43,18 +43,18 @@
     <body ng-controller="SinkCtrl">
         <material-title>Connect Material Kitchensink</material-title>
         <material-appbar>
-            <material-sidenav-button current-page="status">
+<!--             <material-sidenav-button current-page="status">
                 <material-item page="status">Status</material-item>
                 <material-item page="runs">Runs</material-item>
                 <material-item page="findings">Findings</material-item>
                 <material-divider></material-divider>
                 <material-item page="workspaces">Manage Workspaces</material-item>
                 <material-item page="scans">Manage Scans</material-item>
-            </material-sidenav-button>
+            </material-sidenav-button> -->
 
             <material-title page="status">Status</material-title>
 
-            <material-menu-button icon="navigation-white:apps_white" menu-icons="true">
+            <material-menu-button button-config="{icon:'navigation-white:apps_white'}" menu-config="{icons:hasMenuIcons()}">
                 <material-item material-icon="action-black:dashboard_black">Dashboard</material-item>
                 <material-item material-icon="action-black:credit_card_black">Credit</material-item>
                 <material-item material-icon="action-black:account_balance_black">Balance</material-item>
@@ -62,10 +62,10 @@
                 <material-item material-icon="action-black:alarm_black">Set Alarm</material-item>
                 <material-item material-icon="action-black:announcement_black">Announcements</material-item>
                 <material-divider></material-divider>
-                <material-item>Iconless Item</material-item>
+                <material-item ng-click="toggleMenuIcons($event)">Toggle Icons</material-item>
             </material-menu-button>
 
-            <material-menu-button icon="navigation-white:more_vert_white">
+            <material-menu-button button-config="{icon:'navigation-white:more_vert_white'}">
                 <material-item>Menu Item 1</material-item>
                 <material-item>Menu Item 2</material-item>
                 <material-item>Menu Item 3</material-item>

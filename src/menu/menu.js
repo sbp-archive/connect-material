@@ -4,44 +4,63 @@ define([
     '../item/item'
 ], function (material, ng) {
     'use strict';
+
     material.directive('materialMenu', [
         '$animate',
-        '$parse',
-        function ($animate, $parse) {
+        'materialConfigService',
+        'materialMenuService',
+        function ($animate, configs, menus) {
+            var ID_GENERATOR = 1;
+
             return {
                 restrict: 'EA',
                 scope: {
-                    opened: '=opened'
+                    menuId: '@'
                 },
-                link: function(scope, element, attrs) {
-                    if ($parse(attrs.menuIcons)(scope.$parent)) {
-                        element.addClass('material-menu-has-icons');
+                link: function($scope, $element, $attrs) {
+                    configs.apply($scope, $attrs.menuConfig, {
+                        icons: false
+                    });
+
+                    var id = $scope.menuId;
+                    if (!id) {
+                        id = $scope.menuId = 'material-menu-' + ID_GENERATOR++;
                     }
 
+                    $scope._menu = menus.getMenu(id);
+
                     function onBodyClick(e) {
-                        scope.$apply(function() {
-                            scope.opened = false;
+                        $scope.$apply(function() {
+                            menus.close(id);
                         });
                     }
 
-                    scope.$watch('opened', function(opened) {
+                    $scope.$watch('_icons', function(value) {
+                        if (value) {
+                            $element.addClass('material-menu-has-icons');
+                        } else {
+                            $element.removeClass('material-menu-has-icons');
+                        }
+                    });
+
+                    $scope.$watch('_menu.opened', function(opened, wasOpened) {
                         if (opened) {
-                            scope.$root.$broadcast('material-menu.show', element);
-                            $animate.addClass(element, 'material-menu-opened');
+                            $animate.addClass($element, 'material-menu-opened').then(function() {
+                                menus.setTransitionDone('open', id);
+                            });
                             ng.element(window).on('click', onBodyClick);
                         } 
-                        else {
-                            scope.$root.$broadcast('material-menu.hide', element);
-                            $animate.removeClass(element, 'material-menu-opened');
+                        else if (wasOpened) {
+                            $animate.removeClass($element, 'material-menu-opened').then(function() {
+                                menus.setTransitionDone('close', id);
+                            });
                             ng.element(window).off('click', onBodyClick);
                         }
                     });
 
-                    // If another menu opens we need to hide this menu
-                    scope.$root.$on('material-menu.show', function(e, menuEl) {
-                        if (element !== menuEl) {
-                            scope.opened = false;
-                        }
+                    $scope.$on('destroy', function() {
+                        ng.element(window).off('click', onBodyClick);
+                        menus.removeMenu(id);
                     });
                 }
             };
@@ -49,26 +68,145 @@ define([
     ]);
 
     material.directive('materialMenuButton', [
-        function($rootScope) {
+        'materialConfigService',
+        'materialMenuService',
+        function(configs, menus) {
+            var ID_GENERATOR = 1;
+
             return {
                 restrict: 'EA',
                 transclude: true,
                 scope: {
-                    opened: '@',
-                    icon: '@',
-                    menuIcons: '@'
+                    menuId: '@'
                 },
                 template: [
-                    '<material-button ng-click="openMenu($event)" material-icon="{{icon}}"></material-button>',
-                    '<material-menu opened="opened" menu-icons="menuIcons" ng-transclude></material-menu>'
+                    '<material-button ng-click="openMenu($event)" button-config="_buttonConfig"></material-button>',
+                    '<material-menu menu-id="{{menuId}}" menu-config="_menuConfig" ng-transclude></material-menu>'
                 ].join(''),
-                link: function(scope, element) {
-                    scope.openMenu = function(e) {
-                        e.stopPropagation();
-                        scope.opened = true;
-                    };
+                compile: function() {
+                    return {
+                        pre: function($scope, $element, $attrs) {
+                            if (!$scope.menuId) {
+                                $scope.menuId = 'material-menubutton-' + ID_GENERATOR++;
+                            }
+                        },
+                        post: function($scope, $element, $attrs) {
+                            configs.bridge($scope, $attrs, 'buttonConfig');
+                            configs.bridge($scope, $attrs, 'menuConfig');
+
+                            $scope.openMenu = function(e) {
+                                e.stopPropagation();
+                                menus.open($scope.menuId);
+                            };
+                        }
+                    }
                 }
             }
+        }
+    ]);
+
+    material.factory('materialMenuService', [
+        '$q',
+        function($q) {
+            return (function() {
+                var menus = {},
+                    openMenuId = null;
+
+                var self = {
+                    getMenu: function(id) {
+                        var menu = menus[id];
+
+                        if (!menu) {
+                            menu = menus[id] = {
+                                id: id,
+                                opened: false,
+                                listeners: {
+                                    open: [],
+                                    close: []
+                                },
+                                deferred: {
+                                    open: null,
+                                    close: null 
+                                }
+                            };
+                        }
+
+                        return menu;
+                    },
+
+                    removeMenu: function(id) {
+                        delete menus[id];
+                    },
+
+                    setTransitionDone: function(eventName, id) {
+                        var menu = self.getMenu(id),
+                            deferred = menu.deferred[eventName];
+
+                        if (deferred) {
+                            deferred.resolve();
+                            menu.deferred[eventName] = null;
+                            self.broadcast(eventName, id);
+                        }
+                    },
+
+                    open: function(id) {
+                        var menu = self.getMenu(id);
+
+                        if (openMenuId && openMenuId !== id) {
+                            self.close(openMenuId);
+                        }
+
+                        openMenuId = id;
+                        if (!menu.deferred.open) {
+                            menu.opened = true;                            
+                            menu.deferred.open = $q.defer();
+                        }
+
+                        return menu.deferred.open.promise;
+                    },
+
+                    close: function(id) {
+                        var menu = self.getMenu(id);
+
+                        if (openMenuId && openMenuId == id) {                            
+                            openMenuId = null;
+                        }
+
+                        if (!menu.deferred.close) {
+                            menu.opened = false;
+                            menu.deferred.close = $q.defer();
+                        }
+
+                        return menu.deferred.close.promise;
+                    },
+
+                    on: function(eventName, id, callback) {
+                        var menu = self.getMenu(id),
+                            listeners = menu && menu.listeners && menu.listeners[eventName];
+
+                        if (listeners) {
+                            listeners.push(callback);
+
+                            return function() {
+                                listeners[eventName].splice(listeners[eventName].indexOf(callback), 1);
+                            };
+                        }       
+                    },
+
+                    broadcast: function(eventName, id) {
+                        var menu = self.getMenu(id),
+                            listeners = menu && menu.listeners && menu.listeners[eventName];
+
+                        if (listeners) {
+                            listeners.forEach(function(listener) {
+                                listener.apply(self, Array.prototype.slice.call(arguments, 1));
+                            });
+                        }                          
+                    }
+                };
+
+                return self;
+            })();
         }
     ]);
 });
