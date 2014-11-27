@@ -103,49 +103,58 @@ define([
         '$parse',
         '$animate',
         'materialDrawerService',
-        function ($parse, $animate, drawers) {
+        'materialConfigService',
+        function ($parse, $animate, drawers, configs) {
             var ID_GENERATOR = 1;
 
             return {
                 restrict: 'EA',
-                scope: true,
+                scope: {
+                    drawerId: '@',
+                    drawerConfig: '@'
+                },
 
                 link: function($scope, $element, $attrs) {
-                    // First we evaluate all configurations into our current scope
-                    ['drawerId', 'modal', 'position'].forEach(function(config) {
-                        if (ng.isDefined($attrs[config])) {
-                            var value = $parse($attrs[config])($scope);
-                            if (ng.isUndefined(value)) {
-                                value = $attrs[config];
+                    var id = $scope.drawerId;
+                    if (!id) {
+                        id = $scope.drawerId = 'material-drawer-' + ID_GENERATOR++;
+                    }
+
+                    configs.apply($scope, $attrs.drawerConfig, {
+                        position: 'right',
+                        modal: true
+                    });
+
+                    $scope._drawer = drawers.getDrawer(id);
+
+                    var backdrop = null;
+                    $scope.$watch('_modal', function(value) {
+                        if (!value && backdrop) {
+                            backdrop.remove();
+                            backdrop = null;
+                        }
+                        else if (value) {
+                            backdrop = ng.element('<div class="material-backdrop"></div>');
+                            if ($scope._drawer.opened) {
+                                backdrop.addClass('material-backdrop-opened');
                             }
-                            $scope['$' + config] = value;
+                            $element.parent().append(backdrop);
+                            backdrop.on('click', function() {
+                                $scope.$apply(function() {
+                                    drawers.close(id);
+                                });
+                            });
                         }
                     });
 
-                    var id = $scope.$drawerId;
-                    if (!id) {
-                        id = $scope.$drawerId = 'material-drawer-' + ID_GENERATOR++;
-                    }
+                    $scope.$watch('_position', function(newPos, oldPos) {
+                        $element.removeClass('material-drawer-' + oldPos);
+                        $element.addClass('material-drawer-' + newPos);
+                    });
 
-                    $scope.$drawer = drawers.getDrawer(id);
-
-                    if ($scope.$modal) {
-                        var backdrop = ng.element('<div class="material-backdrop"></div>');
-                    }
-
-                    $element.addClass('material-drawer-' + ($scope.$position || 'right'));
-
-                    $scope.$watch('$drawer.opened', function(opened) {
+                    $scope.$watch('_drawer.opened', function(opened) {
                         if (opened) {
-                            if ($scope.$modal) {
-                                $element.parent().append(backdrop);
-
-                                backdrop.one('click', function() {
-                                    $scope.$apply(function() {
-                                        drawers.close(id);
-                                    });
-                                });
-
+                            if ($scope._modal) {
                                 $animate.addClass(backdrop, 'material-backdrop-opened');
                             }
 
@@ -154,10 +163,8 @@ define([
                             });
                         } 
                         else {
-                            if ($scope.$modal) {
-                                $animate.removeClass(backdrop, 'material-backdrop-opened').then(function() {
-                                    backdrop.remove();
-                                });
+                            if ($scope._modal) {
+                                $animate.removeClass(backdrop, 'material-backdrop-opened');
                             }
 
                             $animate.removeClass($element, 'material-drawer-opened').then(function() {

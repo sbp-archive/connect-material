@@ -40,6 +40,14 @@ define([
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             }
+
+            var modal = true;
+            $scope.setModal = function(value) {
+                modal = value;
+            }
+            $scope.isModal = function() {
+                return modal;
+            }
         }
     ]);
 

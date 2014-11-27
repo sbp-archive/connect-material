@@ -84,11 +84,12 @@
                 </material-toolbar>
             </material-card>
 
-            <material-drawer drawer-id="left" modal="true" position="left">
-                <material-datepicker ng-model="date"></material-datepicker>
+            <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
+                <material-button ng-click="setModal(true)">Set Modal</material-button>
+                <material-button ng-click="setModal(false)">Unset Modal</material-button>
             </material-drawer>
 
-            <material-drawer drawer-id="right" modal="true" position="right">
+            <material-drawer drawer-id="right" drawer-config="{position:'right'}">
                 <material-textfield label="First Name" ng-model="firstName"></material-textfield>
                 <material-textfield label="Last Name" ng-model="lastName"></material-textfield>
                 <material-textfield label="Address" ng-model="address"></material-textfield>

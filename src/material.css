@@ -694,13 +694,17 @@ material-drawer.material-drawer-right.material-drawer-opened,
 .material-backdrop {
   position: absolute;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
+  width: 100%;
+  left: -100000px;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0);
+}
+.material-backdrop.material-backdrop-opened,
+.material-backdrop.material-backdrop-opened-remove {
   -webkit-transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  left: 0;
 }
 .material-backdrop.material-backdrop-opened {
   background-color: rgba(0, 0, 0, 0.5);

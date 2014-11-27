@@ -41,15 +41,19 @@ material-drawer,
 .material-backdrop {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
-    left: 0;
+    width: 100%;
+    left: -100000px;
     z-index: 10;
-
     background-color: rgba(0, 0, 0, 0);
 
-    .transition(background-color @material-swift-ease-out);
-    &.material-backdrop-opened {
+    &.material-backdrop-opened,
+    &.material-backdrop-opened-remove {
+        .transition(background-color @material-swift-ease-out);
+        left: 0;
+    }
+
+    &.material-backdrop-opened, {
         background-color: rgba(0, 0, 0, 0.5);
     }
 }
