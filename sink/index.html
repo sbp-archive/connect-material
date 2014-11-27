@@ -35,6 +35,7 @@
                 flex: 1;
                 background-color: #eee;
                 overflow: auto;
+                position: relative;
             }
         </style>
     </head>
@@ -76,10 +77,18 @@
 
         <div class="page-content">
             <material-card>
-                <material-datepicker ng-model="date"></material-datepicker>
+                <material-toolbar>
+                    <material-title>Buttons</material-title>
+                    <material-button ng-click="openDrawer('left')">Drawer Left</material-button>
+                    <material-button ng-click="openDrawer('right')">Drawer Right</material-button>
+                </material-toolbar>
             </material-card>
 
-            <material-drawer drawer-id="main" modal="true" position="right">
+            <material-drawer drawer-id="left" modal="true" position="left">
+                <material-datepicker ng-model="date"></material-datepicker>
+            </material-drawer>
+
+            <material-drawer drawer-id="right" modal="true" position="right">
                 <material-textfield label="First Name" ng-model="firstName"></material-textfield>
                 <material-textfield label="Last Name" ng-model="lastName"></material-textfield>
                 <material-textfield label="Address" ng-model="address"></material-textfield>

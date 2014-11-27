@@ -7,7 +7,6 @@ material-card,
 .material-card {
 	display: block;
 	background-color: white;
-	padding: @material-card-spacing;
 	margin: @material-card-spacing;
 
 	.box-shadow(@material-shadow-card);
@@ -20,6 +19,7 @@ material-card,
 
 		material-title,
 		.material-title {
+			padding: 0 @material-card-spacing;
 			color: lighten(#000, 10%);
 		}
 	}

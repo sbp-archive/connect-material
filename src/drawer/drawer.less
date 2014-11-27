@@ -15,10 +15,13 @@ material-drawer,
 
     .box-shadow(@material-shadow-drawer);
 
-    .transition(transform @material-swift-ease-out);
-
     left: 0;
     transform: translate3d(-100%, 0, 0);
+
+    &.material-drawer-opened,
+    &.material-drawer-opened-remove {
+        .transition(transform @material-swift-ease-out);
+    }
 
     &.material-drawer-left {
         &.material-drawer-opened {

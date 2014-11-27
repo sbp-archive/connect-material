@@ -108,6 +108,8 @@ define([
 
             return {
                 restrict: 'EA',
+                scope: true,
+
                 link: function($scope, $element, $attrs) {
                     // First we evaluate all configurations into our current scope
                     ['drawerId', 'modal', 'position'].forEach(function(config) {
@@ -129,19 +131,21 @@ define([
 
                     if ($scope.$modal) {
                         var backdrop = ng.element('<div class="material-backdrop"></div>');
-                        backdrop.on('click', function() {
-                            $scope.$apply(function() {
-                                drawers.close(id);
-                            });
-                        });
                     }
 
-                    $element.addClass('material-drawer-' + ($attrs.$position || 'right'));
+                    $element.addClass('material-drawer-' + ($scope.$position || 'right'));
 
                     $scope.$watch('$drawer.opened', function(opened) {
                         if (opened) {
                             if ($scope.$modal) {
                                 $element.parent().append(backdrop);
+
+                                backdrop.one('click', function() {
+                                    $scope.$apply(function() {
+                                        drawers.close(id);
+                                    });
+                                });
+
                                 $animate.addClass(backdrop, 'material-backdrop-opened');
                             }
 

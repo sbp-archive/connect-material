@@ -37,21 +37,9 @@ define([
                 key: 'value'
             };
 
-            drawers.open('main').then(function() {
-                setTimeout(function() {
-                    $scope.$apply(function() {
-                        //drawers.close('main');
-                    });
-                }, 800);
-            });
-
-            drawers.on('open', 'main', function() {
-                console.log('main drawer open event');
-            });
-
-            drawers.on('close', 'main', function() {
-                console.log('main drawer closed event');        
-            });
+            $scope.openDrawer = function(id) {
+                drawers.open(id);
+            }
         }
     ]);
 
