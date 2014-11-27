@@ -85,7 +85,7 @@ define([
                 ].join(''),
                 compile: function() {
                     return {
-                        pre: function($scope, $element, $attrs) {
+                        pre: function($scope) {
                             if (!$scope.menuId) {
                                 $scope.menuId = 'material-menubutton-' + ID_GENERATOR++;
                             }
