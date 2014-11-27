@@ -79,14 +79,13 @@
             <material-card>
                 <material-toolbar>
                     <material-title>Buttons</material-title>
-                    <material-button ng-click="openDrawer('left')">Drawer Left</material-button>
-                    <material-button ng-click="openDrawer('right')">Drawer Right</material-button>
+                    <material-button ng-click="openDrawer('left')">Drawer</material-button>
+                    <material-button ng-click="openDrawer('right')">Forms</material-button>
                 </material-toolbar>
             </material-card>
 
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
-                <material-button ng-click="setModal(true)">Set Modal</material-button>
-                <material-button ng-click="setModal(false)">Unset Modal</material-button>
+                <material-button ng-click="toggleModal()">Toggle Modal</material-button>
             </material-drawer>
 
             <material-drawer drawer-id="right" drawer-config="{position:'right'}">

@@ -1,7 +1,8 @@
 define([
     '../material',
     'angular',
-    '../item/item'
+    '../item/item',
+    '../button/button'
 ], function (material, ng) {
     'use strict';
 

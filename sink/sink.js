@@ -51,8 +51,8 @@ define([
             };
 
             var modal = true;
-            $scope.setModal = function(value) {
-                modal = value;
+            $scope.toggleModal = function() {
+                modal = !modal;
             };
             $scope.isModal = function() {
                 return modal;
