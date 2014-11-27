@@ -4,14 +4,14 @@ define([
 ], function (material, ng) {
     'use strict';
 
-    material.factory('cmDrawerService', [
+    material.factory('materialDrawerService', [
         '$q',
         function($q) {
             return (function() {
                 var drawers = {};
 
                 var self = {
-                    addDrawer: function(id) {
+                    getDrawer: function(id) {
                         var drawer = drawers[id];
 
                         if (!drawer) {
@@ -36,59 +36,62 @@ define([
                         delete drawers[id];
                     },
 
-                    setTransitionDone: function(event, id) {
-                        var drawer = drawers[id],
-                            deferred = drawer && drawer.deferred[event];
+                    setTransitionDone: function(eventName, id) {
+                        var drawer = self.getDrawer(id),
+                            deferred = drawer.deferred[eventName];
 
                         if (deferred) {
                             deferred.resolve();
-                            drawer.deferred[event] = null;
+                            drawer.deferred[eventName] = null;
+                            self.broadcast(eventName, id);
                         }
                     },
 
                     open: function(id) {
-                        var drawer = drawers[id];
+                        var drawer = self.getDrawer(id);
 
-                        if (!drawer) {
-                            drawer = self.addDrawer(id);
-                        }
-
-                        if (drawer.deferred.open) {
-                            return drawer.deferred.open.promise;
-                        }
-                        else {
+                        if (!drawer.deferred.open) {
                             drawer.opened = true;                            
                             drawer.deferred.open = $q.defer();
-                            return drawer.deferred.open.promise;
                         }
+
+                        return drawer.deferred.open.promise;
                     },
 
                     close: function(id) {
-                        var drawer = drawers[id];
-                        if (!drawer) {
-                            drawer = self.addDrawer(id);
-                        }
+                        var drawer = self.getDrawer(id);
 
-                        if (drawer.deferred.close) {
-                            return drawer.deferred.close.promise;
-                        }
-                        else {
+                        if (!drawer.deferred.close) {
                             drawer.opened = false;
                             drawer.deferred.close = $q.defer();
-                            return drawer.deferred.close.promise;
-                        }
+                        }           
+
+                        return drawer.deferred.close.promise;
                     },
 
-                    on: function(event, id, callback) {
-                        var drawer = drawers[id];
-                        if (drawer && drawer[event]) {
-                            drawer[event].push(callback);
+                    on: function(eventName, id, callback) {
+                        var drawer = self.getDrawer(id),
+                            listeners = drawer && drawer.listeners && drawer.listeners[eventName];
+
+                        if (listeners) {
+                            listeners.push(callback);
 
                             return function() {
-                                drawer[event].splice(drawer.open.indexOf(callback), 1);
+                                listeners[eventName].splice(listeners[eventName].indexOf(callback), 1);
                             };
                         }       
                     },
+
+                    broadcast: function(eventName, id) {
+                        var drawer = self.getDrawer(id),
+                            listeners = drawer && drawer.listeners && drawer.listeners[eventName];
+
+                        if (listeners) {
+                            listeners.forEach(function(listener) {
+                                listener.apply(self, Array.prototype.slice.call(arguments, 1));
+                            });
+                        }                          
+                    }
                 };
 
                 return self;
@@ -99,57 +102,68 @@ define([
     material.directive('materialDrawer', [
         '$parse',
         '$animate',
-        'cmDrawerService',
-        function ($parse, $animate, cmDrawerService) {
+        'materialDrawerService',
+        function ($parse, $animate, drawers) {
             var ID_GENERATOR = 1;
 
             return {
                 restrict: 'EA',
-                scope: {
-                    //modal: '@',
-                    position: '@'
-                },
-                link: function(scope, element, attrs) {
-                    var id = attrs.drawerId;
+                link: function($scope, $element, $attrs) {
+                    // First we evaluate all configurations into our current scope
+                    ['drawerId', 'modal', 'position'].forEach(function(config) {
+                        if (ng.isDefined($attrs[config])) {
+                            var value = $parse($attrs[config])($scope);
+                            if (ng.isUndefined(value)) {
+                                value = $attrs[config];
+                            }
+                            $scope['$' + config] = value;
+                        }
+                    });
+
+                    var id = $scope.$drawerId;
                     if (!id) {
-                        id = 'material-drawer-' + ID_GENERATOR++;
+                        id = $scope.$drawerId = 'material-drawer-' + ID_GENERATOR++;
                     }
 
-                    scope.drawer = cmDrawerService.addDrawer(id);
+                    $scope.$drawer = drawers.getDrawer(id);
 
-                    // if (scope.modal) {
-                    //     var backdrop = ng.element('<div class="material-backdrop"></div>');
-                    // }
+                    if ($scope.$modal) {
+                        var backdrop = ng.element('<div class="material-backdrop"></div>');
+                        backdrop.on('click', function() {
+                            $scope.$apply(function() {
+                                drawers.close(id);
+                            });
+                        });
+                    }
 
-                    element.addClass('material-drawer-' + (attrs.position || 'right'));
+                    $element.addClass('material-drawer-' + ($attrs.$position || 'right'));
 
-
-                    scope.$watch('drawer.opened', function(opened) {
+                    $scope.$watch('$drawer.opened', function(opened) {
                         if (opened) {
-                            // if (scope.modal) {
-                            //     element.parent().append(backdrop);
-                            //     $animate.addClass(backdrop, 'material-backdrop-opened');
-                            // }
+                            if ($scope.$modal) {
+                                $element.parent().append(backdrop);
+                                $animate.addClass(backdrop, 'material-backdrop-opened');
+                            }
 
-                            $animate.addClass(element, 'material-drawer-opened').then(function() {
-                                cmDrawerService.setTransitionDone('open', id);
+                            $animate.addClass($element, 'material-drawer-opened').then(function() {
+                                drawers.setTransitionDone('open', id);
                             });
                         } 
                         else {
-                            // if (scope.modal) {
-                            //     $animate.removeClass(backdrop, 'material-backdrop-opened').then(function() {
-                            //         backdrop.remove();
-                            //     });
-                            // }
+                            if ($scope.$modal) {
+                                $animate.removeClass(backdrop, 'material-backdrop-opened').then(function() {
+                                    backdrop.remove();
+                                });
+                            }
 
-                            $animate.removeClass(element, 'material-drawer-opened').then(function() {
-                                cmDrawerService.setTransitionDone('close', id);
+                            $animate.removeClass($element, 'material-drawer-opened').then(function() {
+                                drawers.setTransitionDone('close', id);
                             });
                         }
                     });
 
-                    scope.$on('destroy', function() {
-                        cmDrawerService.removeDrawer(id);
+                    $scope.$on('destroy', function() {
+                        drawers.removeDrawer(id);
                     });
                 }
             }

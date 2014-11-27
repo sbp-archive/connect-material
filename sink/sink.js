@@ -31,14 +31,18 @@ define([
 
     module.controller('SinkCtrl', [
         '$scope', 
-        'cmDrawerService',
+        'materialDrawerService',
         function($scope, drawers) {
-            drawers.open('main').then(function() {
-                alert('drawer opened!');
+            $scope.data = {
+                key: 'value'
+            };
 
-                drawers.close('main').then(function() {
-                    alert('drawer closed');
-                });
+            drawers.open('main').then(function() {
+                setTimeout(function() {
+                    $scope.$apply(function() {
+                        //drawers.close('main');
+                    });
+                }, 800);
             });
 
             drawers.on('open', 'main', function() {
