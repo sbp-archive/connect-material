@@ -33,6 +33,8 @@ define([
         '$scope', 
         'materialDrawerService',
         function($scope, drawers) {
+            drawers.open('right');
+            
             $scope.data = {
                 key: 'value'
             };

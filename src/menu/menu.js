@@ -153,6 +153,10 @@ define([
                     open: function(id) {
                         var menu = self.getMenu(id);
 
+                        if (menu.opened && !menu.deferred.open) {
+                            return $q.reject('Menu ' + id + 'already opened');
+                        }
+
                         if (openMenuId && openMenuId !== id) {
                             self.close(openMenuId);
                         }
@@ -168,6 +172,10 @@ define([
 
                     close: function(id) {
                         var menu = self.getMenu(id);
+
+                        if (!menu.opened && !menu.deferred.close) {
+                            return $q.reject('Menu ' + id + 'already closed');
+                        }
 
                         if (openMenuId && openMenuId == id) {                            
                             openMenuId = null;

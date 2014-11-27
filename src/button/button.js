@@ -19,14 +19,6 @@ define([
                         icon: false
                     });
 
-                    $scope.$watch('_icon', function(icon, wasIcon) {
-                        if (icon) {
-                            $element.addClass('material-has-icon');
-                        } else if (wasIcon) {
-                            $element.removeClass('material-has-icon');
-                        }
-                    });
-
                     $scope.getIconClass = function() {
                         var parts = $scope._icon.split(':'),
                             iconCls = 'icon-' + parts[0];

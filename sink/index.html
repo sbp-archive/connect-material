@@ -54,6 +54,9 @@
 
             <material-title page="status">Status</material-title>
 
+
+            <material-button ng-click="openDrawer('left')">Open Drawer</material-button>
+
             <material-menu-button button-config="{icon:'navigation-white:apps_white'}" menu-config="{icons:hasMenuIcons()}">
                 <material-item material-icon="action-black:dashboard_black">Dashboard</material-item>
                 <material-item material-icon="action-black:credit_card_black">Credit</material-item>
@@ -78,9 +81,7 @@
         <div class="page-content">
             <material-card>
                 <material-toolbar>
-                    <material-title>Buttons</material-title>
-                    <material-button ng-click="openDrawer('left')">Drawer from the left</material-button>
-                    <material-button ng-click="openDrawer('right2')">Drawer from the right</material-button>
+                    <material-title>Card with Toolbar</material-title>
                     <material-button ng-click="openDrawer('right')">Forms</material-button>
                 </material-toolbar>
             </material-card>

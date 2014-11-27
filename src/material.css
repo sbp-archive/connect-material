@@ -96,14 +96,18 @@ material-button,
   background: transparent;
   white-space: nowrap;
   text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
   cursor: pointer;
   overflow: hidden;
-  font-weight: 700;
   outline: none;
   border: 1px solid transparent;
+}
+material-button .material-text,
+.material-button .material-text {
   -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 24px;
 }
 material-toolbar,
 .material-toolbar {
@@ -127,6 +131,7 @@ material-toolbar .material-button,
 .material-toolbar .material-button {
   height: 50px;
   padding: 12px;
+  color: #1788b8;
 }
 material-appbar,
 .material-appbar {
@@ -153,6 +158,13 @@ material-appbar .material-button,
 .material-appbar .material-button {
   height: 50px;
   padding: 12px;
+  color: #1788b8;
+}
+material-appbar material-button,
+.material-appbar material-button,
+material-appbar .material-button,
+.material-appbar .material-button {
+  color: #fff;
 }
 material-card,
 .material-card {

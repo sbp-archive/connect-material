@@ -134,8 +134,12 @@ define([
                     open: function(id) {
                         var drawer = self.getDrawer(id);
 
+                        if (drawer.opened && !drawer.deferred.open) {
+                            return $q.reject('Drawer ' + id + 'already opened');
+                        }
+
                         if (!drawer.deferred.open) {
-                            drawer.opened = true;                            
+                            drawer.opened = true;          
                             drawer.deferred.open = $q.defer();
                         }
 
@@ -144,6 +148,10 @@ define([
 
                     close: function(id) {
                         var drawer = self.getDrawer(id);
+
+                        if (!drawer.opened && !drawer.deferred.close) {
+                            return $q.reject('Drawer ' + id + 'already closed');
+                        }
 
                         if (!drawer.deferred.close) {
                             drawer.opened = false;
