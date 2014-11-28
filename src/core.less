@@ -24,3 +24,25 @@ material-row,
 	overflow: visible;
 	width: 100%;
 }
+
+material-buttonbar,
+.material-buttonbar {
+	.material-row;
+
+	justify-content: flex-end;
+	padding: 0 @material-content-spacing;
+
+	material-button,
+	.material-button {
+		margin-left: @material-content-spacing;
+		.material-text {
+			color: @material-primary-color-darker;
+			font-weight: 500;
+			font-size: 1.1em;
+
+			&:hover {
+				color: @material-primary-color-dark;
+			}
+		}
+	}
+}

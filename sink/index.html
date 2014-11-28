@@ -35,6 +35,7 @@
                 flex: 1;
                 background-color: #eee;
                 position: relative;
+                overflow: hidden;
             }
 
             .field-birth {
@@ -95,11 +96,16 @@
             </material-card>
 
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
-                <material-button ng-click="openDrawer('subleft')">We need to go deeper</material-button>
+                <material-buttonbar>
+                    <material-button ng-click="closeDrawer('left')">Close</material-button>
+                    <material-button ng-click="openDrawer('subleft')">Deeper</material-button>
+                </material-buttonbar>
             </material-drawer>
 
             <material-drawer drawer-id="subleft" drawer-config="{position:'left'}">
-                <material-button ng-click="closeDrawer('subleft')">Go back</material-button>
+                <material-buttonbar>
+                    <material-button ng-click="closeDrawer('subleft')">Go back</material-button>
+                </material-buttonbar>
             </material-drawer>
 
             <material-drawer drawer-id="right" drawer-config="{position:'right'}">
@@ -117,6 +123,11 @@
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
                     <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
                 </material-content>
+
+                <material-buttonbar>
+                    <material-button ng-click="closeDrawer('right')">Cancel</material-button>
+                    <material-button ng-click="closeDrawer('right')">Save</material-button>
+                </material-buttonbar>
             </material-drawer>
         </div>
     </body>
