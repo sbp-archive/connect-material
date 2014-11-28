@@ -41,6 +41,10 @@ define([
                 drawers.open(id);
             };
 
+            $scope.closeDrawer = function(id) {
+                drawers.close(id);
+            };
+
             var hasIcons = true;
             $scope.toggleMenuIcons = function(e) {
                 e.stopPropagation();

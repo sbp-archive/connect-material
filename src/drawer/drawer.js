@@ -38,11 +38,14 @@ define([
                             backdrop = null;
                         }
                         else if (value) {
-                            backdrop = ng.element('<div class="material-backdrop"></div>');
+                            backdrop = ng.element('<div class="material-backdrop" backdrop-for-drawer="' + id + '"></div>');
                             if ($scope._drawer.opened) {
                                 backdrop.addClass('material-backdrop-opened');
                             }
-                            $element.parent().append(backdrop);
+
+                            // insert the backdrop just before the drawer:
+                            $element.parent()[0].insertBefore(backdrop[0], $element[0]);
+
                             backdrop.on('click', function() {
                                 $scope.$apply(function() {
                                     drawers.close(id);
