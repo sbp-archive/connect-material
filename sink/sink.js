@@ -22,7 +22,8 @@ define([
     'connect-material/pickers/pickers',
     'connect-material/drawer/drawer',
     'connect-material/textfield/textfield',
-    'connect-material/select/select'
+    'connect-material/select/select',
+    'connect-material/checkbox/checkbox'
 ], function(ng, domReady) {
     'use strict';
 
@@ -67,7 +68,9 @@ define([
                 address: 'Gedempte Oude Gracht 54a',
                 city: 'Haarlem',
                 state: 'NY',
-                gender: null
+                gender: null,
+                receiveEmail: true,
+                receiveNewsletter: false
             };;
 
             $scope.states = [

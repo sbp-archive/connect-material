@@ -692,6 +692,84 @@ material-input-group.material-input-has-value:not(.material-input-focused) label
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
   color: #c4c4c4;
 }
+material-checkbox,
+.material-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+material-checkbox .material-checkbox-container,
+.material-checkbox .material-checkbox-container {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+material-checkbox .material-checkbox-icon,
+.material-checkbox .material-checkbox-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000;
+  border-radius: 2px;
+  -webkit-transition: all 250ms;
+  transition: all 250ms;
+}
+material-checkbox.material-checkbox-checked .material-checkbox-icon,
+.material-checkbox.material-checkbox-checked .material-checkbox-icon {
+  border: none;
+  background-color: #4cbae9;
+}
+material-checkbox.material-checkbox-checked .material-checkbox-icon:after,
+.material-checkbox.material-checkbox-checked .material-checkbox-icon:after {
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  display: table;
+  width: 6px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  content: ' ';
+  transform: rotate(45deg);
+}
+material-checkbox .material-text,
+.material-checkbox .material-text {
+  flex: 1;
+  width: 0 !important;
+  min-width: 0 !important;
+  display: block;
+  border: 1px dotted transparent;
+  pointer-events: none;
+  white-space: normal;
+  vertical-align: middle;
+  margin-left: 10px;
+  line-height: 20px;
+  padding: 2px 4px;
+}
+material-checkbox:focus .material-text,
+.material-checkbox:focus .material-text {
+  border-color: #000;
+}
+material-checkbox[disabled],
+.material-checkbox[disabled] {
+  cursor: no-drop;
+}
+material-checkbox[disabled] .material-checkbox-icon,
+.material-checkbox[disabled] .material-checkbox-icon {
+  border-color: #dedede;
+}
+material-checkbox[disabled].material-checkbox-checked .material-checkbox-icon,
+.material-checkbox[disabled].material-checkbox-checked .material-checkbox-icon {
+  background-color: #dedede;
+}
 material-selectfield,
 .material-selectfield {
   display: block;
@@ -739,6 +817,7 @@ material-drawer,
   bottom: 0;
   background-color: #fff;
   overflow: hidden;
+  padding-top: 20px;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transform: translate3d(-100%, 0, 0);
@@ -768,7 +847,13 @@ material-drawer material-title,
 material-drawer .material-title,
 .material-drawer .material-title {
   color: #1788b8;
-  padding-bottom: 0;
+  padding-top: 0;
+}
+material-drawer material-content,
+.material-drawer material-content,
+material-drawer .material-content,
+.material-drawer .material-content {
+  padding: 0 20px 20px;
 }
 .material-backdrop {
   position: absolute;

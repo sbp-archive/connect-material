@@ -124,6 +124,11 @@
                     <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
                 </material-content>
 
+                <material-content>
+                    <material-checkbox ng-model="user.receiveEmail">Allow us to send you email and spam your inbox forever and ever and ever...</material-checkbox>
+                    <material-checkbox ng-model="user.receiveNewsletter">I want to receive newsletters</material-checkbox>
+                </material-content>
+
                 <material-buttonbar>
                     <material-button ng-click="closeDrawer('right')">Cancel</material-button>
                     <material-button ng-click="closeDrawer('right')">Save</material-button>
