@@ -663,7 +663,6 @@ material-drawer,
   width: 40%;
   top: 0;
   bottom: 0;
-  z-index: 11;
   background-color: #fff;
   overflow: auto;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -697,7 +696,6 @@ material-drawer.material-drawer-right.material-drawer-opened,
   bottom: 0;
   width: 100%;
   left: -100000px;
-  z-index: 10;
   background-color: rgba(0, 0, 0, 0);
 }
 .material-backdrop.material-backdrop-opened,
