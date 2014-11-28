@@ -11,8 +11,7 @@ material-content,
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 0;
-  padding: 20px;
+  margin: 20px;
   overflow-x: hidden;
   overflow: visible;
 }
@@ -21,16 +20,14 @@ material-row,
   display: flex;
   flex-direction: row;
   overflow: visible;
-  width: 100%;
 }
 material-buttonbar,
 .material-buttonbar {
   display: flex;
   flex-direction: row;
   overflow: visible;
-  width: 100%;
   justify-content: flex-end;
-  padding: 0 20px;
+  margin: 20px;
 }
 material-buttonbar material-button,
 .material-buttonbar material-button,
@@ -107,7 +104,7 @@ material-title,
   font-size: 24px;
   line-height: 24px;
   color: #000;
-  padding: 20px;
+  margin: 20px;
   -webkit-font-smoothing: antialiased;
   -webkit-user-select: none;
 }
@@ -166,7 +163,6 @@ material-toolbar > .material-title,
 .material-toolbar > .material-title {
   color: #fff;
   flex: 1;
-  padding: 0;
 }
 material-toolbar material-button,
 .material-toolbar material-button,
@@ -193,7 +189,6 @@ material-appbar > .material-title,
 .material-appbar > .material-title {
   color: #fff;
   flex: 1;
-  padding: 0;
 }
 material-appbar material-button,
 .material-appbar material-button,
@@ -233,7 +228,6 @@ material-card material-toolbar .material-title,
 .material-card material-toolbar .material-title,
 material-card .material-toolbar .material-title,
 .material-card .material-toolbar .material-title {
-  padding: 0 20px;
   color: #1a1a1a;
 }
 material-card material-title,
@@ -258,6 +252,12 @@ material-card p,
   margin: 0;
   padding: 20px;
   -webkit-font-smoothing: antialiased;
+}
+material-card material-content:last-child,
+.material-card material-content:last-child,
+material-card .material-content:last-child,
+.material-card .material-content:last-child {
+  padding-bottom: 20px;
 }
 .material-overlay-backdrop {
   -webkit-transition: opacity 8ms;
@@ -331,6 +331,8 @@ material-menu .material-title,
 .material-menu .material-title {
   color: #1788b8;
   border-bottom: 1px solid #f7f7f7;
+  margin: 0;
+  padding: 20px;
 }
 material-menu material-item:first-of-type,
 .material-menu material-item:first-of-type,
@@ -812,13 +814,12 @@ material-select .material-menu material-item .material-text,
 material-drawer,
 .material-drawer {
   position: absolute;
-  width: 40%;
+  width: 50%;
   top: 0;
   left: 0;
   bottom: 0;
   background-color: #fff;
   overflow: hidden;
-  padding-top: 20px;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transform: translate3d(-100%, 0, 0);
@@ -848,13 +849,6 @@ material-drawer material-title,
 material-drawer .material-title,
 .material-drawer .material-title {
   color: #1788b8;
-  padding-top: 0;
-}
-material-drawer material-content,
-.material-drawer material-content,
-material-drawer .material-content,
-.material-drawer .material-content {
-  padding: 0 20px 20px;
 }
 .material-backdrop {
   position: absolute;

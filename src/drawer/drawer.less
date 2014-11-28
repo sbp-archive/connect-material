@@ -1,7 +1,7 @@
 @import '../variables';
 @import '../mixins';
 
-@sidenav-default-width: 40%;
+@sidenav-default-width: 50%;
 
 material-drawer,
 .material-drawer {
@@ -12,7 +12,6 @@ material-drawer,
     bottom: 0;
     background-color: #fff;
     overflow: hidden;
-    padding-top: @material-content-spacing;
 
     .box-shadow(@material-shadow-drawer);
     .transform(translate3d(-100%, 0, 0));
@@ -38,12 +37,6 @@ material-drawer,
     material-title,
     .material-title {
         color: @material-primary-color-dark;
-        padding-top: 0;
-    }
-
-    material-content,
-    .material-content {
-        padding: 0 @material-content-spacing @material-content-spacing;
     }
 }
 

@@ -95,6 +95,26 @@
                 <material-content>Some content inside of the card</material-content>
             </material-card>
 
+            <material-button ng-click="openDialog('alert')">Alert dialog</material-button>
+            <material-button ng-click="openDialog('confirm')">Confirm dialog</material-button>
+
+            <material-dialog dialog-id="alert">
+                <material-title>Alert Dialog</material-title>
+                <material-content>You have been warned sir!</material-content>
+                <material-buttonbar>
+                    <material-button>Ok</material-button>
+                </material-buttonbar>
+            </material-dialog>
+
+            <material-dialog dialog-id="confirm">
+                <material-title>Confirm Dialog</material-title>
+                <material-content>You have been warned sir!</material-content>
+                <material-buttonbar>
+                    <material-button>Cancel</material-button>
+                    <material-button>Ok</material-button>
+                </material-buttonbar>
+            </material-dialog>
+
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
                 <material-buttonbar>
                     <material-button ng-click="closeDrawer('left')">Close</material-button>

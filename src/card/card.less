@@ -17,7 +17,6 @@ material-card,
 
 		material-title,
 		.material-title {
-			padding: 0 @material-content-spacing;
 			color: lighten(#000, 10%);
 		}
 	}
@@ -42,5 +41,10 @@ material-card,
 		margin: 0;
 		padding: @material-content-spacing;
 		.text();
+	}
+
+	material-content:last-child,
+	.material-content:last-child {
+		padding-bottom: @material-content-spacing;
 	}
 }

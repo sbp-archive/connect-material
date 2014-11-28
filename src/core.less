@@ -11,8 +11,7 @@ material-content,
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	margin: 0;
-	padding: @material-content-spacing;
+	margin: @material-content-spacing;
 	overflow-x: hidden;
 	overflow: visible;
 }
@@ -22,7 +21,6 @@ material-row,
 	display: flex;
 	flex-direction: row;
 	overflow: visible;
-	width: 100%;
 }
 
 material-buttonbar,
@@ -30,7 +28,7 @@ material-buttonbar,
 	.material-row;
 
 	justify-content: flex-end;
-	padding: 0 @material-content-spacing;
+	margin: @material-content-spacing;
 
 	material-button,
 	.material-button {
