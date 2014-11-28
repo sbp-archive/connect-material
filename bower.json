@@ -1,6 +1,6 @@
 {
   "name": "connect-material",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "authors": [
     "Victor Verhaagen <vverhaagen@schubergphilis.com>"
   ],
@@ -14,8 +14,11 @@
   "private": true,
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
+    "Gruntfile.js",
+    "node_modules",
+    "package.json",
+    "sink",
     "test",
     "tests"
   ],
