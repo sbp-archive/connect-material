@@ -1,13 +1,11 @@
 @import '../variables';
 @import '../mixins';
 
-@material-card-spacing: 12px;
-
 material-card,
 .material-card {
 	display: block;
 	background-color: white;
-	margin: @material-card-spacing;
+	margin: @material-content-spacing;
 
 	.box-shadow(@material-shadow-card);
 	border-radius: 2px;
@@ -19,7 +17,7 @@ material-card,
 
 		material-title,
 		.material-title {
-			padding: 0 @material-card-spacing;
+			padding: 0 @material-content-spacing;
 			color: lighten(#000, 10%);
 		}
 	}
@@ -37,5 +35,12 @@ material-card,
 		list-style: none;
 		margin: 0;
 		padding: 0;
+		.text();
+	}
+
+	p {
+		margin: 0;
+		padding: @material-content-spacing;
+		.text();
 	}
 }

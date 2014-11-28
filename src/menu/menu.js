@@ -36,6 +36,18 @@ define([
                         });
                     }
 
+                    function prepareMenu() {
+                        var containerRect = $element.parent()[0].getBoundingClientRect(),
+                            viewportHeight = document.documentElement.clientHeight,
+                            menuHeight = $element[0].scrollHeight;
+
+                        if (containerRect.top + menuHeight > viewportHeight) {
+                            $element[0].style.height = (viewportHeight - containerRect.top - 10) + 'px';
+                        }
+                        
+                        $element[0].scrollTop = 0;
+                    }
+
                     $scope.$watch('_icons', function(value) {
                         if (value) {
                             $element.addClass('material-menu-has-icons');
@@ -46,6 +58,7 @@ define([
 
                     $scope.$watch('_menu.opened', function(opened, wasOpened) {
                         if (opened) {
+                            prepareMenu();
                             $animate.addClass($element, 'material-menu-opened').then(function() {
                                 menus.setTransitionDone('open', id);
                             });
@@ -84,22 +97,19 @@ define([
                     '<material-button ng-click="openMenu($event)" button-config="_buttonConfig"></material-button>',
                     '<material-menu menu-id="{{menuId}}" menu-config="_menuConfig" ng-transclude></material-menu>'
                 ].join(''),
-                compile: function() {
-                    return {
-                        pre: function($scope) {
-                            if (!$scope.menuId) {
-                                $scope.menuId = 'material-menubutton-' + ID_GENERATOR++;
-                            }
-                        },
-                        post: function($scope, $element, $attrs) {
-                            configs.bridge($scope, $attrs, 'buttonConfig');
-                            configs.bridge($scope, $attrs, 'menuConfig');
+                compile: function($element, $attrs) {
+                    if (ng.isUndefined($attrs.menuId)) {
+                        $attrs.menuId = 'material-menubutton-' + ID_GENERATOR++;
+                    }
 
-                            $scope.openMenu = function(e) {
-                                e.stopPropagation();
-                                menus.open($scope.menuId);
-                            };
-                        }
+                    return function($scope, $element, $attrs) {
+                        configs.bridge($scope, $attrs, 'buttonConfig');
+                        configs.bridge($scope, $attrs, 'menuConfig');
+
+                        $scope.openMenu = function(e) {
+                            e.stopPropagation();
+                            menus.open($scope.menuId);
+                        };
                     }
                 }
             }

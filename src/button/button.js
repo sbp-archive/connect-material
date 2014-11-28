@@ -3,6 +3,7 @@ define([
     'angular',
 ], function (material, ng) {
     'use strict';
+    
     material.directive('materialButton', [
         'materialConfigService',
         function(configs) {

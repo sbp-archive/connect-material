@@ -24,11 +24,11 @@ material-sidenav-button,
 	.material-menu {
 		left: 0;
 
-		.transition(transform @material-swift-ease-out);
-		transform: translateX(-@material-sidenav-width);
+        .ease-out(@property: transform);
+		.transform(translateX(-@material-sidenav-width));
 
         &.material-menu-opened {        	
-			transform: translateX(0);
+			.transform(translateX(0));
         }
 
 		material-item,

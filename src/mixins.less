@@ -46,3 +46,23 @@
 .unselectable() {
     -webkit-user-select: none;    
 }
+
+.flex(@flex) {
+    flex: @flex;
+    width: 0 !important;
+    min-width: 0 !important;
+}
+
+.transform(@transform, @origin: false) {
+    transform: @transform;
+
+    & when not (@origin = false) {
+        -ms-transform-origin: @origin;
+        -webkit-transform-origin: @origin;
+        -moz-transform-origin: @origin;
+    }
+}
+
+.ease-out(@duration: 450ms, @property: all, @delay: 0ms) {
+    .transition(@property @duration @material-ease-out-timing-function @delay);
+}

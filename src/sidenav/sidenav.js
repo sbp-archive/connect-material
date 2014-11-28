@@ -30,28 +30,25 @@ define([
                     '</material-menu>'
                 ].join(''),
 
-                compile: function() {
-                    return {
-                        pre: function($scope) {
-                            if (!$scope.menuId) {
-                                $scope.menuId = 'material-sidenav-' + ID_GENERATOR++;
+                compile: function($element, $attrs) {
+                    if (ng.isUndefined($attrs.menuId)) {
+                        $attrs.menuId = 'material-sidenav-' + ID_GENERATOR++;
+                    }
+
+                    return function ($scope, $element, $attrs) {
+                        configs.bridge($scope, $attrs, 'menuConfig');
+
+                        $scope.$watch('currentPage', function() {
+                            var itemElement = $element[0].querySelector('[page="' + $scope.currentPage + '"]');
+                            if (itemElement) {
+                                $scope.pageName = itemElement.innerText;
                             }
-                        },
-                        post: function ($scope, $element, $attrs) {
-                            configs.bridge($scope, $attrs, 'menuConfig');
+                        });
 
-                            $scope.$watch('currentPage', function() {
-                                var itemElement = $element[0].querySelector('[page="' + $scope.currentPage + '"]');
-                                if (itemElement) {
-                                    $scope.pageName = itemElement.innerText;
-                                }
-                            });
-
-                            $scope.openMenu = function(e) {
-                                e.stopPropagation();
-                                menus.open($scope.menuId);
-                            };
-                        }
+                        $scope.openMenu = function(e) {
+                            e.stopPropagation();
+                            menus.open($scope.menuId);
+                        };                    
                     }
                 }                
             };

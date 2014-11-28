@@ -1,2 +1,35 @@
 @import '../variables';
 @import '../mixins';
+
+
+material-selectfield,
+.material-selectfield {
+	display: block;
+	position: relative;
+}
+
+material-select,
+.material-select {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	material-menu,
+	.material-menu {
+		min-width: 0;
+		width: 100%;
+
+        .ease-out(@duration: 200ms; @property: transform);
+        .transform(scale(1, 0), center 24px);
+
+        &.material-menu-opened {
+        	.transform(scale(1, 1));
+        }
+
+        material-item .material-text {
+        	line-height: 26px;
+        }
+	}
+}

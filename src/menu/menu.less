@@ -10,9 +10,13 @@ material-menu,
     z-index: 100;
     top: -10000px;
     min-width: @material-menu-width;
+    overflow-x: hidden;
+    overflow-y: auto;
     
     padding: 0 0 6px;
-    border-bottom: 1px solid @material-gray-lighter;
+    border-color: @material-gray-lighter;
+    border-style: solid;
+    border-width: 1px 0;
     background-color: #fff;
 
     .box-shadow(@material-shadow-menu);
@@ -55,7 +59,7 @@ material-menu-button,
     > .material-menu {
         right: 0;
 
-        .transition(opacity @material-swift-ease-out);
+        .ease-out(@property: opacity);
         opacity: 0;
 
         &.material-menu-opened {

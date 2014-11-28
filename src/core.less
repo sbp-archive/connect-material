@@ -5,3 +5,22 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+material-content,
+.material-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin: 0;
+	padding: @material-content-spacing;
+	overflow-x: hidden;
+	overflow: visible;
+}
+
+material-row,
+.material-row {
+	display: flex;
+	flex-direction: row;
+	overflow: visible;
+	width: 100%;
+}

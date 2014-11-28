@@ -34,8 +34,16 @@
             .page-content {
                 flex: 1;
                 background-color: #eee;
-                overflow: auto;
                 position: relative;
+            }
+
+            .field-birth {
+                margin-right: 10px;
+                flex: 1;
+            }
+
+            .field-gender {
+                width: 100px;
             }
         </style>
     </head>
@@ -53,7 +61,6 @@
             </material-sidenav-button>
 
             <material-title page="status">Status</material-title>
-
 
             <material-button ng-click="openDrawer('left')">Open Drawer</material-button>
 
@@ -84,6 +91,7 @@
                     <material-title>Card with Toolbar</material-title>
                     <material-button ng-click="openDrawer('right')">Forms</material-button>
                 </material-toolbar>
+                <material-content>Some content inside of the card</material-content>
             </material-card>
 
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
@@ -91,17 +99,25 @@
             </material-drawer>
 
             <material-drawer drawer-id="right" drawer-config="{position:'right'}">
-                <material-textfield label="First Name" ng-model="firstName"></material-textfield>
-                <material-textfield label="Last Name" ng-model="lastName"></material-textfield>
-                <material-textfield label="Address" ng-model="address"></material-textfield>
-                <material-textfield label="City" ng-model="address"></material-textfield>
-                <material-datefield label="Date of Birth" ng-model="firstName"></material-datefield>
+                <material-title>Edit User</material-title>
+                <material-content>
+                    <material-textfield label="First Name" ng-model="user.firstName"></material-textfield>
+                    <material-textfield label="Last Name" ng-model="user.lastName"></material-textfield>
+                    <material-textfield label="Address" ng-model="user.address"></material-textfield>
+
+                    <material-row>
+                        <material-textfield label="Date of Birth" ng-model="user.dateOfBirth" class="field-birth"></material-textfield>
+                        <material-selectfield label="Gender" ng-model="user.gender" options="['Male', 'Female']" class="field-gender"></material-selectfield>
+                    </material-row>
+
+                    <material-textfield label="City" ng-model="user.city"></material-textfield>
+                    <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
+                </material-content>
             </material-drawer>
 
             <material-drawer drawer-id="right2" drawer-config="{position:'right'}" style="width: 50%;">
                 <material-button ng-click="openDrawer('right3')">We need to go deeper</material-button>
             </material-drawer>
-
 
             <material-drawer drawer-id="right3" drawer-config="{position:'right'}">
                 <material-button ng-click="closeDrawer('right3')">Go back</material-button>
