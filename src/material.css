@@ -753,6 +753,7 @@ material-checkbox .material-text,
   margin-left: 10px;
   line-height: 20px;
   padding: 2px 4px;
+  text-align: justify;
 }
 material-checkbox:focus .material-text,
 .material-checkbox:focus .material-text {
