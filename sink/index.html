@@ -95,7 +95,11 @@
             </material-card>
 
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
-                <material-button ng-click="toggleModal()">Toggle Modal</material-button>
+                <material-button ng-click="openDrawer('subleft')">We need to go deeper</material-button>
+            </material-drawer>
+
+            <material-drawer drawer-id="subleft" drawer-config="{position:'left'}">
+                <material-button ng-click="closeDrawer('subleft')">Go back</material-button>
             </material-drawer>
 
             <material-drawer drawer-id="right" drawer-config="{position:'right'}">
@@ -113,14 +117,6 @@
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
                     <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
                 </material-content>
-            </material-drawer>
-
-            <material-drawer drawer-id="right2" drawer-config="{position:'right'}" style="width: 50%;">
-                <material-button ng-click="openDrawer('right3')">We need to go deeper</material-button>
-            </material-drawer>
-
-            <material-drawer drawer-id="right3" drawer-config="{position:'right'}">
-                <material-button ng-click="closeDrawer('right3')">Go back</material-button>
             </material-drawer>
         </div>
     </body>
