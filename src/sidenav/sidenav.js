@@ -30,22 +30,22 @@ define([
                     '</material-menu>'
                 ].join(''),
 
-                compile: function($element, $attrs) {
+                compile: function ($element, $attrs) {
                     if (ng.isUndefined($attrs.menuId)) {
                         $attrs.menuId = 'material-sidenav-' + ID_GENERATOR++;
                     }
 
                     return function ($scope, $element, $attrs) {
-                        configs.bridge($scope, $attrs, 'menuConfig');
+                        configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
-                        $scope.$watch('currentPage', function() {
+                        $scope.$watch('currentPage', function () {
                             var itemElement = $element[0].querySelector('[page="' + $scope.currentPage + '"]');
                             if (itemElement) {
                                 $scope.pageName = itemElement.innerText;
                             }
                         });
 
-                        $scope.openMenu = function(e) {
+                        $scope.openMenu = function (e) {
                             e.stopPropagation();
                             menus.open($scope.menuId);
                         };                    

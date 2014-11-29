@@ -23,7 +23,8 @@ define([
     'connect-material/drawer/drawer',
     'connect-material/textfield/textfield',
     'connect-material/select/select',
-    'connect-material/checkbox/checkbox'
+    'connect-material/checkbox/checkbox',
+    'connect-material/dialog/dialog'
 ], function(ng, domReady) {
     'use strict';
 
@@ -34,15 +35,24 @@ define([
     module.controller('SinkCtrl', [
         '$scope', 
         'materialDrawerService',
-        function($scope, drawers) {
+        'materialDialogService',
+        function($scope, drawers, dialogs) {
             drawers.open('right');
-
+            
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             };
 
             $scope.closeDrawer = function(id) {
                 drawers.close(id);
+            };
+
+            $scope.openDialog = function(id) {
+                dialogs.open(id);
+            };
+
+            $scope.closeDialog = function(id) {
+                dialogs.close(id);
             };
 
             var hasIcons = true;

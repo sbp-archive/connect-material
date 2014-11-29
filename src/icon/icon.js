@@ -4,8 +4,8 @@ define([
 ], function (material, ng) {
     'use strict';
 
-    material.directive('materialIcon', function() {
-        return function(scope, element, attrs) {
+    material.directive('materialIcon', function () {
+        return function (scope, element, attrs) {
             if (ng.isDefined(attrs.materialIcon)) {
                 var parts = attrs.materialIcon.split(':'),
                     iconCls = 'icon-' + parts[0];

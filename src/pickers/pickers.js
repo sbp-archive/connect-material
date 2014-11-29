@@ -16,18 +16,18 @@ define([
         '$parse',
         'dateFilter',
         'datepickerConfig',
-        function($scope, $attrs, $parse, dateFilter, datepickerConfig) {
+        function ($scope, $attrs, $parse, dateFilter, datepickerConfig) {
             var self = this,
                 ngModelCtrl = {$setViewValue: angular.noop};
 
             // Configuration attributes
-            angular.forEach(['startingDay', 'yearRange'], function(key) {
+            angular.forEach(['startingDay', 'yearRange'], function (key) {
               this[key] = angular.isDefined($attrs[key]) ? $scope.$parent.$eval($attrs[key]) : datepickerConfig[key];
             }.bind(this));
 
-            angular.forEach(['minDate', 'maxDate'], function(key) {
+            angular.forEach(['minDate', 'maxDate'], function (key) {
                 if ($attrs[key]) {
-                    $scope.$parent.$watch($parse($attrs[key]), function(value) {
+                    $scope.$parent.$watch($parse($attrs[key]), function (value) {
                         self[key] = value ? new Date(value.toString()) : null;
                         self.refreshView();
                     });
@@ -40,22 +40,22 @@ define([
 
             $scope.datepickerMode = $scope.datepickerMode || 'day';
 
-            $scope.isActive = function(dateObject) {
+            $scope.isActive = function (dateObject) {
                 if (self.compare(dateObject.date, self.activeDate) === 0) {
                     return true;
                 }
                 return false;
             };
 
-            this.init = function(ngModelCtrl_) {
+            this.init = function (ngModelCtrl_) {
                 ngModelCtrl = ngModelCtrl_;
 
-                ngModelCtrl.$render = function() {
+                ngModelCtrl.$render = function () {
                     self.render();
                 };
             };
 
-            this.render = function() {
+            this.render = function () {
                 if (ngModelCtrl.$modelValue) {
                     var date = new Date(ngModelCtrl.$modelValue),
                         isValid = !isNaN(date);
@@ -70,13 +70,13 @@ define([
                 this.refreshView();
             };
 
-            this.refreshView = function() {
+            this.refreshView = function () {
                 if (this._refreshView) {
                     this._refreshView();
                 }
             };
 
-            this.createDateObject = function(date, format) {
+            this.createDateObject = function (date, format) {
                 var model = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : null;
                 return {
                     date: date,
@@ -87,7 +87,7 @@ define([
                 };
             };
 
-            this.isDisabled = function(date) {
+            this.isDisabled = function (date) {
                 return ((this.minDate && this.compare(date, this.minDate) < 0) || (this.maxDate && this.compare(date, this.maxDate) > 0) || ($attrs.dateDisabled && $scope.dateDisabled({
                     date: date,
                     mode: $scope.datepickerMode
@@ -95,7 +95,7 @@ define([
             };
 
             // Split array into smaller arrays
-            this.split = function(arr, size) {
+            this.split = function (arr, size) {
                 var arrays = [];
                 while (arr.length > 0) {
                     arrays.push(arr.splice(0, size));
@@ -103,18 +103,18 @@ define([
                 return arrays;
             };
 
-            $scope.select = function(date) {
+            $scope.select = function (date) {
                 var dt = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : new Date(0, 0, 0, 0, 0, 0, 0);
                 dt.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
                 ngModelCtrl.$setViewValue(dt);
                 ngModelCtrl.$render();
             };
 
-            this.getDaysInMonth = function(year, month) {
+            this.getDaysInMonth = function (year, month) {
                 return new Date(year, month+1, 1, 0, 0, -1).getDate();
             };
 
-            $scope.selectMonth = function(newDate) {
+            $scope.selectMonth = function (newDate) {
                 var dt = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : new Date(0, 0, 0, 0, 0, 0, 0),
                     daysInNewMonth = self.getDaysInMonth(dt.getYear(), newDate.getMonth());
 
@@ -126,7 +126,7 @@ define([
                 $scope.select(dt);
             };
 
-            $scope.selectYear = function(newDate) {
+            $scope.selectYear = function (newDate) {
                 var dt = ngModelCtrl.$modelValue ? new Date(ngModelCtrl.$modelValue) : new Date(0, 0, 0, 0, 0, 0, 0),
                     daysInNewMonth = self.getDaysInMonth(newDate.getFullYear(), dt.getMonth());
 
@@ -138,7 +138,7 @@ define([
                 $scope.select(dt);                   
             };
 
-            $scope.setMode = function(mode) {
+            $scope.setMode = function (mode) {
                 $scope.datepickerMode = mode;
             };
         }
@@ -164,7 +164,7 @@ define([
                 '</div>',
             ].join(''),
 
-            link : function(scope, element, attrs, ctrls) {
+            link : function (scope, element, attrs, ctrls) {
                 var datePickerCtrl = ctrls[0],
                     ngModelCtrl = ctrls[1];
 
@@ -177,7 +177,7 @@ define([
         };
     });
         
-    material.directive('materialDaypicker', ['dateFilter', function(dateFilter) {
+    material.directive('materialDaypicker', ['dateFilter', function (dateFilter) {
         return {
             restrict: 'EA',
             replace: true,
@@ -199,7 +199,7 @@ define([
                     '</tr>',
                 '</table>'
             ].join(''),
-            link: function(scope, element, attrs, ctrl) {
+            link: function (scope, element, attrs, ctrl) {
                 function getDates(startDate, n) {
                     var dates = new Array(n),
                         current = new Date(startDate),
@@ -212,7 +212,7 @@ define([
                     return dates;
                 }
 
-                ctrl._refreshView = function() {
+                ctrl._refreshView = function () {
                     var year = ctrl.activeDate.getFullYear(),
                         month = ctrl.activeDate.getMonth(),
                         firstDayOfMonth = new Date(year, month, 1),
@@ -240,7 +240,7 @@ define([
                     scope.rows = ctrl.split(days, 7);
                 };
 
-                ctrl.compare = function(date1, date2) {
+                ctrl.compare = function (date1, date2) {
                     return (new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()));
                 };
 
@@ -249,7 +249,7 @@ define([
         };
     }]);
         
-    material.directive('materialMonthpicker', ['dateFilter', function(dateFilter) {
+    material.directive('materialMonthpicker', ['dateFilter', function (dateFilter) {
         return {
             restrict: 'EA',
             replace: true,
@@ -266,8 +266,8 @@ define([
                     '</li>',
                 '</ul>'
             ].join(''),
-            link: function(scope, element, attrs, ctrl) {
-                ctrl._refreshView = function() {
+            link: function (scope, element, attrs, ctrl) {
+                ctrl._refreshView = function () {
                     var months = new Array(12),
                         year = ctrl.activeDate.getFullYear();
 
@@ -278,7 +278,7 @@ define([
                     scope.rows = months;
                 };
 
-                ctrl.compare = function(date1, date2) {
+                ctrl.compare = function (date1, date2) {
                     return new Date(date1.getFullYear(), date1.getMonth()) - new Date(date2.getFullYear(), date2.getMonth());
                 };
 
@@ -287,7 +287,7 @@ define([
         };
     }]);
 
-    material.directive('materialYearpicker', ['dateFilter', function(dateFilter) {
+    material.directive('materialYearpicker', ['dateFilter', function (dateFilter) {
         return {
             restrict: 'EA',
             replace: true,
@@ -304,11 +304,11 @@ define([
                     '</li>',
                 '</ul>'
             ].join(''),
-            link: function(scope, element, attrs, ctrl) {
+            link: function (scope, element, attrs, ctrl) {
                 var minYear = ctrl.minDate.getFullYear(),
                     range = ctrl.yearRange;
 
-                ctrl._refreshView = function() {
+                ctrl._refreshView = function () {
                     var years = new Array(range);
 
                     for (var i = 0; i < range; i++) {
@@ -318,7 +318,7 @@ define([
                     scope.rows = years;
                 };
 
-                ctrl.compare = function(date1, date2) {
+                ctrl.compare = function (date1, date2) {
                     return date1.getFullYear() - date2.getFullYear();
                 };
 
@@ -338,7 +338,7 @@ define([
         'dateFilter', 
         'datepickerDialogConfig', 
         'datepickerConfig',
-        function($parse, $compile, dateFilter, datepickerDialogConfig, datepickerConfig) {
+        function ($parse, $compile, dateFilter, datepickerDialogConfig, datepickerConfig) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -356,13 +356,13 @@ define([
                         '</div>',
                     '</div>'
                 ].join(''),
-                link: function(scope, element, attrs, ngModel) {
-                    scope.getText = function(key) {
+                link: function (scope, element, attrs, ngModel) {
+                    scope.getText = function (key) {
                         return scope[key + 'Text'] || datepickerDialogConfig[key + 'Text'];
                     };
 
                     function cameltoDash(string) {
-                        return string.replace(/([A-Z])/g, function($1) {
+                        return string.replace(/([A-Z])/g, function ($1) {
                             return '-' + $1.toLowerCase();
                         });
                     }
@@ -374,10 +374,10 @@ define([
                     // // inner datepicker element including watchers for when the values change
                     // var datepickerEl = angular.element('<div material-datepicker></div>');
                     // datepickerEl.attr('ng-model', 'data.date');                
-                    // angular.forEach(datepickerConfig, function(index, key) {
+                    // angular.forEach(datepickerConfig, function (index, key) {
                     //     if (attrs[key]) {
                     //         var getAttribute = $parse(attrs[key]);
-                    //         scope.$parent.$watch(getAttribute, function(value) {
+                    //         scope.$parent.$watch(getAttribute, function (value) {
                     //             scope.watchData[key] = value;
                     //         });
                     //         datepickerEl.attr(cameltoDash(key), 'watchData.' + key);
@@ -389,11 +389,11 @@ define([
                     // element.prepend($datepicker);
 
                     // Outter change
-                    ngModel.$render = function() {
+                    ngModel.$render = function () {
                         scope.data.date = angular.isDefined(ngModel.$modelValue) ? new Date(ngModel.$modelValue) : new Date();
                     };
 
-                    scope.commitDate = function() {
+                    scope.commitDate = function () {
                         ngModel.$setViewValue(scope.data.date);
                         ngModel.$render();
                     }

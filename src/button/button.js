@@ -6,7 +6,7 @@ define([
     
     material.directive('materialButton', [
         'materialConfigService',
-        function(configs) {
+        function (configs) {
             return {
                 restrict: 'EA',
                 transclude: true,
@@ -15,12 +15,12 @@ define([
                     '<div ng-if="_icon" class="{{getIconClass()}}"></div>',
                     '<div class="material-text" ng-transclude></div>',
                 ].join(''),
-                link: function($scope, $element, $attrs) {
-                    configs.apply($scope, $attrs.buttonConfig, {
+                link: function ($scope, $element, $attrs) {
+                    configs.applyConfigs($scope, $attrs.buttonConfig, {
                         icon: false
                     });
 
-                    $scope.getIconClass = function() {
+                    $scope.getIconClass = function () {
                         var parts = $scope._icon.split(':'),
                             iconCls = 'icon-' + parts[0];
 

@@ -44,3 +44,22 @@ material-buttonbar,
 		}
 	}
 }
+
+.material-backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    left: -100000px;
+    background-color: rgba(0, 0, 0, 0);
+
+    &.material-opened,
+    &.material-opened-remove {
+        .ease-out(@property: background-color);
+        left: 0;
+    }
+
+    &.material-opened, {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}

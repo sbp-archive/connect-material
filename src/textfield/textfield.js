@@ -17,15 +17,15 @@ define([
                     label : '@?',
                     value : '=ngModel'
                 },
-                compile : function(element, attr) {
+                compile : function (element, attr) {
                     if (ng.isUndefined(attr.fieldId)) {
                         attr.fieldId = 'field-' + ++FIELD_ID_COUNTER;
                     }
 
                     return {
-                        pre: function(scope, element, attrs) {
+                        pre: function (scope, element, attrs) {
                             var disabledParsed = $parse(attrs.ngDisabled);
-                            scope.isDisabled = function() {
+                            scope.isDisabled = function () {
                                 return disabledParsed(scope.$parent);
                             };
                             scope.inputType = attrs.type || "text";               
@@ -47,11 +47,11 @@ define([
         function ($parse) {
             return {
                 restrict: 'CE',
-                controller: ['$element', function($element) {
-                    this.setFocused = function(isFocused) {
+                controller: ['$element', function ($element) {
+                    this.setFocused = function (isFocused) {
                         $element.toggleClass('material-input-focused', !!isFocused);
                     };                
-                    this.setHasValue = function(hasValue) {
+                    this.setHasValue = function (hasValue) {
                         $element.toggleClass('material-input-has-value', hasValue);
                     };
                 }]
@@ -69,14 +69,14 @@ define([
                 require: [
                     '^?materialInputGroup', '?ngModel'
                 ],
-                link: function(scope, element, attr, ctrls) {
+                link: function (scope, element, attr, ctrls) {
                     if (!ctrls[0]) {
                         return;
                     }
                     var inputGroupCtrl = ctrls[0];
                     var ngModelCtrl = ctrls[1];
 
-                    scope.$watch(scope.isDisabled, function(isDisabled) {
+                    scope.$watch(scope.isDisabled, function (isDisabled) {
                         element.attr('aria-disabled', !!isDisabled);
                         element.attr('tabindex', !!isDisabled);
                     });
@@ -86,27 +86,27 @@ define([
                     // set the appropriate class on the input group
                     if (ngModelCtrl) {
                         //Add a $formatter so we don't use up the render function
-                        ngModelCtrl.$formatters.push(function(value) {
+                        ngModelCtrl.$formatters.push(function (value) {
                             inputGroupCtrl.setHasValue(isNotEmpty(value));
                             return value;
                         });
                     }
 
                     element
-                        .on('input', function() {
+                        .on('input', function () {
                             inputGroupCtrl.setHasValue(isNotEmpty());
                         })
-                        .on('focus', function(e) {
+                        .on('focus', function (e) {
                             // When the input focuses, add the focused class to the group
                             inputGroupCtrl.setFocused(true);
                         })
-                        .on('blur', function(e) {
+                        .on('blur', function (e) {
                             // When the input blurs, remove the focused class from the group
                             inputGroupCtrl.setFocused(false);
                             inputGroupCtrl.setHasValue(isNotEmpty());
                         });
 
-                    scope.$on('$destroy', function() {
+                    scope.$on('$destroy', function () {
                         inputGroupCtrl.setFocused(false);
                         inputGroupCtrl.setHasValue(false);
                     });

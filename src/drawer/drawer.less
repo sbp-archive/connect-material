@@ -3,6 +3,10 @@
 
 @sidenav-default-width: 50%;
 
+.material-drawer-wrap {
+    width: 100%;
+}
+
 material-drawer,
 .material-drawer {
     position: absolute;
@@ -12,16 +16,17 @@ material-drawer,
     bottom: 0;
     background-color: #fff;
     overflow: hidden;
+    z-index: 1;
 
     .box-shadow(@material-shadow-drawer);
     .transform(translate3d(-100%, 0, 0));
 
-    &.material-drawer-opened,
-    &.material-drawer-opened-remove {
+    &.material-opened,
+    &.material-opened-remove {
         .ease-out(@property: transform);
     }
 
-    &.material-drawer-left.material-drawer-opened {
+    &.material-drawer-left.material-opened {
         .transform(translate3d(0, 0, 0));
     }
 
@@ -29,7 +34,7 @@ material-drawer,
         left: 100%;
         .transform(translate3d(0, 0, 0));
 
-        &.material-drawer-opened {
+        &.material-opened {
             .transform(translate3d(-100%, 0, 0));
         }
     }
@@ -37,24 +42,5 @@ material-drawer,
     material-title,
     .material-title {
         color: @material-primary-color-dark;
-    }
-}
-
-.material-backdrop {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    left: -100000px;
-    background-color: rgba(0, 0, 0, 0);
-
-    &.material-backdrop-opened,
-    &.material-backdrop-opened-remove {
-        .ease-out(@property: background-color);
-        left: 0;
-    }
-
-    &.material-backdrop-opened, {
-        background-color: rgba(0, 0, 0, 0.5);
     }
 }

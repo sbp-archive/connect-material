@@ -102,16 +102,16 @@
                 <material-title>Alert Dialog</material-title>
                 <material-content>You have been warned sir!</material-content>
                 <material-buttonbar>
-                    <material-button>Ok</material-button>
+                    <material-button ng-click="closeDialog('alert')">Ok</material-button>
                 </material-buttonbar>
             </material-dialog>
 
             <material-dialog dialog-id="confirm">
                 <material-title>Confirm Dialog</material-title>
-                <material-content>You have been warned sir!</material-content>
+                <material-content>Can you please confirm that you like material?</material-content>
                 <material-buttonbar>
-                    <material-button>Cancel</material-button>
-                    <material-button>Ok</material-button>
+                    <material-button ng-click="closeDialog('confirm')">Cancel</material-button>
+                    <material-button ng-click="closeDialog('confirm')">Ok</material-button>
                 </material-buttonbar>
             </material-dialog>
 

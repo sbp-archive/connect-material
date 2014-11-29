@@ -5,33 +5,95 @@ define([
     'use strict';
 
     material.directive('materialDialog', [
-        '$state',
-        '$parse',
-        function ($state, $parse) {
-            return function(scope, element, attrs) {
-                console.log('TODO: implement drawer');
+        '$animate',
+        'materialConfigService',
+        'materialDialogService',
+        function ($animate, configs, dialogs) {
+            var ID_GENERATOR = 1;
+
+            return {
+                restrict: 'EA',
+                scope: {
+                    dialogId: '@'
+                },
+                transclude: true,
+                replace: true,
+                template: [
+                    '<div class="material-dialog-wrap">',
+                        '<div ',
+                            'ng-if="_modal" ',
+                            'class="material-backdrop" ',
+                            'ng-class="{\'material-opened\':_dialog.opened}" ',
+                            'ng-click="onBackdropClick($event)" ',
+                            'backdrop-for-dialog="{{dialogId}}">',
+                        '</div>',
+                        '<div class="material-dialog" ng-transclude></div>',
+                    '</div>'
+                ].join(''),
+
+                compile: function ($element, $attrs) {
+                    if (ng.isUndefined($attrs.dialogId)) {
+                        $attrs.dialogId = 'material-dialog-' + ID_GENERATOR++;
+                        $element.attr('dialog-id', $attrs.dialogId);
+                    }
+
+                    return function ($scope, $element, $attrs) {
+                        var id = $attrs.dialogId,
+                            backdrop = null,
+                            originalParent = $element.parent(),
+                            innerDialogEl = $element[0].querySelector('.material-dialog'),
+                            dialog = $scope._dialog = dialogs.create(id, innerDialogEl);
+
+                        configs.applyConfigs($scope, $attrs.dialogConfig, {
+                            modal: true,
+                            appendToBody: true,
+                            closeOnBackdropClick: false
+                        });
+
+                        dialog.on('beforeopen', function () {
+                            $element.addClass('material-opened');
+                        });
+                        dialog.on('close', function () {
+                            $element.removeClass('material-opened');
+                        });
+
+                        // This is a bit ugly I think but it solves the problem
+                        // where the close was already called for this dialog
+                        // before this link method is called
+                        if (dialog.deferred.open) {
+                            dialog.open();
+                        }
+
+                        $scope.onBackdropClick = function (e) {
+                            if ($scope._closeOnBackdropClick) {
+                                e.stopPropagation();
+                                dialog.close();
+                            }
+                        };
+
+                        $scope.$watch('_appendToBody', function (value, oldValue) {
+                            if (!value) {
+                                if (value !== oldValue) {
+                                    originalParent.append($element);
+                                }
+                            } else {
+                                ng.element(document.body).append($element);
+                            }
+                        });
+
+                        $scope.$on('destroy', function () {
+                            dialogs.remove(id);
+                        });
+                    };
+                }
             };
-            // var doc = document,
-            //     body = doc.body,
-            //     active = false,
-            //     backdrop = doc.createElement('div'),
-            //     element = ng.element;
-            // //set classes for backdrop
-            // element(backdrop).addClass('material-overlay-backdrop hide');
-            // body.appendChild(backdrop);
-            // //directive
-            // directive('overlay', function () {
-            //     return function ($scope, $lement) {
-            //         element(backdrop).removeClass('hide');
-            //         body.appendChild(elm[0]);
-            //         //remove
-            //         scope.$on('$destroy', function () {
-            //             active = false;
-            //             body.removeChild(elm[0]);
-            //             element(backdrop).addClass('hide');
-            //         });
-            //     };
-            // });
+        }
+    ]);
+
+    material.factory('materialDialogService', [
+        'materialTransitionService',
+        function (TransitionService) {
+            return TransitionService('dialogs');
         }
     ]);
 });

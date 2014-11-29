@@ -1,15 +1,15 @@
 define([
     '../material',
-    'angular',
+    'angular'
 ], function (material, ng) {
     'use strict';
 
     material.directive('materialDrawer', [
         '$parse',
         '$animate',
-        'materialDrawerService',
         'materialConfigService',
-        function ($parse, $animate, drawers, configs) {
+        'materialDrawerService',
+        function ($parse, $animate, configs, drawers) {
             var ID_GENERATOR = 1;
 
             return {
@@ -18,176 +18,66 @@ define([
                     drawerId: '@'
                 },
 
-                link: function($scope, $element, $attrs) {
-                    var id = $scope.drawerId;
-                    if (!id) {
-                        id = $scope.drawerId = 'material-drawer-' + ID_GENERATOR++;
+                transclude: true,
+                replace: true,
+                template: [
+                    '<div class="material-drawer-wrap">',
+                        '<div ',
+                            'ng-if="_modal" ',
+                            'class="material-backdrop" ',
+                            'ng-class="{\'material-opened\':_drawer.opened}" ',
+                            'ng-click="onBackdropClick($event)" ',
+                            'backdrop-for-drawer="{{dialogId}}">',
+                        '</div>',
+                        '<div class="material-drawer material-drawer-{{_position}}" ng-transclude></div>',
+                    '</div>'
+                ].join(''),
+
+                compile: function ($element, $attrs) {                    
+                    if (ng.isUndefined($attrs.drawerId)) {
+                        $attrs.drawerId = 'material-drawer-' + ID_GENERATOR++;
+                        $element.attr('drawer-id', $attrs.drawerId);
                     }
 
-                    configs.apply($scope, $attrs.drawerConfig, {
-                        position: 'right',
-                        modal: true
-                    });
+                    return function ($scope, $element, $attrs) {
+                        var id = $attrs.drawerId,
+                            backdrop = null,
+                            innerDrawerEl = $element[0].querySelector('.material-drawer'),
+                            drawer = $scope._drawer = drawers.create(id, innerDrawerEl);
 
-                    $scope._drawer = drawers.getDrawer(id);
+                        configs.applyConfigs($scope, $attrs.drawerConfig, {
+                            position: 'right',
+                            modal: true,
+                            closeOnBackdropClick: true
+                        });
 
-                    var backdrop = null;
-                    $scope.$watch('_modal', function(value) {
-                        if (!value && backdrop) {
-                            backdrop.remove();
-                            backdrop = null;
+                        // This is a bit ugly I think but it solves the problem
+                        // where the close was already called for this drawer
+                        // before this link method is called
+                        if (drawer.deferred.open) {
+                            drawer.open();                 
                         }
-                        else if (value) {
-                            backdrop = ng.element('<div class="material-backdrop" backdrop-for-drawer="' + id + '"></div>');
-                            if ($scope._drawer.opened) {
-                                backdrop.addClass('material-backdrop-opened');
+
+                        $scope.onBackdropClick = function (e) {
+                            if ($scope._closeOnBackdropClick) {
+                                e.stopPropagation();
+                                drawer.close();
                             }
-
-                            // insert the backdrop just before the drawer:
-                            $element.parent()[0].insertBefore(backdrop[0], $element[0]);
-
-                            backdrop.on('click', function() {
-                                $scope.$apply(function() {
-                                    drawers.close(id);
-                                });
-                            });
                         }
-                    });
 
-                    $scope.$watch('_position', function(newPos, oldPos) {
-                        $element.removeClass('material-drawer-' + oldPos);
-                        $element.addClass('material-drawer-' + newPos);
-                    });
-
-                    $scope.$watch('_drawer.opened', function(opened, wasOpened) {
-                        if (opened) {
-                            if ($scope._modal) {
-                                $animate.addClass(backdrop, 'material-backdrop-opened');
-                            }
-
-                            $animate.addClass($element, 'material-drawer-opened').then(function() {
-                                drawers.setTransitionDone('open', id);
-                            });
-                        } 
-                        else if (wasOpened) {
-                            if ($scope._modal) {
-                                $animate.removeClass(backdrop, 'material-backdrop-opened');
-                            }
-
-                            $animate.removeClass($element, 'material-drawer-opened').then(function() {
-                                drawers.setTransitionDone('close', id);
-                            });
-                        }
-                    });
-
-                    $scope.$on('destroy', function() {
-                        drawers.removeDrawer(id);
-                    });
+                        $scope.$on('destroy', function () {
+                            drawers.remove(id);
+                        });
+                    };
                 }
             }
         }
     ]);
 
     material.factory('materialDrawerService', [
-        '$q',
-        function($q) {
-            return (function() {
-                var drawers = {};
-
-                var self = {
-                    getDrawer: function(id) {
-                        var drawer = drawers[id];
-
-                        if (!drawer) {
-                            drawer = drawers[id] = {
-                                id: id,
-                                opened: false,
-                                listeners: {
-                                    open: [],
-                                    close: []
-                                },
-                                deferred: {
-                                    open: null,
-                                    close: null 
-                                }
-                            };
-                        }
-
-                        return drawer;
-                    },
-
-                    removeDrawer: function(id) {
-                        delete drawers[id];
-                    },
-
-                    setTransitionDone: function(eventName, id) {
-                        var drawer = self.getDrawer(id),
-                            deferred = drawer.deferred[eventName];
-
-                        if (deferred) {
-                            deferred.resolve();
-                            drawer.deferred[eventName] = null;
-                            self.broadcast(eventName, id);
-                        }
-                    },
-
-                    open: function(id) {
-                        var drawer = self.getDrawer(id);
-
-                        if (drawer.opened && !drawer.deferred.open) {
-                            return $q.reject('Drawer ' + id + 'already opened');
-                        }
-
-                        if (!drawer.deferred.open) {
-                            drawer.opened = true;          
-                            drawer.deferred.open = $q.defer();
-                        }
-
-                        return drawer.deferred.open.promise;
-                    },
-
-                    close: function(id) {
-                        var drawer = self.getDrawer(id);
-
-                        if (!drawer.opened && !drawer.deferred.close) {
-                            return $q.reject('Drawer ' + id + 'already closed');
-                        }
-
-                        if (!drawer.deferred.close) {
-                            drawer.opened = false;
-                            drawer.deferred.close = $q.defer();
-                        }           
-
-                        return drawer.deferred.close.promise;
-                    },
-
-                    on: function(eventName, id, callback) {
-                        var drawer = self.getDrawer(id),
-                            listeners = drawer && drawer.listeners && drawer.listeners[eventName];
-
-                        if (listeners) {
-                            listeners.push(callback);
-
-                            return function() {
-                                listeners[eventName].splice(listeners[eventName].indexOf(callback), 1);
-                            };
-                        }       
-                    },
-
-                    broadcast: function(eventName, id) {
-                        var drawer = self.getDrawer(id),
-                            listeners = drawer && drawer.listeners && drawer.listeners[eventName];
-
-                        if (listeners) {
-                            listeners.forEach(function(listener) {
-                                listener.apply(self, Array.prototype.slice.call(arguments, 1));
-                            });
-                        }                          
-                    }
-                };
-
-                return self;
-            })();
+        'materialTransitionService',
+        function (TransitionService) {
+            return TransitionService('drawers');
         }
     ]);
 });

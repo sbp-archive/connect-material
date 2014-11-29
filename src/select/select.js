@@ -15,16 +15,18 @@ define([
                 scope : {
                     selectId: '@?',
                     fieldLabel : '@?label',
-                    value: '=ngModel'
+                    value: '=ngModel',
+                    options: '=options'
                 },
                 template: [
                     '<material-textfield ng-model="label" label="{{fieldLabel}}" ng-click="openSelect($event)" field-config="_fieldConfig"></material-textfield>',
                     '<material-select select-id="{{selectId}}" menu-config="_menuConfig" ng-model="value" options="options"></material-select>'
                 ].join(''),
 
-                compile: function($element, $attrs) {
+                compile: function ($element, $attrs) {
                     if (ng.isUndefined($attrs.selectId)) {
                         $attrs.selectId = 'material-selectfield-' + ID_GENERATOR++;
+                        $element.attr('select-id', $attrs.selectId);
                     }
 
                     if (ng.isUndefined($attrs.options)) {
@@ -32,17 +34,13 @@ define([
                         $attrs.options = [];
                     }
 
-                    return function($scope, $element, $attrs) {
-                        configs.bridge($scope, $attrs, 'menuConfig');
-                        configs.bridge($scope, $attrs, 'fieldConfig');
+                    return function ($scope, $element, $attrs) {
+                        configs.bridgeConfigs($scope, $attrs, 'menuConfig');
+                        configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
 
-                        $scope.$parent.$watch($attrs.options, function(options) {
-                            $scope.options = options;
-                        }, true);
-
-                        $scope.$watch('value', function(value) {
+                        $scope.$watch('value', function (value) {
                             if (ng.isDefined(value)) {
-                                var result = $scope.options.filter(function(option) {
+                                var result = $scope.options.filter(function (option) {
                                     if ((ng.isObject(option) && option.value == value) || option == value) {
                                         return true;
                                     }
@@ -54,7 +52,7 @@ define([
                             }
                         });
 
-                        $scope.openSelect = function(e) {
+                        $scope.openSelect = function (e) {
                             e.stopPropagation();
                             e.preventDefault();
                             menus.open($scope.selectId);
@@ -88,7 +86,7 @@ define([
                     '</material-menu>'
                 ].join(''),
 
-                compile: function($element, $attrs) {
+                compile: function ($element, $attrs) {
                     if (ng.isUndefined($attrs.selectId)) {
                         $attrs.selectId = 'material-select-' + ID_GENERATOR++;
                     }
@@ -98,10 +96,10 @@ define([
                         $attrs.options = [];
                     }
 
-                    return function($scope, $element, $attrs, ngModelCtrl) {
-                        configs.bridge($scope, $attrs, 'menuConfig');
+                    return function ($scope, $element, $attrs, ngModelCtrl) {
+                        configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
-                        ngModelCtrl.$render = function() {
+                        ngModelCtrl.$render = function () {
                             var value = ngModelCtrl.$modelValue,
                                 options = $scope.options,
                                 ln = options.length,
@@ -120,7 +118,7 @@ define([
                             ngModelCtrl.$setValidity('select', isValid);
                         }
 
-                        $scope.select = function(value) {
+                        $scope.select = function (value) {
                             ngModelCtrl.$setViewValue(value);
                             ngModelCtrl.$render();
                         }

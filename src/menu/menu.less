@@ -7,7 +7,7 @@ material-menu,
 .material-menu {
     display: block;
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     top: -10000px;
     min-width: @material-menu-width;
     overflow-x: hidden;
@@ -21,8 +21,8 @@ material-menu,
 
     .box-shadow(@material-shadow-menu);
 
-    &.material-menu-opened,
-    &.material-menu-opened-remove {
+    &.material-opened,
+    &.material-opened-remove {
         top: 0;
     }
 
@@ -64,7 +64,7 @@ material-menu-button,
         .ease-out(@property: opacity);
         opacity: 0;
 
-        &.material-menu-opened {
+        &.material-opened {
             opacity: 1;
         }
     }
