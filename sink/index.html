@@ -14,6 +14,12 @@
         <script data-main="sink" src="bower_components/requirejs/require.js"></script>
 
         <style>
+            .logo {
+                display: inline-block;
+                height: 24px;
+                margin-right: 20px;
+            }
+
             body {
                 font-size: 12px;
                 font-family: Helvetica;
@@ -46,11 +52,22 @@
             .field-gender {
                 flex: 1;
             }
+
+            .buttton-examples material-button:not(.material-fab) {
+                min-width: 100px;
+            }
+
+            .buttton-examples material-button {
+                margin: 10px;
+            }
         </style>
     </head>
 
     <body ng-controller="SinkCtrl">
-        <material-title>Connect Material Kitchensink</material-title>
+        <material-title>
+            <img class="logo" src="https://www.schubergphilis.com/bundles/schubergfrontend/image/default/logo.svg">
+            <span>Connect Material Kitchensink<span>
+        </material-title>
         <material-appbar>
             <material-sidenav-button current-page="status">
                 <material-item page="status">Status</material-item>
@@ -63,7 +80,7 @@
 
             <material-title page="status">Status</material-title>
 
-            <material-button ng-click="openDrawer('left')">Open Drawer</material-button>
+            <material-button ng-click="openDrawer('left')">Drawer</material-button>
 
             <material-menu-button icon="navigation-white:apps_white" menu-config="{icons:hasMenuIcons()}">
                 <material-item icon="action-black:dashboard_black">Dashboard</material-item>
@@ -92,7 +109,7 @@
                     <material-title>Card with Toolbar and Buttons</material-title>
                     <material-button ng-click="openDrawer('right')">Forms</material-button>
                 </material-toolbar>
-                <material-content>
+                <material-content class="buttton-examples">
                     <material-buttonbar layout="row" layout-align="center center">
                         <material-button>Normal</material-button>
                         <material-button class="material-primary">Primary</material-button>
@@ -115,8 +132,8 @@
             </material-card>
 
             <material-buttonbar>
-                <material-button ng-click="openDialog('alert')" class="material-warn">Alert dialog</material-button>
-                <material-button ng-click="openDialog('confirm')" class="material-primary">Confirm dialog</material-button>
+                <material-button ng-click="openDialog('alert')" class="material-raised material-warn">Alert dialog</material-button>
+                <material-button ng-click="openDialog('confirm')" class="material-raised material-primary">Confirm dialog</material-button>
             </material-buttonbar>
 
             <material-dialog dialog-id="alert">
