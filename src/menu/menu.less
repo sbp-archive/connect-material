@@ -39,10 +39,21 @@ material-menu,
         margin-top: 5px;
     }
 
+    material-item,
+    .material-item {
+        .material-icon {
+            display: none;
+        }
+    }
+
     &.material-menu-has-icons {
         material-item,
         .material-item {
             padding-left: 64px;
+
+            .material-icon {
+                display: block;
+            }
         }
     }
 }
@@ -52,10 +63,6 @@ material-menu-button,
     display: block;
     position: relative;
     height: 50px;
-
-    &:last-child {
-        margin-right: 7px;
-    }
 
     > material-menu,
     > .material-menu {

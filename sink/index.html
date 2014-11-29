@@ -40,11 +40,11 @@
 
             .field-birth {
                 margin-right: 10px;
-                flex: 1;
+                flex: 2;
             }
 
             .field-gender {
-                width: 100px;
+                flex: 1;
             }
         </style>
     </head>
@@ -65,18 +65,18 @@
 
             <material-button ng-click="openDrawer('left')">Open Drawer</material-button>
 
-            <material-menu-button button-config="{icon:'navigation-white:apps_white'}" menu-config="{icons:hasMenuIcons()}">
-                <material-item material-icon="action-black:dashboard_black">Dashboard</material-item>
-                <material-item material-icon="action-black:credit_card_black">Credit</material-item>
-                <material-item material-icon="action-black:account_balance_black">Balance</material-item>
+            <material-menu-button icon="navigation-white:apps_white" menu-config="{icons:hasMenuIcons()}">
+                <material-item icon="action-black:dashboard_black">Dashboard</material-item>
+                <material-item icon="action-black:credit_card_black">Credit</material-item>
+                <material-item icon="action-black:account_balance_black">Balance</material-item>
                 <material-divider></material-divider>
-                <material-item material-icon="action-black:alarm_black">Set Alarm</material-item>
-                <material-item material-icon="action-black:announcement_black">Announcements</material-item>
+                <material-item icon="action-black:alarm_black">Set Alarm</material-item>
+                <material-item icon="action-black:announcement_black">Announcements</material-item>
                 <material-divider></material-divider>
                 <material-item ng-click="toggleMenuIcons($event)">Toggle Icons</material-item>
             </material-menu-button>
 
-            <material-menu-button button-config="{icon:'navigation-white:more_vert_white'}">
+            <material-menu-button icon="navigation-white:more_vert_white">
                 <material-item>Menu Item 1</material-item>
                 <material-item>Menu Item 2</material-item>
                 <material-item>Menu Item 3</material-item>
@@ -89,20 +89,41 @@
         <div class="page-content">
             <material-card>
                 <material-toolbar>
-                    <material-title>Card with Toolbar</material-title>
+                    <material-title>Card with Toolbar and Buttons</material-title>
                     <material-button ng-click="openDrawer('right')">Forms</material-button>
                 </material-toolbar>
-                <material-content>Some content inside of the card</material-content>
+                <material-content>
+                    <material-buttonbar layout="row" layout-align="center center">
+                        <material-button>Normal</material-button>
+                        <material-button class="material-primary">Primary</material-button>
+                        <material-button ng-disabled="true">Disabled</material-button>
+                        <material-button class="material-warn">Warn</material-button>
+                    </material-buttonbar>
+                    <material-buttonbar layout="row" layout-align="center center">
+                        <material-button class="material-raised">Normal</material-button>
+                        <material-button class="material-raised material-primary">Primary</material-button>
+                        <material-button class="material-raised" ng-disabled="true">Disabled</material-button>
+                        <material-button class="material-raised material-warn">Warn</material-button>
+                    </material-buttonbar>
+                    <material-buttonbar layout="row" layout-align="center center">
+                        <material-button class="material-fab" icon="action-black:alarm_black"></material-button>
+                        <material-button class="material-fab" icon="action-black:dashboard_black"></material-button>
+                        <material-button class="material-fab" icon="action-black:credit_card_black" ng-disabled="true"></material-button>
+                        <material-button class="material-fab material-primary" icon="action-black:account_balance_black"></material-button>
+                    </material-buttonbar>
+                </material-content>
             </material-card>
 
-            <material-button ng-click="openDialog('alert')">Alert dialog</material-button>
-            <material-button ng-click="openDialog('confirm')">Confirm dialog</material-button>
+            <material-buttonbar>
+                <material-button ng-click="openDialog('alert')" class="material-warn">Alert dialog</material-button>
+                <material-button ng-click="openDialog('confirm')" class="material-primary">Confirm dialog</material-button>
+            </material-buttonbar>
 
             <material-dialog dialog-id="alert">
                 <material-title>Alert Dialog</material-title>
                 <material-content>You have been warned sir!</material-content>
                 <material-buttonbar>
-                    <material-button ng-click="closeDialog('alert')">Ok</material-button>
+                    <material-button ng-click="closeDialog('alert')" class="material-primary">Ok</material-button>
                 </material-buttonbar>
             </material-dialog>
 
@@ -111,20 +132,20 @@
                 <material-content>Can you please confirm that you like material?</material-content>
                 <material-buttonbar>
                     <material-button ng-click="closeDialog('confirm')">Cancel</material-button>
-                    <material-button ng-click="closeDialog('confirm')">Ok</material-button>
+                    <material-button ng-click="closeDialog('confirm')" class="material-primary">Ok</material-button>
                 </material-buttonbar>
             </material-dialog>
 
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
                 <material-buttonbar>
                     <material-button ng-click="closeDrawer('left')">Close</material-button>
-                    <material-button ng-click="openDrawer('subleft')">Deeper</material-button>
+                    <material-button ng-click="openDrawer('subleft')" class="material-primary">Deeper</material-button>
                 </material-buttonbar>
             </material-drawer>
 
             <material-drawer drawer-id="subleft" drawer-config="{position:'left'}">
                 <material-buttonbar>
-                    <material-button ng-click="closeDrawer('subleft')">Go back</material-button>
+                    <material-button ng-click="closeDrawer('subleft')" class="material-primary">Go back</material-button>
                 </material-buttonbar>
             </material-drawer>
 
@@ -151,7 +172,7 @@
 
                 <material-buttonbar>
                     <material-button ng-click="closeDrawer('right')">Cancel</material-button>
-                    <material-button ng-click="closeDrawer('right')">Save</material-button>
+                    <material-button ng-click="closeDrawer('right')" class="material-primary">Save</material-button>
                 </material-buttonbar>
             </material-drawer>
         </div>

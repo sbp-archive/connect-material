@@ -1,10 +1,154 @@
-html {
-  box-sizing: border-box;
+[layout] {
+  display: flex;
+}
+[layout=column] {
+  flex-direction: column;
+}
+[layout=row] {
+  flex-direction: row;
+}
+[layout-wrap] {
+  flex-wrap: wrap;
+}
+[flex-order="0"] {
+  order: 0;
+}
+[flex-order="1"] {
+  order: 1;
+}
+[flex-order="2"] {
+  order: 2;
+}
+[flex-order="3"] {
+  order: 3;
+}
+[flex-order="4"] {
+  order: 4;
+}
+[flex-order="5"] {
+  order: 5;
+}
+[flex-order="6"] {
+  order: 6;
+}
+[flex-order="7"] {
+  order: 7;
+}
+[flex-order="8"] {
+  order: 8;
+}
+[flex-order="9"] {
+  order: 9;
+}
+[layout-align="center"],
+[layout-align="center center"],
+[layout-align="center start"],
+[layout-align="center end"] {
+  justify-content: center;
+}
+[layout-align="end"],
+[layout-align="end center"],
+[layout-align="end start"],
+[layout-align="end end"] {
+  justify-content: flex-end;
+}
+[layout-align="space-around"],
+[layout-align="space-around center"],
+[layout-align="space-around start"],
+[layout-align="space-around end"] {
+  justify-content: space-around;
+}
+[layout-align="space-between"],
+[layout-align="space-between center"],
+[layout-align="space-between start"],
+[layout-align="space-between end"] {
+  justify-content: space-between;
+}
+[layout-align="center center"],
+[layout-align="start center"],
+[layout-align="end center"],
+[layout-align="space-between center"],
+[layout-align="space-around center"] {
+  align-items: center;
+}
+[layout-align="center start"],
+[layout-align="start start"],
+[layout-align="end start"],
+[layout-align="space-between start"],
+[layout-align="space-around start"] {
+  align-items: flex-start;
+}
+[layout-align="center end"],
+[layout-align="start end"],
+[layout-align="end end"],
+[layout-align="space-between end"],
+[layout-align="space-around end"] {
+  align-items: flex-end;
 }
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+  box-sizing: border-box;
+}
+:focus {
+  outline: none;
+}
+html,
+body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+a {
+  background: transparent;
+  outline: none;
+}
+select,
+button,
+textarea,
+input {
+  margin: 0;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+input[type="reset"],
+input[type="submit"],
+html input[type="button"],
+button {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type="reset"][disabled],
+input[type="submit"][disabled],
+html input[type="button"][disabled],
+button[disabled] {
+  cursor: default;
+}
+textarea {
+  vertical-align: top;
+  overflow: auto;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  padding: 0;
+  box-sizing: border-box;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 material-content,
 .material-content {
@@ -20,34 +164,6 @@ material-row,
   display: flex;
   flex-direction: row;
   overflow: visible;
-}
-material-buttonbar,
-.material-buttonbar {
-  display: flex;
-  flex-direction: row;
-  overflow: visible;
-  justify-content: flex-end;
-  margin: 20px;
-}
-material-buttonbar material-button,
-.material-buttonbar material-button,
-material-buttonbar .material-button,
-.material-buttonbar .material-button {
-  margin-left: 20px;
-}
-material-buttonbar material-button .material-text,
-.material-buttonbar material-button .material-text,
-material-buttonbar .material-button .material-text,
-.material-buttonbar .material-button .material-text {
-  color: #1fa8e3;
-  font-weight: 500;
-  font-size: 1.1em;
-}
-material-buttonbar material-button .material-text:hover,
-.material-buttonbar material-button .material-text:hover,
-material-buttonbar .material-button .material-text:hover,
-.material-buttonbar .material-button .material-text:hover {
-  color: #1788b8;
 }
 .material-backdrop {
   position: absolute;
@@ -109,7 +225,6 @@ material-item > .material-icon,
 }
 material-item > .material-text,
 .material-item > .material-text {
-  -webkit-font-smoothing: antialiased;
   -webkit-user-select: none;
   line-height: 20px;
 }
@@ -122,7 +237,6 @@ material-title,
   line-height: 24px;
   color: #000;
   margin: 20px;
-  -webkit-font-smoothing: antialiased;
   -webkit-user-select: none;
 }
 material-title h2,
@@ -149,22 +263,198 @@ material-button,
   position: relative;
   border: 0;
   margin: 0;
-  padding: 0;
+  padding: 6px;
   background: transparent;
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
   overflow: hidden;
   outline: none;
+  user-select: none;
   border: 1px solid transparent;
+  transition: box-shadow 450ms cubic-bezier(0.25, 0.8, 0.25, 1), background-color 450ms cubic-bezier(0.25, 0.8, 0.25, 1), transform 450ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 3px;
 }
 material-button .material-text,
 .material-button .material-text {
-  -webkit-font-smoothing: antialiased;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   text-decoration: none;
   line-height: 24px;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+material-button:not([disabled]):hover,
+.material-button:not([disabled]):hover,
+material-button:not([disabled]):focus,
+.material-button:not([disabled]):focus {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+material-button.material-cornered,
+.material-button.material-cornered {
+  border-radius: 0;
+}
+material-button.material-primary .material-text,
+.material-button.material-primary .material-text {
+  color: #1fa8e3;
+}
+material-button.material-warn .material-text,
+.material-button.material-warn .material-text {
+  color: #ef5350;
+}
+material-button.material-raised,
+.material-button.material-raised {
+  transform: translate3d(0, 0, 0);
+}
+material-button.material-raised:not([disabled]),
+.material-button.material-raised:not([disabled]) {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+material-button.material-raised,
+.material-button.material-raised,
+material-button.material-fab,
+.material-button.material-fab {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+material-button.material-raised:not([disabled]):hover,
+.material-button.material-raised:not([disabled]):hover,
+material-button.material-fab:not([disabled]):hover,
+.material-button.material-fab:not([disabled]):hover,
+material-button.material-raised:not([disabled]):focus,
+.material-button.material-raised:not([disabled]):focus,
+material-button.material-fab:not([disabled]):focus,
+.material-button.material-fab:not([disabled]):focus {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+material-button.material-raised.material-primary,
+.material-button.material-raised.material-primary,
+material-button.material-fab.material-primary,
+.material-button.material-fab.material-primary {
+  background-color: #4cbae9;
+}
+material-button.material-raised.material-primary .material-text,
+.material-button.material-raised.material-primary .material-text,
+material-button.material-fab.material-primary .material-text,
+.material-button.material-fab.material-primary .material-text {
+  color: #fff;
+}
+material-button.material-raised.material-primary:not([disabled]):hover,
+.material-button.material-raised.material-primary:not([disabled]):hover,
+material-button.material-fab.material-primary:not([disabled]):hover,
+.material-button.material-fab.material-primary:not([disabled]):hover,
+material-button.material-raised.material-primary:not([disabled]):focus,
+.material-button.material-raised.material-primary:not([disabled]):focus,
+material-button.material-fab.material-primary:not([disabled]):focus,
+.material-button.material-fab.material-primary:not([disabled]):focus {
+  background-color: #1fa8e3;
+}
+material-button.material-raised.material-warn,
+.material-button.material-raised.material-warn,
+material-button.material-fab.material-warn,
+.material-button.material-fab.material-warn {
+  background-color: #ef5350;
+}
+material-button.material-raised.material-warn .material-text,
+.material-button.material-raised.material-warn .material-text,
+material-button.material-fab.material-warn .material-text,
+.material-button.material-fab.material-warn .material-text {
+  color: #fff;
+}
+material-button.material-raised.material-warn:not([disabled]):hover,
+.material-button.material-raised.material-warn:not([disabled]):hover,
+material-button.material-fab.material-warn:not([disabled]):hover,
+.material-button.material-fab.material-warn:not([disabled]):hover,
+material-button.material-raised.material-warn:not([disabled]):focus,
+.material-button.material-raised.material-warn:not([disabled]):focus,
+material-button.material-fab.material-warn:not([disabled]):focus,
+.material-button.material-fab.material-warn:not([disabled]):focus {
+  background-color: #eb2521;
+}
+material-button:not([disabled]).material-raised:focus,
+.material-button:not([disabled]).material-raised:focus,
+material-button:not([disabled]).material-fab:focus,
+.material-button:not([disabled]).material-fab:focus,
+material-button:not([disabled]).material-raised:hover,
+.material-button:not([disabled]).material-raised:hover,
+material-button:not([disabled]).material-fab:hover,
+.material-button:not([disabled]).material-fab:hover {
+  transform: translate3d(0, -1px, 0);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+material-button.material-fab,
+.material-button.material-fab {
+  overflow: hidden;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transform: translate3d(0, 0, 0);
+  transition: 0.2s linear;
+  transition-property: transform, box-shadow;
+}
+material-button.material-fab.material-fab-bottom-right,
+.material-button.material-fab.material-fab-bottom-right {
+  top: auto;
+  right: 28px;
+  bottom: 28px;
+  left: auto;
+  position: absolute;
+}
+material-button.material-fab.material-fab-bottom-left,
+.material-button.material-fab.material-fab-bottom-left {
+  top: auto;
+  right: auto;
+  bottom: 28px;
+  left: 28px;
+  position: absolute;
+}
+material-button.material-fab.material-fab-top-right,
+.material-button.material-fab.material-fab-top-right {
+  top: 28px;
+  right: 28px;
+  bottom: auto;
+  left: auto;
+  position: absolute;
+}
+material-button.material-fab.material-fab-top-left,
+.material-button.material-fab.material-fab-top-left {
+  top: 28px;
+  right: auto;
+  bottom: auto;
+  left: 28px;
+  position: absolute;
+}
+material-button.material-fab .material-icon,
+.material-button.material-fab .material-icon {
+  margin-top: 9px;
+}
+material-button[disabled],
+.material-button[disabled],
+material-button.material-raised[disabled],
+.material-button.material-raised[disabled],
+material-button.material-fab[disabled],
+.material-button.material-fab[disabled] {
+  color: #787878;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+material-buttonbar,
+.material-buttonbar {
+  display: flex;
+  flex-direction: row;
+  overflow: visible;
+  justify-content: flex-end;
+  margin: 20px;
+}
+material-buttonbar material-button,
+.material-buttonbar material-button,
+material-buttonbar .material-button,
+.material-buttonbar .material-button {
+  margin-left: 10px;
 }
 material-toolbar,
 .material-toolbar {
@@ -187,7 +477,10 @@ material-toolbar .material-button,
 .material-toolbar .material-button {
   height: 50px;
   padding: 12px;
-  color: #1788b8;
+}
+material-toolbar > :last-child,
+.material-toolbar > :last-child {
+  margin-right: 7px;
 }
 material-appbar,
 .material-appbar {
@@ -213,7 +506,16 @@ material-appbar .material-button,
 .material-appbar .material-button {
   height: 50px;
   padding: 12px;
-  color: #1788b8;
+}
+material-appbar > :last-child,
+.material-appbar > :last-child {
+  margin-right: 7px;
+}
+material-appbar material-title,
+.material-appbar material-title,
+material-appbar .material-title,
+.material-appbar .material-title {
+  margin: 20px 0;
 }
 material-appbar material-button,
 .material-appbar material-button,
@@ -262,13 +564,11 @@ material-card li,
   list-style: none;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
 }
 material-card p,
 .material-card p {
   margin: 0;
   padding: 20px;
-  -webkit-font-smoothing: antialiased;
 }
 material-card material-content:last-child,
 .material-card material-content:last-child,
@@ -359,21 +659,29 @@ material-menu .material-item:first-of-type,
 .material-menu .material-item:first-of-type {
   margin-top: 5px;
 }
+material-menu material-item .material-icon,
+.material-menu material-item .material-icon,
+material-menu .material-item .material-icon,
+.material-menu .material-item .material-icon {
+  display: none;
+}
 material-menu.material-menu-has-icons material-item,
 .material-menu.material-menu-has-icons material-item,
 material-menu.material-menu-has-icons .material-item,
 .material-menu.material-menu-has-icons .material-item {
   padding-left: 64px;
 }
+material-menu.material-menu-has-icons material-item .material-icon,
+.material-menu.material-menu-has-icons material-item .material-icon,
+material-menu.material-menu-has-icons .material-item .material-icon,
+.material-menu.material-menu-has-icons .material-item .material-icon {
+  display: block;
+}
 material-menu-button,
 .material-menu-button {
   display: block;
   position: relative;
   height: 50px;
-}
-material-menu-button:last-child,
-.material-menu-button:last-child {
-  margin-right: 7px;
 }
 material-menu-button > material-menu,
 .material-menu-button > material-menu,
@@ -448,9 +756,6 @@ material-datepicker,
   width: 272px;
   background-color: #fff;
   border: 1px solid #dedede;
-}
-.material-datepicker-date {
-  -webkit-font-smoothing: antialiased;
 }
 .material-datepicker-date h4 {
   background-color: #1788b8;
@@ -649,7 +954,6 @@ material-input-group textarea,
   border-color: #c4c4c4;
   font-size: 16px;
   background: none;
-  -webkit-font-smoothing: antialiased;
 }
 material-input-group input:-ms-input-placeholder,
 .material-input-group input:-ms-input-placeholder,
@@ -670,7 +974,6 @@ material-input-group label,
   z-index: 1;
   pointer-events: none;
   color: #c4c4c4;
-  -webkit-font-smoothing: antialiased;
 }
 material-input-group label:hover,
 .material-input-group label:hover {

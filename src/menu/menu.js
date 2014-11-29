@@ -93,10 +93,11 @@ define([
                 restrict: 'EA',
                 transclude: true,
                 scope: {
-                    menuId: '@'
+                    menuId: '@',
+                    icon: '@'
                 },
                 template: [
-                    '<material-button ng-click="openMenu($event)" button-config="_buttonConfig"></material-button>',
+                    '<material-button ng-click="openMenu($event)" icon="{{icon}}"></material-button>',
                     '<material-menu menu-id="{{menuId}}" menu-config="_menuConfig" ng-transclude></material-menu>'
                 ].join(''),
                 
@@ -106,7 +107,6 @@ define([
                     }
 
                     return function ($scope, $element, $attrs) {
-                        configs.bridgeConfigs($scope, $attrs, 'buttonConfig');
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
                         $scope.openMenu = function (e) {

@@ -23,7 +23,7 @@ define([
                     currentPage: '@'
                 },
                 template: [
-                    '<material-button ng-click="openMenu($event)" button-config="{icon:\'navigation-white:menu_white\'}"></material-button>',
+                    '<material-button ng-click="openMenu($event)" icon="navigation-white:menu_white"></material-button>',
                     '<material-menu menu-id="{{menuId}}" menu-config="_menuConfig">',
                         '<material-title material-icon="navigation-black:menu_black">{{pageName}}</material-title>',
                         '<ng-transclude></ng-transclude>',

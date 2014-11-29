@@ -1,4 +1,27 @@
 @import '../variables';
+@import '../mixins';
+
+@material-button-border-radius: 3px;
+@material-button-hover-background-color: rgba(0, 0, 0, 0.08);
+
+@material-button-fab-width: 56px;
+@material-button-fab-height: 56px;
+@material-button-fab-padding: 16px;
+
+@material-button-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+@material-button-shadow-hover: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+
+@material-button-warn-color: #ef5350;
+
+.fab-position(@spot, @top: auto, @right: auto, @bottom: auto, @left: auto) {
+	&.material-fab-@{spot} {
+		top: @top;
+		right: @right;
+		bottom: @bottom;
+		left: @left;
+		position: absolute;
+	}
+}
 
 material-button,
 .material-button {
@@ -6,7 +29,7 @@ material-button,
 	position: relative;
 	border: 0;
 	margin: 0;
-	padding: 0;
+	padding: 6px;
 
 	background: transparent;
 	white-space: nowrap;
@@ -16,85 +39,144 @@ material-button,
 	cursor: pointer;
 	overflow: hidden;
 	outline: none;
+  	user-select: none;
 
 	border: 1px solid transparent;
 
 	.material-text {
-		.text();
-		font-weight: 700;
+		font-weight: 500;
 		text-transform: uppercase;
 		text-decoration: none;
 		line-height: 24px;
+		font-size: 1.1em;
+		vertical-align: middle;
+	}
+
+	transition: box-shadow 450ms @material-ease-out-timing-function,
+                background-color 450ms @material-ease-out-timing-function,
+                transform 450ms @material-ease-out-timing-function;
+
+	border-radius: @material-button-border-radius;
+
+	&:not([disabled]) {
+		&:hover, 
+		&:focus {
+			background-color: @material-button-hover-background-color;
+		}
+	}
+
+    &.material-cornered {
+    	border-radius: 0;
+    }
+
+    &.material-primary .material-text {
+    	color: @material-primary-color-darker;
+    }
+
+    &.material-warn .material-text {
+    	color: @material-button-warn-color;
+    }
+
+    &.material-raised {
+	    .transform(translate3d(0, 0, 0));
+
+	    &:not([disabled]) {
+	    	.box-shadow(@material-button-shadow);
+	    }
+    }
+
+	&.material-raised, 
+	&.material-fab {
+		background-color: rgba(0, 0, 0, 0.1);
+
+		&:not([disabled]) {
+			&:hover, 
+			&:focus {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+		}
+
+		&.material-primary {
+			background-color: @material-primary-color;
+			.material-text {
+				color: #fff;
+			}
+			&:not([disabled]) {
+				&:hover,
+				&:focus {
+					background-color: @material-primary-color-darker;
+				}
+			}
+		}
+
+		&.material-warn {
+			background-color: @material-button-warn-color;
+			.material-text {
+				color: #fff;
+			}
+			&:not([disabled]) {
+				&:hover, 
+				&:focus {
+					background-color: darken(@material-button-warn-color, 10%);
+				}
+			}
+		}
+	}
+
+	&:not([disabled]) {
+		&.material-raised,
+		&.material-fab {
+			&:focus,
+			&:hover {
+				.transform(translate3d(0, -1px, 0));
+				.box-shadow(@material-button-shadow-hover);
+			}
+		}
+	}
+
+	&.material-fab {
+		.fab-position(bottom-right, auto, @material-button-fab-width/2, @material-button-fab-height/2, auto);
+		.fab-position(bottom-left, auto, auto, @material-button-fab-height/2, @material-button-fab-width/2);
+		.fab-position(top-right, @material-button-fab-height/2, @material-button-fab-width/2, auto, auto);
+		.fab-position(top-left, @material-button-fab-height/2, auto, auto, @material-button-fab-width/2);
+
+		overflow: hidden;
+		z-index: 1;
+
+		width: @material-button-fab-width;
+		height: @material-button-fab-height;
+
+		border-radius: 50%;
+
+		.box-shadow(@material-button-shadow);
+		.transform(translate3d(0, 0, 0));
+
+		transition: 0.2s linear;
+		transition-property: transform, box-shadow;
+
+		.material-icon {
+			margin-top: 9px;
+		}
+	}
+
+	&[disabled],
+	&.material-raised[disabled],
+	&.material-fab[disabled] {
+		color: @material-gray-dark;
+		background-color: transparent;
+		cursor: not-allowed;
 	}
 }
 
-// .material-btn {
-//     position: relative;
-//     display: inline-block;
-//     outline: none;
-//     border: 0;
-//     padding: 6px;
-//     margin: 0;
-//     background: transparent;
-//     white-space: nowrap;
-//     text-align: center;
-//     text-transform: uppercase;
-//     text-decoration: none;
-//     cursor: pointer;
-//     overflow: hidden;
-//     text-decoration: none;
-//     font-weight: 700;
-//     font-size: 0.9em;
-//     border-radius: 3px;
-//     line-height: 25px;
-//     .box-shadow(0 2px 6px rgba(0,0,0,.2));
-//     .transition(all 0.2s ease);
-//     &:hover {
-//         cursor: pointer;
-//         text-decoration: none;
-//         .box-shadow(0 4px 8px rgba(0,0,0,.3));
-//     }
-//     //add button
-//     &.btn-add {
-//         background-color: darken(@material-primary-color, 20%);
-//         color: #fff;
-//         //hover
-//         &:hover{
-//             background-color: darken(@material-primary-color,15%);
-//         }
-//     }
-//     //round
-//     &.btn-round {
-//         display: block;
-//         width: 56px;
-//         height: 56px;
-//         padding: 0px 15px;
-//         border-radius: 28px;
-//         font-size: 3em;
-//         line-height: 56px;
-//     }
-//     &.btn-menu {
-//         display: block;
-//         width: 24px;
-//         height: 24px;
-//         border: none;
-//         background: transparent;
-//         padding: 4px 10px;
-//         .box-shadow(none);
-//         > span {
-//              &.round {
-//                 border-radius: 2px;
-//             }
-//             background: @material-gray;
-//             display: block;
-//             width: 4px;
-//             height: 4px;
-//             + span {
-//                 margin-top: 2px;
-//             }
-//         }
-//         &:hover > span {
-//             background: #000;
-//         }
-//     }
-// }
+material-buttonbar,
+.material-buttonbar {
+	.material-row;
+
+	justify-content: flex-end;
+	margin: @material-content-spacing;
+
+	material-button,
+	.material-button {
+		margin-left: @material-content-spacing / 2;
+	}
+}

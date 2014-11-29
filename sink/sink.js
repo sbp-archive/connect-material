@@ -37,8 +37,6 @@ define([
         'materialDrawerService',
         'materialDialogService',
         function($scope, drawers, dialogs) {
-            drawers.open('right');
-            
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             };

@@ -20,8 +20,11 @@ material-toolbar,
 	.material-button {
 		height: 50px;
 		padding: 12px;
-		color: @material-primary-color-dark;
 	}
+
+	>:last-child {
+        margin-right: 7px;
+    }
 }
 
 material-appbar,
@@ -32,6 +35,11 @@ material-appbar,
 
 	.box-shadow(@material-shadow-toolbar);
 
+	material-title,
+	.material-title {
+		margin: @material-content-spacing 0;
+	}
+	
 	material-button,
 	.material-button {
 		color: #fff;

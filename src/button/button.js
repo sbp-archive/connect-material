@@ -10,18 +10,16 @@ define([
             return {
                 restrict: 'EA',
                 transclude: true,
-                scope: {},
+                scope: {
+                    icon: '@'
+                },
                 template: [
-                    '<div ng-if="_icon" class="{{getIconClass()}}"></div>',
+                    '<div ng-if="icon" class="{{getIconClass()}}"></div>',
                     '<div class="material-text" ng-transclude></div>',
                 ].join(''),
                 link: function ($scope, $element, $attrs) {
-                    configs.applyConfigs($scope, $attrs.buttonConfig, {
-                        icon: false
-                    });
-
                     $scope.getIconClass = function () {
-                        var parts = $scope._icon.split(':'),
+                        var parts = $scope.icon.split(':'),
                             iconCls = 'icon-' + parts[0];
 
                         iconCls += ' ' + iconCls + '-ic_' + parts[1] + '_24dp';
