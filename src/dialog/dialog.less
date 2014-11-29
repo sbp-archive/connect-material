@@ -12,14 +12,18 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    z-index: 1;
 
     &.material-opened {
         display: flex;
     }
+
+    .material-backdrop {
+        z-index: 4;
+    }
 }
 
 .material-dialog {
+    z-index: 4;
     display: block;
     overflow-x: hidden;
     overflow-y: auto;

@@ -1,6 +1,60 @@
 @import '../variables';
 @import '../mixins';
 
+material-gridlist,
+.material-gridlist {
+	display: block;
+	margin: @material-content-spacing;
+
+	&.material-view-list {
+		material-cell,
+		.material-cell {
+            display: block;
+            padding: 14px 6px 14px 16px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+		}
+
+		material-gridlist-sortbar,
+		.material-gridlist-sortbar,
+		material-row,
+		.material-row {
+			position: relative;	        
+			display: flex;
+	        flex-direction: row;
+	    	align-items: center;
+		}
+
+	    material-gridlist-sortbar,
+	    .material-gridlist-sortbar {
+	    	material-cell,
+	        .material-cell {
+	            color: @material-gray-dark;
+	            font-weight: 500;
+	            text-decoration: none;
+	        }
+	    }
+
+	    material-gridlist-content,
+	    .material-gridlist-content {
+	    	display: block;
+			.box-shadow(@material-shadow-card);
+	        background: #fff;
+	    }
+
+	    material-row,
+	    .material-row {
+	        border-bottom: 1px solid @material-gray-lighter;
+
+	        &:hover {
+	            background: @material-gray-light;
+	            cursor: pointer;
+	        }
+	    }
+	}
+}
+
 // .material-grid-list {
 //     //2
 //     @media only screen and (min-width: 444px) {

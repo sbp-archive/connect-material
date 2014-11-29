@@ -6,7 +6,7 @@
 @import '../item/item';
 @import '../icon/icon';
 
-@material-sidenav-width: 200px;
+@material-sidenav-width: 260px;
 
 material-sidenav-button,
 .material-sidenav-button {
@@ -24,6 +24,7 @@ material-sidenav-button,
 	.material-menu {
 		border-top-width: 0px;
 		left: 0;
+		min-width: @material-sidenav-width;
 
         .ease-out(@property: transform);
 		.transform(translateX(-@material-sidenav-width));
@@ -34,10 +35,10 @@ material-sidenav-button,
 
 		material-item,
 		.material-item {
-			padding: 13px 24px;
+			padding: 18px 32px;
 			font-weight: 500;
 			color: #222;
-			font-size: 14px;
+			font-size: 16px;
 
 			&:hover {
 				color: #444;

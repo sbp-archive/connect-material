@@ -152,18 +152,10 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 material-content,
 .material-content {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: block;
   margin: 20px;
   overflow-x: hidden;
-  overflow: visible;
-}
-material-row,
-.material-row {
-  display: flex;
-  flex-direction: row;
-  overflow: visible;
+  overflow-y: auto;
 }
 .material-backdrop {
   position: absolute;
@@ -446,7 +438,7 @@ material-buttonbar,
 .material-buttonbar {
   display: flex;
   flex-direction: row;
-  overflow: visible;
+  align-items: center;
   justify-content: flex-end;
   margin: 20px;
 }
@@ -528,6 +520,7 @@ material-card,
   display: block;
   background-color: white;
   margin: 20px;
+  padding-bottom: 20px;
   -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px inset, 0 1px 4px rgba(0, 0, 0, 0.25);
   box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px inset, 0 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
@@ -587,12 +580,15 @@ material-card .material-content:last-child,
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  z-index: 1;
 }
 .material-dialog-wrap.material-opened {
   display: flex;
 }
+.material-dialog-wrap .material-backdrop {
+  z-index: 4;
+}
 .material-dialog {
+  z-index: 4;
   display: block;
   overflow-x: hidden;
   overflow-y: auto;
@@ -625,7 +621,7 @@ material-menu,
 .material-menu {
   display: block;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: -10000px;
   min-width: 200px;
   overflow-x: hidden;
@@ -717,9 +713,10 @@ material-sidenav-button .material-menu,
 .material-sidenav-button .material-menu {
   border-top-width: 0px;
   left: 0;
+  min-width: 260px;
   -webkit-transition: transform 450ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
   transition: transform 450ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
-  transform: translateX(-200px);
+  transform: translateX(-260px);
 }
 material-sidenav-button material-menu.material-opened,
 .material-sidenav-button material-menu.material-opened,
@@ -735,10 +732,10 @@ material-sidenav-button material-menu .material-item,
 .material-sidenav-button material-menu .material-item,
 material-sidenav-button .material-menu .material-item,
 .material-sidenav-button .material-menu .material-item {
-  padding: 13px 24px;
+  padding: 18px 32px;
   font-weight: 500;
   color: #222;
-  font-size: 14px;
+  font-size: 16px;
 }
 material-sidenav-button material-menu material-item:hover,
 .material-sidenav-button material-menu material-item:hover,
@@ -1067,8 +1064,8 @@ material-checkbox.material-checkbox-checked .material-checkbox-icon:after,
 material-checkbox .material-text,
 .material-checkbox .material-text {
   flex: 1;
-  width: 0 !important;
-  min-width: 0 !important;
+  width: 0;
+  min-width: 0;
   display: block;
   border: 1px dotted transparent;
   pointer-events: none;
@@ -1136,6 +1133,9 @@ material-select .material-menu material-item .material-text,
 .material-drawer-wrap {
   width: 100%;
 }
+.material-drawer-wrap .material-backdrop {
+  z-index: 2;
+}
 material-drawer,
 .material-drawer {
   position: absolute;
@@ -1145,7 +1145,7 @@ material-drawer,
   bottom: 0;
   background-color: #fff;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transform: translate3d(-100%, 0, 0);
@@ -1175,6 +1175,68 @@ material-drawer material-title,
 material-drawer .material-title,
 .material-drawer .material-title {
   color: #1788b8;
+}
+material-gridlist,
+.material-gridlist {
+  display: block;
+  margin: 20px;
+}
+material-gridlist.material-view-list material-cell,
+.material-gridlist.material-view-list material-cell,
+material-gridlist.material-view-list .material-cell,
+.material-gridlist.material-view-list .material-cell {
+  display: block;
+  padding: 14px 6px 14px 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+material-gridlist.material-view-list material-gridlist-sortbar,
+.material-gridlist.material-view-list material-gridlist-sortbar,
+material-gridlist.material-view-list .material-gridlist-sortbar,
+.material-gridlist.material-view-list .material-gridlist-sortbar,
+material-gridlist.material-view-list material-row,
+.material-gridlist.material-view-list material-row,
+material-gridlist.material-view-list .material-row,
+.material-gridlist.material-view-list .material-row {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+material-gridlist.material-view-list material-gridlist-sortbar material-cell,
+.material-gridlist.material-view-list material-gridlist-sortbar material-cell,
+material-gridlist.material-view-list .material-gridlist-sortbar material-cell,
+.material-gridlist.material-view-list .material-gridlist-sortbar material-cell,
+material-gridlist.material-view-list material-gridlist-sortbar .material-cell,
+.material-gridlist.material-view-list material-gridlist-sortbar .material-cell,
+material-gridlist.material-view-list .material-gridlist-sortbar .material-cell,
+.material-gridlist.material-view-list .material-gridlist-sortbar .material-cell {
+  color: #787878;
+  font-weight: 500;
+  text-decoration: none;
+}
+material-gridlist.material-view-list material-gridlist-content,
+.material-gridlist.material-view-list material-gridlist-content,
+material-gridlist.material-view-list .material-gridlist-content,
+.material-gridlist.material-view-list .material-gridlist-content {
+  display: block;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px inset, 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px inset, rgba(0, 0, 0, 0.03) 0px -1px 0px inset, 0 1px 4px rgba(0, 0, 0, 0.25);
+  background: #fff;
+}
+material-gridlist.material-view-list material-row,
+.material-gridlist.material-view-list material-row,
+material-gridlist.material-view-list .material-row,
+.material-gridlist.material-view-list .material-row {
+  border-bottom: 1px solid #dedede;
+}
+material-gridlist.material-view-list material-row:hover,
+.material-gridlist.material-view-list material-row:hover,
+material-gridlist.material-view-list .material-row:hover,
+.material-gridlist.material-view-list .material-row:hover {
+  background: #f7f7f7;
+  cursor: pointer;
 }
 .material-list {
   padding: 8px 0px 8px 0px;
