@@ -154,8 +154,7 @@ material-content,
 .material-content {
   display: block;
   margin: 20px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: visible;
 }
 .material-backdrop {
   position: absolute;
