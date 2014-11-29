@@ -41,7 +41,15 @@
                 flex: 1;
                 background-color: #eee;
                 position: relative;
-                overflow-x: hidden;
+                overflow: hidden;
+            }
+
+            .inner-content {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;                
                 overflow-y: auto;
             }
 
@@ -118,52 +126,54 @@
         </material-appbar>
 
         <div class="page-content">
-            <material-card>
-                <material-toolbar>
-                    <material-title>Card with Toolbar and Buttons</material-title>
-                    <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
-                    <material-button ng-click="openDialog('confirm')" class="material-primary">Confirm</material-button>
-                    <material-button ng-click="openDrawer('right')">Forms</material-button>
-                </material-toolbar>
-                <region class="buttton-examples">
-                    <material-buttonbar layout="row" layout-align="center center">
-                        <material-button>Normal</material-button>
-                        <material-button class="material-primary">Primary</material-button>
-                        <material-button ng-disabled="true">Disabled</material-button>
-                        <material-button class="material-warn">Warn</material-button>
-                    </material-buttonbar>
-                    <material-buttonbar layout="row" layout-align="center center">
-                        <material-button class="material-raised">Normal</material-button>
-                        <material-button class="material-raised material-primary">Primary</material-button>
-                        <material-button class="material-raised" ng-disabled="true">Disabled</material-button>
-                        <material-button class="material-raised material-warn">Warn</material-button>
-                    </material-buttonbar>
-                    <material-buttonbar layout="row" layout-align="center center">
-                        <material-button class="material-fab" icon="action-black:alarm_black"></material-button>
-                        <material-button class="material-fab" icon="action-black:dashboard_black"></material-button>
-                        <material-button class="material-fab" icon="action-black:credit_card_black" ng-disabled="true"></material-button>
-                        <material-button class="material-fab material-primary" icon="action-black:account_balance_black"></material-button>
-                    </material-buttonbar>
-                </region>
-            </material-card>
+            <div class="inner-content">
+                <material-card>
+                    <material-toolbar>
+                        <material-title>Card with Toolbar and Buttons</material-title>
+                        <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
+                        <material-button ng-click="openDialog('confirm')" class="material-primary">Confirm</material-button>
+                        <material-button ng-click="openDrawer('right')">Forms</material-button>
+                    </material-toolbar>
+                    <region class="buttton-examples">
+                        <material-buttonbar layout="row" layout-align="center center">
+                            <material-button>Normal</material-button>
+                            <material-button class="material-primary">Primary</material-button>
+                            <material-button ng-disabled="true">Disabled</material-button>
+                            <material-button class="material-warn">Warn</material-button>
+                        </material-buttonbar>
+                        <material-buttonbar layout="row" layout-align="center center">
+                            <material-button class="material-raised">Normal</material-button>
+                            <material-button class="material-raised material-primary">Primary</material-button>
+                            <material-button class="material-raised" ng-disabled="true">Disabled</material-button>
+                            <material-button class="material-raised material-warn">Warn</material-button>
+                        </material-buttonbar>
+                        <material-buttonbar layout="row" layout-align="center center">
+                            <material-button class="material-fab" icon="action-black:alarm_black"></material-button>
+                            <material-button class="material-fab" icon="action-black:dashboard_black"></material-button>
+                            <material-button class="material-fab" icon="action-black:credit_card_black" ng-disabled="true"></material-button>
+                            <material-button class="material-fab material-primary" icon="action-black:account_balance_black"></material-button>
+                        </material-buttonbar>
+                    </region>
+                </material-card>
 
-            <material-title>A simple Grid</material-title>
-            <material-gridlist class="material-view-list">
-                <material-gridlist-sortbar>
-                    <material-cell class="cell-firstName">First Name</material-cell>
-                    <material-cell class="cell-lastName">Last Name</material-cell>
-                    <material-cell class="cell-dateOfBirth">Date of Birth</material-cell>
-                    <material-cell class="cell-company">Company</material-cell>                
-                </material-gridlist-sortbar>
-                <material-gridlist-content>
-                    <material-row ng-repeat="user in gridData">
-                        <material-cell class="cell-firstName">{{user.firstName}}</material-cell>
-                        <material-cell class="cell-lastName">{{user.lastName}}</material-cell>
-                        <material-cell class="cell-dateOfBirth">{{user.dateOfBirth}}</material-cell>
-                        <material-cell class="cell-company">{{user.company}}</material-cell>
-                    </material-row>
-                </material-gridlist-content>
-            </material-gridlist>
+                <material-title>A simple Grid</material-title>
+                <material-gridlist class="material-view-list">
+                    <material-gridlist-sortbar>
+                        <material-cell class="cell-firstName">First Name</material-cell>
+                        <material-cell class="cell-lastName">Last Name</material-cell>
+                        <material-cell class="cell-dateOfBirth">Date of Birth</material-cell>
+                        <material-cell class="cell-company">Company</material-cell>                
+                    </material-gridlist-sortbar>
+                    <material-gridlist-content>
+                        <material-row ng-repeat="user in gridData">
+                            <material-cell class="cell-firstName">{{user.firstName}}</material-cell>
+                            <material-cell class="cell-lastName">{{user.lastName}}</material-cell>
+                            <material-cell class="cell-dateOfBirth">{{user.dateOfBirth}}</material-cell>
+                            <material-cell class="cell-company">{{user.company}}</material-cell>
+                        </material-row>
+                    </material-gridlist-content>
+                </material-gridlist>
+            </div>
 
             <material-dialog dialog-id="alert">
                 <material-title>Alert Dialog</material-title>
@@ -202,10 +212,10 @@
                     <material-textfield label="Last Name" ng-model="user.lastName"></material-textfield>
                     <material-textfield label="Address" ng-model="user.address"></material-textfield>
 
-                    <material-row>
+                    <div layout="row">
                         <material-textfield label="Date of Birth" ng-model="user.dateOfBirth" class="field-birth"></material-textfield>
                         <material-selectfield label="Gender" ng-model="user.gender" options="['Male', 'Female']" class="field-gender"></material-selectfield>
-                    </material-row>
+                    </div>
 
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
                     <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
