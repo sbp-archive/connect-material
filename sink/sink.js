@@ -38,6 +38,10 @@ define([
         'materialDrawerService',
         'materialDialogService',
         function($scope, drawers, dialogs) {
+            $scope.menu = {
+                icons: true
+            }
+
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             };
@@ -52,15 +56,6 @@ define([
 
             $scope.closeDialog = function(id) {
                 dialogs.close(id);
-            };
-
-            var hasIcons = true;
-            $scope.toggleMenuIcons = function(e) {
-                e.stopPropagation();
-                hasIcons = !hasIcons;
-            };
-            $scope.hasMenuIcons = function() {
-                return hasIcons;
             };
 
             var modal = true;

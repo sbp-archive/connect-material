@@ -1,24 +1,31 @@
+@import '../variables';
+@import '../mixins';
+
+@import '../icon/icon';
+
 @material-checkbox-width: 18px;
 @material-checkbox-height: @material-checkbox-width;
 
-@material-checkbox-spacing: @material-content-spacing / 2;
+@material-checkbox-spacing: @material-content-spacing;
 
 material-checkbox,
 .material-checkbox {
     display: flex;
     flex-direction: row;
-    align-items: center;
-
-    margin: 0 0 @material-checkbox-spacing;
+    align-items: flex-start;
+    padding-bottom: 8px;
     white-space: nowrap;
     cursor: pointer;
     outline: none;
+
+    .unselectable();
 
     .material-checkbox-container {
         position: relative;
         display: block;
         width: @material-checkbox-width;
         height: @material-checkbox-height;
+        margin: 3px;
     }
 
     .material-checkbox-icon {
@@ -57,13 +64,13 @@ material-checkbox,
     .material-text {
         .flex(1);
         display: block;
-        border: 1px dotted transparent;
+        //border: 1px dotted transparent;
+        border: none;
         pointer-events: none;
         white-space: normal;
         vertical-align: middle;
         margin-left: @material-checkbox-spacing;
         line-height: 20px;
-        padding: 2px 4px;
         text-align: justify;
     }
 

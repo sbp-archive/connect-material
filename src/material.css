@@ -192,13 +192,14 @@ material-item,
   display: block;
   text-decoration: none;
   font-weight: normal;
-  padding: 8px 24px;
+  padding: 8px 20px;
   font-size: 13px;
   color: #333;
   white-space: nowrap;
   cursor: pointer;
   position: relative;
   vertical-align: bottom;
+  -webkit-user-select: none;
 }
 material-item:hover,
 .material-item:hover {
@@ -212,11 +213,10 @@ material-item > .material-icon,
 .material-item > .material-icon {
   position: absolute;
   top: 6px;
-  left: 24px;
+  left: 20px;
 }
 material-item > .material-text,
 .material-item > .material-text {
-  -webkit-user-select: none;
   line-height: 20px;
 }
 material-title,
@@ -675,6 +675,18 @@ material-menu.material-menu-has-icons .material-item .material-icon,
 .material-menu.material-menu-has-icons .material-item .material-icon {
   display: block;
 }
+material-menu material-checkbox,
+.material-menu material-checkbox,
+material-menu .material-checkbox,
+.material-menu .material-checkbox {
+  padding: 8px 20px;
+}
+material-menu material-checkbox .material-text,
+.material-menu material-checkbox .material-text,
+material-menu .material-checkbox .material-text,
+.material-menu .material-checkbox .material-text {
+  line-height: 24px;
+}
 material-menu-button,
 .material-menu-button {
   display: block;
@@ -1084,11 +1096,12 @@ material-checkbox,
 .material-checkbox {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0 0 10px;
+  align-items: flex-start;
+  padding-bottom: 8px;
   white-space: nowrap;
   cursor: pointer;
   outline: none;
+  -webkit-user-select: none;
 }
 material-checkbox .material-checkbox-container,
 .material-checkbox .material-checkbox-container {
@@ -1096,6 +1109,7 @@ material-checkbox .material-checkbox-container,
   display: block;
   width: 18px;
   height: 18px;
+  margin: 3px;
 }
 material-checkbox .material-checkbox-icon,
 .material-checkbox .material-checkbox-icon {
@@ -1134,13 +1148,12 @@ material-checkbox .material-text,
   width: 0;
   min-width: 0;
   display: block;
-  border: 1px dotted transparent;
+  border: none;
   pointer-events: none;
   white-space: normal;
   vertical-align: middle;
-  margin-left: 10px;
+  margin-left: 20px;
   line-height: 20px;
-  padding: 2px 4px;
   text-align: justify;
 }
 material-checkbox:focus .material-text,

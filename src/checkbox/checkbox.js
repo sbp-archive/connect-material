@@ -45,6 +45,7 @@ define([
 
                         function clickHandler (e) {
                             if (!$element[0].hasAttribute('disabled')) {
+                                e.stopPropagation();
                                 $scope.$apply(function () {
                                     checked = !checked;
 

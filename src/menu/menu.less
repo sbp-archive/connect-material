@@ -1,6 +1,8 @@
 @import '../variables';
 @import '../mixins';
 
+@import '../item/item';
+
 @material-menu-width: 200px;
 
 material-menu,
@@ -54,6 +56,15 @@ material-menu,
             .material-icon {
                 display: block;
             }
+        }
+    }
+
+    material-checkbox,
+    .material-checkbox {
+        padding: 8px @material-content-spacing;
+
+        .material-text {
+            line-height: 24px;
         }
     }
 }

@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="../sprites/sprite-action-white.css">
         <link rel="stylesheet" href="../sprites/sprite-navigation-black.css">
         <link rel="stylesheet" href="../sprites/sprite-navigation-white.css">
+        <link rel="stylesheet" href="../sprites/sprite-content-black.css">
+        <link rel="stylesheet" href="../sprites/sprite-content-white.css">
 
         <script data-main="sink" src="bower_components/requirejs/require.js"></script>
 
@@ -108,7 +110,7 @@
 
             <material-button ng-click="openDrawer('left')">Drawer</material-button>
 
-            <material-menu-button icon="navigation-white:apps_white" menu-config="{icons:hasMenuIcons()}">
+            <material-menu-button icon="navigation-white:apps_white" menu-config="{icons:menu.icons}">
                 <material-item icon="action-black:dashboard_black">Dashboard</material-item>
                 <material-item icon="action-black:credit_card_black">Credit</material-item>
                 <material-item icon="action-black:account_balance_black">Balance</material-item>
@@ -116,7 +118,8 @@
                 <material-item icon="action-black:alarm_black">Set Alarm</material-item>
                 <material-item icon="action-black:announcement_black">Announcements</material-item>
                 <material-divider></material-divider>
-                <material-item ng-click="toggleMenuIcons($event)">Toggle Icons</material-item>
+                <material-checkbox ng-model="menu.icons">Menu Icons</material-checkbox>
+                <material-item>Some Item</material-item>
             </material-menu-button>
 
             <material-menu-button icon="navigation-white:more_vert_white">
@@ -126,6 +129,14 @@
                 <material-divider></material-divider>
                 <material-item>Menu Item 4</material-item>
                 <material-item>Menu Item 5</material-item>
+            </material-menu-button>
+
+            <material-menu-button icon="content-white:filter_list_white">
+                <material-title>List Filters</material-title>      
+                <material-checkbox ng-model="filters.active">Active</material-checkbox>
+                <material-checkbox ng-model="filters.pending">Installation Pending</material-checkbox>
+                <material-checkbox ng-model="filters.decommissioned">Decommissioned</material-checkbox>
+                <material-checkbox ng-model="filters.deleted">Deleted</material-checkbox>
             </material-menu-button>
         </material-appbar>
 

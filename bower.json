@@ -19,7 +19,6 @@
     "Gruntfile.js",
     "node_modules",
     "package.json",
-    "sink",
     "test",
     "tests"
   ],
