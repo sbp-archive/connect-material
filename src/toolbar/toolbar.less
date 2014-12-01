@@ -16,14 +16,12 @@ material-toolbar,
 		flex: 1;
 	}
 
-	material-button,
-	.material-button {
-		height: 50px;
-		padding: 12px;
+	> * {		
+		margin-left: @material-content-spacing / 2;
 	}
 
 	>:last-child {
-        margin-right: 7px;
+        margin-right: @material-content-spacing / 2;
     }
 }
 

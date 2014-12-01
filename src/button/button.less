@@ -25,31 +25,35 @@
 
 material-button,
 .material-button {
-	display: inline-block;
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	position: relative;
-	border: 0;
-	margin: 0;
+	border: 1px solid transparent;
 	padding: 6px;
 
 	background: transparent;
 	white-space: nowrap;
 
-	text-align: center;
-
 	cursor: pointer;
 	overflow: hidden;
 	outline: none;
   	user-select: none;
+	line-height: 24px;
 
-	border: 1px solid transparent;
+	font-size: 1.1em;
+
+	.material-icon {
+		display: block;
+	}
 
 	.material-text {
+		display: block;
 		font-weight: 500;
 		text-transform: uppercase;
 		text-decoration: none;
-		line-height: 24px;
-		font-size: 1.1em;
-		vertical-align: middle;
+		text-align: center;
 	}
 
 	transition: box-shadow 450ms @material-ease-out-timing-function,
@@ -153,10 +157,6 @@ material-button,
 
 		transition: 0.2s linear;
 		transition-property: transform, box-shadow;
-
-		.material-icon {
-			margin-top: 9px;
-		}
 	}
 
 	&[disabled],
