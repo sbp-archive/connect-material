@@ -6,45 +6,6 @@
 @material-field-transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
 @material-field-focus-color: @material-primary-color-darker;
 
-.text-field (@transition: false, @borderWidth: 1px) {
-    input, textarea {
-        border-bottom-width: @borderWidth;
-
-        & when not (@transition = false) {
-            transition: @transition
-        }
-    } 
-}
-
-.text-hint (@size: large, @transition: false) {
-    label when (@size = small) {
-        .transform(translate3d(0, 4px, 0) scale(0.75));
-    }
-
-    label when not (@size = small) {
-        .transform(translate3d(0, 22px, 0), left center);
-    }
-
-    label when not (@transition = false) {
-        .transition(@transition);
-    }
-}
-
-.text-dashed-line(@dotGap, @dotSize) {
-    background-size: @dotSize @dotGap;
-    background-position: 0 bottom;
-    background-repeat: repeat-x;
-}
-
-.input-placeholder(@color) {
-    &:-ms-input-placeholder {
-        color: @color;
-    }
-    &::-webkit-input-placeholder {
-        color: @color;
-    }
-}
-
 material-input-group,
 .material-input-group {
     padding-bottom: 2px;

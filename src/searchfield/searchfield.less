@@ -1,0 +1,48 @@
+@import '../variables';
+@import '../mixins';
+
+@material-searchfield-color: #fff;
+@material-searchfield-unfocused-color: rgba(255, 255, 255, 0.9);
+
+material-searchfield,
+.material-searchfield {
+	display: block;
+	position: relative;
+
+	.material-searchfield-icon {
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.material-searchfield-clear {
+		position: absolute;
+		right: 0;
+		top: 0;
+		cursor: pointer;
+		display: none;
+	}
+
+	&.material-input-has-value .material-searchfield-clear {
+		display: block;
+	}
+
+	input {
+        .input-placeholder(@material-searchfield-unfocused-color);        
+        color: @material-searchfield-unfocused-color;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        line-height: 24px;
+        height: 24px;
+        display: inline-block;
+        margin: 0;
+        padding: 0 34px;
+        font-weight: 300;
+    }
+
+    &.material-input-focused input {
+    	color: #fff;
+    }
+}

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="../src/material.css">
         <link rel="stylesheet" href="../sprites/sprite-navigation-white.css">
         <link rel="stylesheet" href="../sprites/sprite-navigation-black.css">
+        <link rel="stylesheet" href="../sprites/sprite-action-white.css">
         <link rel="stylesheet" href="../sprites/sprite-action-black.css">
 
         <script data-main="sink" src="bower_components/requirejs/require.js"></script>
@@ -102,6 +103,8 @@
 
             <material-title page="status">Status</material-title>
 
+            <material-searchfield ng-model="search" placeholder="Search..."></material-searchfield>
+
             <material-button ng-click="openDrawer('left')">Drawer</material-button>
 
             <material-menu-button icon="navigation-white:apps_white" menu-config="{icons:hasMenuIcons()}">
@@ -156,7 +159,6 @@
                     </region>
                 </material-card>
 
-                <material-title>A simple Grid</material-title>
                 <material-gridlist class="material-view-list">
                     <material-gridlist-sortbar>
                         <material-cell class="cell-firstName">First Name</material-cell>

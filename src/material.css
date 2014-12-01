@@ -473,6 +473,14 @@ material-toolbar > :last-child,
 .material-toolbar > :last-child {
   margin-right: 7px;
 }
+.material-toolbar-blank {
+  background-color: #fff;
+  border-bottom: 1px solid #dedede;
+}
+.material-toolbar-blank material-title,
+.material-toolbar-blank .material-title {
+  color: #1a1a1a;
+}
 material-appbar,
 .material-appbar {
   display: flex;
@@ -528,7 +536,7 @@ material-card material-toolbar,
 .material-card material-toolbar,
 material-card .material-toolbar,
 .material-card .material-toolbar {
-  background-color: transparent;
+  background-color: #fff;
   border-bottom: 1px solid #dedede;
 }
 material-card material-toolbar material-title,
@@ -1011,6 +1019,55 @@ material-input-group.material-input-has-value:not(.material-input-focused) label
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
   color: #c4c4c4;
+}
+material-searchfield,
+.material-searchfield {
+  display: block;
+  position: relative;
+}
+material-searchfield .material-searchfield-icon,
+.material-searchfield .material-searchfield-icon {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+material-searchfield .material-searchfield-clear,
+.material-searchfield .material-searchfield-clear {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  display: none;
+}
+material-searchfield.material-input-has-value .material-searchfield-clear,
+.material-searchfield.material-input-has-value .material-searchfield-clear {
+  display: block;
+}
+material-searchfield input,
+.material-searchfield input {
+  color: rgba(255, 255, 255, 0.9);
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 0;
+  padding: 0 34px;
+  font-weight: 300;
+}
+material-searchfield input:-ms-input-placeholder,
+.material-searchfield input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+material-searchfield input::-webkit-input-placeholder,
+.material-searchfield input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+material-searchfield.material-input-focused input,
+.material-searchfield.material-input-focused input {
+  color: #fff;
 }
 material-checkbox,
 .material-checkbox {

@@ -22,6 +22,7 @@ define([
     'connect-material/pickers/pickers',
     'connect-material/drawer/drawer',
     'connect-material/textfield/textfield',
+    'connect-material/searchfield/searchfield',
     'connect-material/select/select',
     'connect-material/checkbox/checkbox',
     'connect-material/dialog/dialog'
