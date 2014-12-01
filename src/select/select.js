@@ -65,7 +65,8 @@ define([
 
     material.directive('materialSelect', [
         'materialConfigService',
-        function (configs) {
+        'materialMenuService',
+        function (configs, menus) {
             var ID_GENERATOR = 1;
 
             return {
@@ -121,6 +122,7 @@ define([
                         $scope.select = function (value) {
                             ngModelCtrl.$setViewValue(value);
                             ngModelCtrl.$render();
+                            menus.close($scope.selectId);
                         }
                     };
                 }                
