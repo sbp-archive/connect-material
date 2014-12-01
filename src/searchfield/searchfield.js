@@ -19,8 +19,8 @@ define([
                 },
                 require: '?ngModel',
                 template: [
-                    '<div class="material-searchfield-icon material-icon icon-action-white icon-action-white-ic_search_white_24dp"></div>',
-                    '<div ng-click="clearField($event)" class="material-searchfield-clear material-icon icon-action-white icon-action-white-ic_highlight_remove_white_24dp"></div>',
+                    '<div class="material-searchfield-icon material-icon"></div>',
+                    '<div ng-click="clearField($event)" class="material-searchfield-clear material-icon"></div>',
                     '<input ng-model="value" id="{{fid}}" ng-disabled="isDisabled()" type="text" placeholder="{{placeholder}}"></input>',
                 ].join(''),
                 compile : function ($element, $attrs) {
