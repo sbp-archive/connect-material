@@ -1,15 +1,12 @@
 @import '../variables';
 @import '../mixins';
 
-@material-searchfield-color: #fff;
-@material-searchfield-unfocused-color: rgba(255, 255, 255, 0.9);
-
 material-searchfield,
 .material-searchfield {
 	display: block;
 	position: relative;
 
-	.material-searchfield-icon {
+	.material-searchfield-search {
 		pointer-events: none;
 		position: absolute;
 		top: 0;
@@ -29,8 +26,8 @@ material-searchfield,
 	}
 
 	input {
-        .input-placeholder(@material-searchfield-unfocused-color);        
-        color: @material-searchfield-unfocused-color;
+        .input-placeholder(rgba(0, 0, 0, 0.9));    
+        color: rgba(0, 0, 0, 0.9);
         border: none;
         background: transparent;
         font-size: 16px;
@@ -41,8 +38,17 @@ material-searchfield,
         padding: 0 34px;
         font-weight: 300;
     }
-
     &.material-input-focused input {
-    	color: #fff;
+    	color: #000;
+    }
+
+    &.material-searchfield-blank {
+    	input {
+    		.input-placeholder(rgba(255, 255, 255, 0.9));  
+    		color: rgba(255, 255, 255, 0.9);
+    	}
+    	&.material-input-focus input {
+    		color: #fff;
+    	}
     }
 }

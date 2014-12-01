@@ -1025,8 +1025,8 @@ material-searchfield,
   display: block;
   position: relative;
 }
-material-searchfield .material-searchfield-icon,
-.material-searchfield .material-searchfield-icon {
+material-searchfield .material-searchfield-search,
+.material-searchfield .material-searchfield-search {
   pointer-events: none;
   position: absolute;
   top: 0;
@@ -1046,7 +1046,7 @@ material-searchfield.material-input-has-value .material-searchfield-clear,
 }
 material-searchfield input,
 .material-searchfield input {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   border: none;
   background: transparent;
   font-size: 16px;
@@ -1059,14 +1059,30 @@ material-searchfield input,
 }
 material-searchfield input:-ms-input-placeholder,
 .material-searchfield input:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 material-searchfield input::-webkit-input-placeholder,
 .material-searchfield input::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 material-searchfield.material-input-focused input,
 .material-searchfield.material-input-focused input {
+  color: #000;
+}
+material-searchfield.material-searchfield-blank input,
+.material-searchfield.material-searchfield-blank input {
+  color: rgba(255, 255, 255, 0.9);
+}
+material-searchfield.material-searchfield-blank input:-ms-input-placeholder,
+.material-searchfield.material-searchfield-blank input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+material-searchfield.material-searchfield-blank input::-webkit-input-placeholder,
+.material-searchfield.material-searchfield-blank input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.9);
+}
+material-searchfield.material-searchfield-blank.material-input-focus input,
+.material-searchfield.material-searchfield-blank.material-input-focus input {
   color: #fff;
 }
 material-checkbox,

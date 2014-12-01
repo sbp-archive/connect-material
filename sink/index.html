@@ -7,6 +7,12 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="../src/material.css">
+
+        <link rel="stylesheet" href="../sprites/sprite-action-black.css">
+        <link rel="stylesheet" href="../sprites/sprite-action-white.css">
+        <link rel="stylesheet" href="../sprites/sprite-navigation-black.css">
+        <link rel="stylesheet" href="../sprites/sprite-navigation-white.css">
+
         <script data-main="sink" src="bower_components/requirejs/require.js"></script>
 
         <style>
@@ -98,7 +104,7 @@
 
             <material-title page="status">Status</material-title>
 
-            <material-searchfield ng-model="search" placeholder="Search..."></material-searchfield>
+            <material-searchfield class="material-searchfield-blank" ng-model="search" placeholder="Search..."></material-searchfield>
 
             <material-button ng-click="openDrawer('left')">Drawer</material-button>
 

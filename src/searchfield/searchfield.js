@@ -19,8 +19,8 @@ define([
                 },
                 require: '?ngModel',
                 template: [
-                    '<div class="material-searchfield-icon material-icon"></div>',
-                    '<div ng-click="clearField($event)" class="material-searchfield-clear material-icon"></div>',
+                    '<div class="{{getIconCls(\'search\')}}"></div>',
+                    '<div class="{{getIconCls(\'clear\')}}" ng-click="clearField($event)"></div>',
                     '<input ng-model="value" id="{{fid}}" ng-disabled="isDisabled()" type="text" placeholder="{{placeholder}}"></input>',
                 ].join(''),
                 compile : function ($element, $attrs) {
@@ -46,9 +46,27 @@ define([
                             });
 
                             $scope.clearField = function(e) {
-                                e.stopPropagation();
-                                input.val('');
-                                setHasValue(false);
+                                ngModelCtrl.$setViewValue('');
+                                ngModelCtrl.$render();
+                            }
+
+                            $scope.getIconCls = function(type) {
+                                var iconCls = 'material-searchfield-' + type + ' material-icon ',
+                                    isBlank = $element.hasClass('material-searchfield-blank'),
+                                    theme = (isBlank ? 'white' : 'black'),
+                                    baseCls = 'icon-action-' + theme;
+
+                                switch (type) {
+                                    case 'search':
+                                        iconCls += baseCls + ' ' + baseCls + '-ic_search_' +  theme + '_24dp';
+                                    break;
+
+                                    case 'clear':
+                                        iconCls += baseCls + ' ' + baseCls + '-ic_highlight_remove_' +  theme + '_24dp';
+                                    break;
+                                }
+
+                                return iconCls;
                             }
 
                             function setFocused (isFocused) {
