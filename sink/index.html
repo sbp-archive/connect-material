@@ -7,10 +7,6 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="../src/material.css">
-        <link rel="stylesheet" href="../sprites/sprite-navigation-white.css">
-        <link rel="stylesheet" href="../sprites/sprite-navigation-black.css">
-        <link rel="stylesheet" href="../sprites/sprite-action-white.css">
-        <link rel="stylesheet" href="../sprites/sprite-action-black.css">
 
         <script data-main="sink" src="bower_components/requirejs/require.js"></script>
 
@@ -132,7 +128,8 @@
             <div class="inner-content">
                 <material-card>
                     <material-toolbar>
-                        <material-title>Card with Toolbar and Buttons</material-title>
+                        <material-title>Card</material-title>
+                        <material-searchfield ng-model="search" placeholder="Search..."></material-searchfield>
                         <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
                         <material-button ng-click="openDialog('confirm')" class="material-primary">Confirm</material-button>
                         <material-button ng-click="openDrawer('right')">Forms</material-button>

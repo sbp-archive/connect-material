@@ -1,3 +1,7 @@
+@import "../sprites/sprite-action-black.css";
+@import "../sprites/sprite-action-white.css";
+@import "../sprites/sprite-navigation-black.css";
+@import "../sprites/sprite-navigation-white.css";
 [layout] {
   display: flex;
 }
