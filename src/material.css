@@ -659,10 +659,17 @@ material-tabs.material-tabs-blank .material-tabs-bar,
   background-color: #fff;
   border-bottom: 1px solid #dedede;
 }
+material-tabs.material-tabs-blank .material-tabs-bar material-tab,
+.material-tabs.material-tabs-blank .material-tabs-bar material-tab,
+material-tabs.material-tabs-blank .material-tabs-bar .material-tab,
+.material-tabs.material-tabs-blank .material-tabs-bar .material-tab {
+  color: rgba(0, 0, 0, 0.5);
+}
 material-tabs.material-tabs-blank .material-tabs-bar material-tab.material-tab-active,
 .material-tabs.material-tabs-blank .material-tabs-bar material-tab.material-tab-active,
 material-tabs.material-tabs-blank .material-tabs-bar .material-tab.material-tab-active,
 .material-tabs.material-tabs-blank .material-tabs-bar .material-tab.material-tab-active {
+  color: #000;
   border-bottom-color: #03a9f4;
 }
 .material-dialog-wrap {
