@@ -18,6 +18,7 @@ define([
                     value: '=ngModel',
                     options: '=options'
                 },
+                require: '?ngModel',
                 template: [
                     '<material-textfield ng-model="label" label="{{fieldLabel}}" ng-click="openSelect($event)" field-config="_fieldConfig"></material-textfield>',
                     '<material-select select-id="{{selectId}}" menu-config="_menuConfig" ng-model="value" options="options"></material-select>'
@@ -34,12 +35,18 @@ define([
                         $attrs.options = [];
                     }
 
-                    return function ($scope, $element, $attrs) {
+                    return function ($scope, $element, $attrs, ngModelCtrl) {
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
                         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
 
-                        $scope.$watch('value', function (value) {
-                            if (ng.isDefined(value)) {
+                        $scope.$watch('options', function(value, oldValue) {
+                            if (value.length !== oldValue.length) {
+                                renderValue($scope.value);
+                            }
+                        }, true);
+
+                        function renderValue(value) {
+                            if (ng.isDefined(value) && $scope.options.length) {
                                 var result = $scope.options.filter(function (option) {
                                     if ((ng.isObject(option) && option.value == value) || option == value) {
                                         return true;
@@ -50,7 +57,14 @@ define([
                             else {
                                 $scope.label = null;
                             }
-                        });
+
+                            return value;                            
+                        }
+
+                        if (ngModelCtrl) {
+                            //Add a $formatter so we don't use up the render function
+                            ngModelCtrl.$formatters.push(renderValue);
+                        }
 
                         $scope.openSelect = function (e) {
                             e.stopPropagation();
@@ -100,6 +114,12 @@ define([
                     return function ($scope, $element, $attrs, ngModelCtrl) {
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
+                        $scope.$watch('options', function(value, oldValue) {
+                            if (value.length !== oldValue.length) {
+                                ngModelCtrl.$render();
+                            }
+                        }, true);
+
                         ngModelCtrl.$render = function () {
                             var value = ngModelCtrl.$modelValue,
                                 options = $scope.options,
@@ -142,5 +162,4 @@ define([
             return results;
         };
     });
-
 });
