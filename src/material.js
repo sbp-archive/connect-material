@@ -178,7 +178,7 @@ define([
                             listeners.push(callback);
 
                             return function () {
-                                listeners[eventName].splice(listeners[eventName].indexOf(callback), 1);
+                                listeners.splice(listeners.indexOf(callback), 1);
                             };
                         }       
                     },
