@@ -292,7 +292,7 @@ material-button.material-cornered,
 }
 material-button.material-primary .material-text,
 .material-button.material-primary .material-text {
-  color: #1fa8e3;
+  color: #0288d1;
 }
 material-button.material-warn .material-text,
 .material-button.material-warn .material-text {
@@ -327,7 +327,7 @@ material-button.material-raised.material-primary,
 .material-button.material-raised.material-primary,
 material-button.material-fab.material-primary,
 .material-button.material-fab.material-primary {
-  background-color: #4cbae9;
+  background-color: #03a9f4;
 }
 material-button.material-raised.material-primary .material-text,
 .material-button.material-raised.material-primary .material-text,
@@ -343,7 +343,7 @@ material-button.material-raised.material-primary:not([disabled]):focus,
 .material-button.material-raised.material-primary:not([disabled]):focus,
 material-button.material-fab.material-primary:not([disabled]):focus,
 .material-button.material-fab.material-primary:not([disabled]):focus {
-  background-color: #1fa8e3;
+  background-color: #0288d1;
 }
 material-button.material-raised.material-warn,
 .material-button.material-raised.material-warn,
@@ -454,7 +454,7 @@ material-toolbar,
   flex-direction: row;
   align-items: center;
   height: 64px;
-  background-color: #4cbae9;
+  background-color: #03a9f4;
 }
 material-toolbar > material-title,
 .material-toolbar > material-title,
@@ -485,8 +485,8 @@ material-appbar,
   flex-direction: row;
   align-items: center;
   height: 64px;
-  background-color: #4cbae9;
-  background-color: #1788b8;
+  background-color: #03a9f4;
+  background-color: #01579b;
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
@@ -549,7 +549,7 @@ material-card material-title,
 material-card .material-title,
 .material-card .material-title {
   display: block;
-  color: #1788b8;
+  color: #01579b;
   font-weight: 300;
   height: 36px;
   line-height: 36px;
@@ -570,6 +570,100 @@ material-card material-content:last-child,
 material-card .material-content:last-child,
 .material-card .material-content:last-child {
   padding-bottom: 20px;
+}
+material-tabs,
+.material-tabs {
+  display: block;
+}
+material-tabs .material-tabs-bar,
+.material-tabs .material-tabs-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 48px;
+  background-color: #03a9f4;
+  font-weight: 500;
+}
+material-tabs[center] .material-tabs-bar,
+.material-tabs[center] .material-tabs-bar {
+  justify-content: center;
+}
+material-tabs material-tab,
+.material-tabs material-tab,
+material-tabs .material-tab,
+.material-tabs .material-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  min-width: 120px;
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+material-tabs material-tab.material-tab-active,
+.material-tabs material-tab.material-tab-active,
+material-tabs .material-tab.material-tab-active,
+.material-tabs .material-tab.material-tab-active {
+  color: #fff;
+  border-bottom-color: #ffeb3b;
+}
+material-tabs material-tab[disabled],
+.material-tabs material-tab[disabled],
+material-tabs .material-tab[disabled],
+.material-tabs .material-tab[disabled] {
+  pointer-events: none;
+  cursor: default;
+}
+material-tabs material-tab material-tab-label,
+.material-tabs material-tab material-tab-label,
+material-tabs .material-tab material-tab-label,
+.material-tabs .material-tab material-tab-label,
+material-tabs material-tab .material-tab-label,
+.material-tabs material-tab .material-tab-label,
+material-tabs .material-tab .material-tab-label,
+.material-tabs .material-tab .material-tab-label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+}
+material-tabs .material-tabs-content,
+.material-tabs .material-tabs-content {
+  overflow: hidden;
+  position: relative;
+}
+material-tabs .material-tabs-content .material-tabcontent,
+.material-tabs .material-tabs-content .material-tabcontent {
+  opacity: 0;
+  position: absolute;
+  left: -10000px;
+}
+material-tabs .material-tabs-content .material-tabcontent.material-opened,
+.material-tabs .material-tabs-content .material-tabcontent.material-opened {
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  position: relative;
+  opacity: 1;
+  left: 0;
+}
+material-tabs.material-tabs-blank .material-tabs-bar,
+.material-tabs.material-tabs-blank .material-tabs-bar {
+  background-color: #fff;
+  border-bottom: 1px solid #dedede;
+}
+material-tabs.material-tabs-blank .material-tabs-bar material-tab.material-tab-active,
+.material-tabs.material-tabs-blank .material-tabs-bar material-tab.material-tab-active,
+material-tabs.material-tabs-blank .material-tabs-bar .material-tab.material-tab-active,
+.material-tabs.material-tabs-blank .material-tabs-bar .material-tab.material-tab-active {
+  border-bottom-color: #03a9f4;
 }
 .material-dialog-wrap {
   position: absolute;
@@ -617,7 +711,7 @@ material-card .material-content:last-child,
 }
 .material-dialog material-title,
 .material-dialog .material-title {
-  color: #1788b8;
+  color: #01579b;
 }
 material-menu,
 .material-menu {
@@ -646,7 +740,7 @@ material-menu material-title,
 .material-menu material-title,
 material-menu .material-title,
 .material-menu .material-title {
-  color: #1788b8;
+  color: #01579b;
   border-bottom: 1px solid #f7f7f7;
   margin: 0;
   padding: 20px;
@@ -773,7 +867,7 @@ material-datepicker,
   border: 1px solid #dedede;
 }
 .material-datepicker-date h4 {
-  background-color: #1788b8;
+  background-color: #01579b;
   color: white;
   font-size: 14px;
   font-weight: 500;
@@ -787,7 +881,7 @@ material-datepicker,
 .material-datepicker-date h2,
 .material-datepicker-date h3 {
   cursor: pointer;
-  background-color: #4cbae9;
+  background-color: #03a9f4;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
   text-align: center;
@@ -847,7 +941,7 @@ material-datepicker,
   width: 36px;
 }
 .material-datepicker-view td .material-btn.btn-text.date-active {
-  background-color: #4cbae9;
+  background-color: #03a9f4;
   color: #fff;
   border-radius: 18px;
   -webkit-transition: none;
@@ -1009,11 +1103,11 @@ material-input-group.material-input-focused input,
 material-input-group.material-input-focused textarea,
 .material-input-group.material-input-focused textarea {
   color: #000;
-  border-color: #1fa8e3;
+  border-color: #0288d1;
 }
 material-input-group.material-input-focused label,
 .material-input-group.material-input-focused label {
-  color: #1fa8e3;
+  color: #0288d1;
 }
 material-input-group.material-input-focused input,
 .material-input-group.material-input-focused input {
@@ -1129,7 +1223,7 @@ material-checkbox .material-checkbox-icon,
 material-checkbox.material-checkbox-checked .material-checkbox-icon,
 .material-checkbox.material-checkbox-checked .material-checkbox-icon {
   border: none;
-  background-color: #4cbae9;
+  background-color: #03a9f4;
 }
 material-checkbox.material-checkbox-checked .material-checkbox-icon:after,
 .material-checkbox.material-checkbox-checked .material-checkbox-icon:after {
@@ -1257,7 +1351,7 @@ material-drawer material-title,
 .material-drawer material-title,
 material-drawer .material-title,
 .material-drawer .material-title {
-  color: #1788b8;
+  color: #01579b;
 }
 material-gridlist,
 .material-gridlist {

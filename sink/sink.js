@@ -25,7 +25,8 @@ define([
     'connect-material/searchfield/searchfield',
     'connect-material/select/select',
     'connect-material/checkbox/checkbox',
-    'connect-material/dialog/dialog'
+    'connect-material/dialog/dialog',
+    'connect-material/tabs/tabs'
 ], function(ng, domReady) {
     'use strict';
 
@@ -41,7 +42,7 @@ define([
             $scope.menu = {
                 icons: true
             }
-
+            
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             };

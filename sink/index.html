@@ -149,6 +149,7 @@
                         <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
                         <material-button ng-click="openDialog('confirm')" class="material-raised material-primary">Confirm</material-button>
                         <material-button ng-click="openDrawer('right')">Forms</material-button>
+                        <material-button ng-click="openDrawer('tabs')" class="material-primary">Tabs</material-button>
                     </material-toolbar>
                     <region class="buttton-examples">
                         <material-buttonbar layout="row" layout-align="center center">
@@ -212,6 +213,26 @@
                     <material-button ng-click="closeDrawer('left')">Close</material-button>
                     <material-button ng-click="openDrawer('subleft')" class="material-primary">Deeper</material-button>
                 </material-buttonbar>
+            </material-drawer>
+
+            <material-drawer drawer-id="tabs">
+                <material-tabs>
+                    <material-tab tab-id="tab-asset-basic" label="Basic">
+                        <material-content>
+                            <material-textfield label="Status" ng-model="asset.status.status" disabled></material-textfield>
+                            <material-textfield label="Hostname" ng-model="asset.host_name"></material-textfield>
+                            <material-textfield label="Vendor" ng-model="asset.vendor"></material-textfield>
+                            <material-textfield label="Hardware Type" ng-model="asset.hardware_type"></material-textfield>
+                            <material-textfield label="Owner" ng-model="asset.owner"></material-textfield>
+                            <material-textfield label="Serial Number" ng-model="asset.serial_no"></material-textfield>
+                            <material-textfield label="Actual Quantity" ng-model="asset.actual_quantity"></material-textfield>
+                            <material-textfield label="Date Active (date)" ng-model="asset.date_active"></material-textfield>
+                            <material-textfield label="Support Contract Number" ng-model="asset.support_contract_no"></material-textfield>
+                        </material-content>
+                    </material-tab>
+                    <material-tab tab-id="tab-asset-support" label="Support">Support Tab</material-tab>
+                    <material-tab tab-id="tab-asset-costmodel" label="Cost Model">Cost Model Tab</material-tab>
+                </material-tabs>
             </material-drawer>
 
             <material-drawer drawer-id="subleft" drawer-config="{position:'left'}">
