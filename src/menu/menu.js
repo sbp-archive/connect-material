@@ -58,6 +58,14 @@ define([
                             $element[0].scrollTop = 0;
                         });
 
+                        $element.on('click', function(e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            $scope.$apply(function() {
+                                menu.close();
+                            });
+                        });
+
                         // This is a bit ugly I think but it solves the problem
                         // where the close was already called for this menu
                         // before this link method is called
