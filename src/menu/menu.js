@@ -58,11 +58,6 @@ define([
                             $element[0].scrollTop = 0;
                         });
 
-                        $element.on('click', function(e) {
-                            e.stopPropagation();
-                            e.preventDefault();
-                        });
-
                         // This is a bit ugly I think but it solves the problem
                         // where the close was already called for this menu
                         // before this link method is called
@@ -78,7 +73,7 @@ define([
                             }
                         });
 
-                        $scope.$on('destroy', function () {
+                        $scope.$on('$destroy', function () {
                             ng.element(window).off('click', onBodyClick);
                             menus.remove(id);
                         });

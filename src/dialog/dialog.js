@@ -81,7 +81,7 @@ define([
                             }
                         });
 
-                        $scope.$on('destroy', function () {
+                        $scope.$on('$destroy', function () {
                             dialogs.remove(id);
                         });
                     };

@@ -65,7 +65,7 @@ define([
                             }
                         }
 
-                        $scope.$on('destroy', function () {
+                        $scope.$on('$destroy', function () {
                             drawers.remove(id);
                         });
                     };
