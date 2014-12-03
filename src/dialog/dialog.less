@@ -39,16 +39,15 @@
     max-width: 80%;
     max-height: 80%;
 
-    .box-shadow(@material-shadow-drawer);
-    
-    .ease-out(@property: all, @duration: 300ms);
-
-    .transform(scale(0, 0));
+    box-shadow: @material-shadow-drawer;
+    transform: scale(0, 0);
     opacity: 0;
+
+    .ease-out(@property: all, @duration: 300ms);
 
     &.material-opened,
     &.material-opened-remove {
-        .transform(scale(1, 1));
+        transform: scale(1, 1);
     }
 
     &.material-opened {

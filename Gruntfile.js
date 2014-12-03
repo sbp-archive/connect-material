@@ -1,6 +1,8 @@
 /* jshint node: true */
 'use strict';
 module.exports = function (grunt) {
+    var autoprefixer = require('autoprefixer-core');
+    
     grunt.initConfig(
         {
 
@@ -14,7 +16,7 @@ module.exports = function (grunt) {
             watch: {
                 less: {
                     files: ['src/**/*.less'],
-                    tasks: ['less:material']
+                    tasks: ['less', 'postcss']
                 }
             },
 
@@ -24,6 +26,15 @@ module.exports = function (grunt) {
                         'src/material.css': 'src/material.less'
                     }
                 }
+            },
+
+            postcss: {
+                options: {
+                    processors: [
+                        autoprefixer({ browsers: ['last 2 version'] }).postcss
+                    ]
+                },
+                dist: { src: 'src/material.css' }
             }
         }
     );
@@ -32,9 +43,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-release');
+    grunt.loadNpmTasks('grunt-postcss');
 
     //build task
     grunt.registerTask('build', [
-        'less'
+        'less',
+        'postcss'
     ]);
 };

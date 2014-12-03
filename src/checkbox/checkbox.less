@@ -35,8 +35,7 @@ material-checkbox,
         height: @material-checkbox-height;
         border: 2px solid #000;
         border-radius: 2px;
-
-        .transition(all 250ms);
+        transition: all 250ms;
     }
 
     &.material-checkbox-checked {
@@ -55,15 +54,14 @@ material-checkbox,
                 border-top: 0;
                 border-left: 0;
                 content: ' ';
-                .transform(rotate(45deg));           
+                transform: rotate(45deg);
             }
         }
     }
 
     .material-text {
-        .flex(1);
+        flex: 1;
         display: block;
-        //border: 1px dotted transparent;
         border: none;
         pointer-events: none;
         white-space: normal;

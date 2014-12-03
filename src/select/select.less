@@ -22,10 +22,11 @@ material-select,
 		width: 100%;
 
         .ease-out(@duration: 200ms; @property: transform);
-        .transform(scale(1, 0), center 24px);
+        transform: scale(1, 0);
+        transform-origin: center 24px;
 
         &.material-opened {
-        	.transform(scale(1, 1));
+        	transform: scale(1, 1);
         }
 
         material-item .material-text {

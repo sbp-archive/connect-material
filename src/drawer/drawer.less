@@ -21,8 +21,8 @@ material-drawer,
     overflow: hidden;
     z-index: 2;
 
-    .box-shadow(@material-shadow-drawer);
-    .transform(translate3d(-100%, 0, 0));
+    box-shadow: @material-shadow-drawer;
+    transform: translate3d(-100%, 0, 0);
 
     &.material-opened,
     &.material-opened-remove {
@@ -30,15 +30,15 @@ material-drawer,
     }
 
     &.material-drawer-left.material-opened {
-        .transform(translate3d(0, 0, 0));
+        transform: translate3d(0, 0, 0);
     }
 
     &.material-drawer-right {
         left: 100%;
-        .transform(translate3d(0, 0, 0));
+        transform: translate3d(0, 0, 0);
 
         &.material-opened {
-            .transform(translate3d(-100%, 0, 0));
+            transform: translate3d(-100%, 0, 0);
         }
     }
 

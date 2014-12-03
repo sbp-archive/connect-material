@@ -26,10 +26,10 @@ material-sidenav-button,
 		min-width: @material-sidenav-width;
 
         .ease-out(@property: transform);
-		.transform(translateX(-@material-sidenav-width));
+		transform: translateX(-@material-sidenav-width);
 
         &.material-opened {        	
-			.transform(translateX(0));
+			transform: translateX(0);
         }
 
 		material-item,
