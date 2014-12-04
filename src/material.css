@@ -1181,7 +1181,8 @@ material-input-group textarea,
 .material-input-group textarea {
   color: #333333;
   border-color: #c4c4c4;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
   background: none;
 }
 material-input-group input:-ms-input-placeholder,
@@ -1199,7 +1200,7 @@ material-input-group textarea::-webkit-input-placeholder,
 material-input-group label,
 .material-input-group label {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   z-index: 1;
   pointer-events: none;
   color: #c4c4c4;
@@ -1210,8 +1211,8 @@ material-input-group label:hover,
 }
 material-input-group.material-input-focused label,
 .material-input-group.material-input-focused label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.75);
-          transform: translate3d(0, 4px, 0) scale(0.75);
+  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
+          transform: translate3d(0, 4px, 0) scale(0.85);
 }
 material-input-group.material-input-focused input,
 .material-input-group.material-input-focused input,
@@ -1236,13 +1237,13 @@ material-input-group.material-input-focused input,
 }
 material-input-group.material-input-has-value label,
 .material-input-group.material-input-has-value label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.75);
-          transform: translate3d(0, 4px, 0) scale(0.75);
+  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
+          transform: translate3d(0, 4px, 0) scale(0.85);
 }
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.75);
-          transform: translate3d(0, 4px, 0) scale(0.75);
+  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
+          transform: translate3d(0, 4px, 0) scale(0.85);
 }
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
