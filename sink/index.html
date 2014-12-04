@@ -66,6 +66,10 @@
                 overflow-y: auto;
             }
 
+            .sink-gridlist material-gridlist-sortbar {
+                padding: 0 46px;
+            }
+
             .field-birth {
                 margin-right: 10px;
                 -webkit-flex: 2;
@@ -186,7 +190,7 @@
                     </region>
                 </material-card>
 
-                <material-gridlist class="material-view-list">
+                <material-gridlist class="sink-gridlist material-view-list">
                     <material-gridlist-sortbar>
                         <material-cell class="cell-firstName">First Name</material-cell>
                         <material-cell class="cell-lastName">Last Name</material-cell>
@@ -195,10 +199,21 @@
                     </material-gridlist-sortbar>
                     <material-gridlist-content>
                         <material-row ng-repeat="user in gridData">
+                            <material-checkbox ng-model="list.selected[asset.id]"></material-checkbox>
+
                             <material-cell class="cell-firstName">{{user.firstName}}</material-cell>
                             <material-cell class="cell-lastName">{{user.lastName}}</material-cell>
                             <material-cell class="cell-dateOfBirth">{{user.dateOfBirth}}</material-cell>
                             <material-cell class="cell-company">{{user.company}}</material-cell>
+
+                            <material-menu-button menu-id="user-menu-{{user.id}}" icon="navigation-black:more_vert_black">
+                                <material-item>Activate</material-item>
+                                <material-item>Decommission</material-item>
+                                <material-item>Stock</material-item>
+                                <material-item>Delete</material-item>
+                                <material-item>Asset History</material-item>
+                                <material-item>Host Details</material-item>
+                            </material-menu-button>
                         </material-row>
                     </material-gridlist-content>
                 </material-gridlist>
@@ -232,7 +247,7 @@
                 <material-tabs class="material-tabs-blank">
                     <material-tab tab-id="tab-asset-basic" label="Basic">
                         <material-content>
-                            <material-textfield label="Status" ng-model="asset.status.status" disabled></material-textfield>
+                            <material-textfield label="Status" ng-model="asset.status" disabled></material-textfield>
                             <material-textfield label="Hostname" ng-model="asset.host_name"></material-textfield>
                             <material-textfield label="Vendor" ng-model="asset.vendor"></material-textfield>
                             <material-textfield label="Hardware Type" ng-model="asset.hardware_type"></material-textfield>

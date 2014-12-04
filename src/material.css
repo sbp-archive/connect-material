@@ -1572,6 +1572,26 @@ material-gridlist.material-view-list .material-row:hover,
   background: #f7f7f7;
   cursor: pointer;
 }
+material-gridlist.material-view-list material-row material-checkbox,
+.material-gridlist.material-view-list material-row material-checkbox,
+material-gridlist.material-view-list .material-row material-checkbox,
+.material-gridlist.material-view-list .material-row material-checkbox {
+  margin: 0 4px;
+  padding: 0;
+  display: block;
+}
+material-gridlist.material-view-list material-row material-checkbox .material-text,
+.material-gridlist.material-view-list material-row material-checkbox .material-text,
+material-gridlist.material-view-list .material-row material-checkbox .material-text,
+.material-gridlist.material-view-list .material-row material-checkbox .material-text {
+  display: none;
+}
+material-gridlist.material-view-list material-row material-menu-button,
+.material-gridlist.material-view-list material-row material-menu-button,
+material-gridlist.material-view-list .material-row material-menu-button,
+.material-gridlist.material-view-list .material-row material-menu-button {
+  margin: 0 4px;
+}
 .material-list {
   padding: 8px 0px 8px 0px;
 }
