@@ -91,30 +91,16 @@ material-input-group,
             }
         }
     }
+
+    &[disabled] {
+        .text-field(false, 0);
+
+        input, textarea {
+            .text-dashed-line(1px, 5px);
+            pointer-events: none;
+            border-bottom-color: @material-gray;
+            color: @material-gray;
+            background-image: linear-gradient(to right, @material-gray 0%, @material-gray 50%, rgba(0, 0, 0, 0) 0%);
+        }
+    }
 }
-
-// material-input-group,
-// .material-input-group {
-//   &[disabled] {
-//     .text-field(false, @tff-line-disabled-width);
-//     input, textarea {
-//     @tff-line-dot-width: 1px;
-//     @tff-line-dot-size: 3px;
-//     @tff-line-dashed: #cfcfcf;
-//     @tff-disabled-line-color: #f1f1f1;
-//     @tff-disabled-color: #f1f1f1;
-//     
-//       .text-dashed-line(@tff-line-dot-width, @tff-line-dot-size);
-//       pointer-events: none;
-//       border-bottom-color: @tff-disabled-color;
-//       color: @tff-hint-color;
-//       background-image: linear-gradient(to right, @tff-disabled-line-color 0%, @tff-disabled-line-color 50%, rgba(0, 0, 0, 0) 0%);
-//     }
-
-//     .text-hint(small);
-
-//     *:not(.material-input-has-value) {
-//       .text-hint(large);
-//     }
-//   }
-// }

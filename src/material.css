@@ -1249,6 +1249,24 @@ material-input-group.material-input-has-value:not(.material-input-focused) label
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
   color: #c4c4c4;
 }
+material-input-group[disabled] input,
+.material-input-group[disabled] input,
+material-input-group[disabled] textarea,
+.material-input-group[disabled] textarea {
+  border-bottom-width: 0;
+}
+material-input-group[disabled] input,
+.material-input-group[disabled] input,
+material-input-group[disabled] textarea,
+.material-input-group[disabled] textarea {
+  background-size: 5px 1px;
+  background-position: 0 bottom;
+  background-repeat: repeat-x;
+  pointer-events: none;
+  border-bottom-color: #c4c4c4;
+  color: #c4c4c4;
+  background-image: linear-gradient(to right, #c4c4c4 0%, #c4c4c4 50%, rgba(0, 0, 0, 0) 0%);
+}
 material-searchfield,
 .material-searchfield {
   display: block;
