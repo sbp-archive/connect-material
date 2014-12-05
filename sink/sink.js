@@ -52,7 +52,15 @@ define([
             };
 
             $scope.openDialog = function(id) {
-                dialogs.open(id);
+                if (id === 'alert') {
+                    dialogs.alert('Test', 'Some message');
+                }
+                else if (id === 'confirm') {
+                    dialogs.confirm('Are you sure?', 'Are you sure you really like connect material?');
+                }
+                else {
+                    dialogs.open(id);
+                }
             };
 
             $scope.closeDialog = function(id) {

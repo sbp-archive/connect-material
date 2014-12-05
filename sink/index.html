@@ -67,7 +67,7 @@
             }
 
             .sink-gridlist material-gridlist-sortbar {
-                padding: 0 46px;
+                padding: 0 46px 0 32px;
             }
 
             .field-birth {
@@ -163,6 +163,7 @@
                     <material-toolbar>
                         <material-title>Card</material-title>
                         <material-searchfield ng-model="search" placeholder="Search..."></material-searchfield>
+                        <material-button ng-click="openDialog('custom')">Custom</material-button>
                         <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
                         <material-button ng-click="openDialog('confirm')" class="material-raised material-primary">Confirm</material-button>
                         <material-button ng-click="openDrawer('right')">Forms</material-button>
@@ -219,20 +220,12 @@
                 </material-gridlist>
             </div>
 
-            <material-dialog dialog-id="alert">
-                <material-title>Alert Dialog</material-title>
-                <material-content>You have been warned sir!</material-content>
-                <material-buttonbar>
-                    <material-button ng-click="closeDialog('alert')" class="material-primary">Ok</material-button>
-                </material-buttonbar>
-            </material-dialog>
-
-            <material-dialog dialog-id="confirm">
-                <material-title>Confirm Dialog</material-title>
+            <material-dialog dialog-id="custom">
+                <material-title>Custom Dialog</material-title>
                 <material-content>Can you please confirm that you like material?</material-content>
                 <material-buttonbar>
-                    <material-button ng-click="closeDialog('confirm')">Cancel</material-button>
-                    <material-button ng-click="closeDialog('confirm')" class="material-primary">Ok</material-button>
+                    <material-button ng-click="closeDialog('custom')">Cancel</material-button>
+                    <material-button ng-click="closeDialog('custom')" class="material-primary">Ok</material-button>
                 </material-buttonbar>
             </material-dialog>
 
