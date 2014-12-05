@@ -67,7 +67,7 @@
             }
 
             .sink-gridlist material-gridlist-sortbar {
-                padding: 0 46px 0 32px;
+                padding: 0 46px;
             }
 
             .field-birth {
@@ -207,13 +207,11 @@
                             <material-cell class="cell-dateOfBirth">{{user.dateOfBirth}}</material-cell>
                             <material-cell class="cell-company">{{user.company}}</material-cell>
 
-                            <material-menu-button menu-id="user-menu-{{user.id}}" icon="navigation-black:more_vert_black">
+                            <material-menu-button menu-id="user-menu-{{$index}}" icon="navigation-black:more_vert_black">
                                 <material-item>Activate</material-item>
                                 <material-item>Decommission</material-item>
                                 <material-item>Stock</material-item>
                                 <material-item>Delete</material-item>
-                                <material-item>Asset History</material-item>
-                                <material-item>Host Details</material-item>
                             </material-menu-button>
                         </material-row>
                     </material-gridlist-content>

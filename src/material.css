@@ -1576,7 +1576,7 @@ material-gridlist.material-view-list material-row material-checkbox,
 .material-gridlist.material-view-list material-row material-checkbox,
 material-gridlist.material-view-list .material-row material-checkbox,
 .material-gridlist.material-view-list .material-row material-checkbox {
-  margin: 0 4px;
+  margin: 0 8px 0 14px;
   padding: 0;
   display: block;
 }
