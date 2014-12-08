@@ -353,8 +353,8 @@ material-button.material-warn .material-text,
 }
 material-button.material-raised,
 .material-button.material-raised {
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 material-button.material-raised:not([disabled]),
 .material-button.material-raised:not([disabled]) {
@@ -428,8 +428,8 @@ material-button:not([disabled]).material-raised:hover,
 .material-button:not([disabled]).material-raised:hover,
 material-button:not([disabled]).material-fab:hover,
 .material-button:not([disabled]).material-fab:hover {
-  -webkit-transform: translate3d(0, -1px, 0);
-          transform: translate3d(0, -1px, 0);
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 material-button.material-fab,
@@ -440,8 +440,8 @@ material-button.material-fab,
   height: 56px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
   transition: 0.2s linear;
   transition-property: -webkit-transform, box-shadow;
   transition-property: transform, box-shadow;
@@ -1090,8 +1090,8 @@ material-input-group,
 }
 material-input-group label,
 .material-input-group label {
-  -webkit-transform: translate3d(0, 22px, 0);
-          transform: translate3d(0, 22px, 0);
+  -webkit-transform: translateY(22px);
+          transform: translateY(22px);
   -webkit-transform-origin: left center;
           transform-origin: left center;
 }
@@ -1211,8 +1211,8 @@ material-input-group label:hover,
 }
 material-input-group.material-input-focused label,
 .material-input-group.material-input-focused label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
-          transform: translate3d(0, 4px, 0) scale(0.85);
+  -webkit-transform: translateY(4px) scale(0.85);
+          transform: translateY(4px) scale(0.85);
 }
 material-input-group.material-input-focused input,
 .material-input-group.material-input-focused input,
@@ -1237,13 +1237,13 @@ material-input-group.material-input-focused input,
 }
 material-input-group.material-input-has-value label,
 .material-input-group.material-input-has-value label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
-          transform: translate3d(0, 4px, 0) scale(0.85);
+  -webkit-transform: translateY(4px) scale(0.85);
+          transform: translateY(4px) scale(0.85);
 }
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
-  -webkit-transform: translate3d(0, 4px, 0) scale(0.85);
-          transform: translate3d(0, 4px, 0) scale(0.85);
+  -webkit-transform: translateY(4px) scale(0.85);
+          transform: translateY(4px) scale(0.85);
 }
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
@@ -1473,8 +1473,8 @@ material-drawer,
   overflow: hidden;
   z-index: 2;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  -webkit-transform: translate3d(-100%, 0, 0);
-          transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 material-drawer.material-opened,
 .material-drawer.material-opened,
@@ -1485,19 +1485,19 @@ material-drawer.material-opened-remove,
 }
 material-drawer.material-drawer-left.material-opened,
 .material-drawer.material-drawer-left.material-opened {
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 material-drawer.material-drawer-right,
 .material-drawer.material-drawer-right {
   left: 100%;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 material-drawer.material-drawer-right.material-opened,
 .material-drawer.material-drawer-right.material-opened {
-  -webkit-transform: translate3d(-100%, 0, 0);
-          transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 material-drawer material-title,
 .material-drawer material-title,
@@ -1591,58 +1591,4 @@ material-gridlist.material-view-list material-row material-menu-button,
 material-gridlist.material-view-list .material-row material-menu-button,
 .material-gridlist.material-view-list .material-row material-menu-button {
   margin: 0 4px;
-}
-.material-list {
-  padding: 8px 0px 8px 0px;
-}
-.material-item-content {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  box-sizing: border-box;
-  position: relative;
-  padding: 0px 0px 0px 0px;
-}
-/**
- * The left tile for a list item.
- */
-.material-tile-left {
-  min-width: 56px;
-  margin-right: -16px;
-}
-/**
- * The center content tile for a list item.
- */
-.material-tile-content {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 8px 16px;
-  text-overflow: ellipsis;
-}
-.material-tile-content h3 {
-  margin: 0 0 3px 0;
-  font-weight: 400;
-  font-size: 16px;
-}
-.material-tile-content h4 {
-  margin: 0 0 3px 0;
-  font-weight: 400;
-  font-size: 14px;
-}
-.material-tile-content p {
-  margin: 0 0 3px 0;
-  font-size: 12px;
-}
-/**
- * The right tile for a list item.
- */
-.material-tile-right {
-  padding-right: 0px;
 }

@@ -51,11 +51,11 @@
 
 .text-hint (@size: large, @transition: false) {
     label when (@size = small) {
-        transform: translate3d(0, 4px, 0) scale(0.85);
+        transform: translateY(4px) scale(0.85);
     }
 
     label when not (@size = small) {
-        transform: translate3d(0, 22px, 0);
+        transform: translateY(22px);
         transform-origin: left center;
     }
 

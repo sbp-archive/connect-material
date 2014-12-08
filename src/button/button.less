@@ -84,7 +84,7 @@ material-button,
     }
 
     &.material-raised {
-	    transform: translate3d(0, 0, 0);
+	    transform: translateY(0);
 
 	    &:not([disabled]) {
 	    	box-shadow: @material-button-shadow;
@@ -134,7 +134,7 @@ material-button,
 		&.material-fab {
 			&:focus,
 			&:hover {
-				transform: translate3d(0, -1px, 0);
+				transform: translateY(-1px);
 				box-shadow: @material-button-shadow-hover;
 			}
 		}
@@ -155,7 +155,7 @@ material-button,
 		border-radius: 50%;
 
 		box-shadow: @material-button-shadow;
-		transform: translate3d(0, 0, 0);
+		transform: translateY(0);
 
 		transition: 0.2s linear;
 		transition-property: transform, box-shadow;
