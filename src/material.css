@@ -1520,10 +1520,10 @@ material-gridlist.material-view-list .material-cell,
   text-overflow: ellipsis;
   overflow-x: hidden;
 }
-material-gridlist.material-view-list material-gridlist-sortbar,
-.material-gridlist.material-view-list material-gridlist-sortbar,
-material-gridlist.material-view-list .material-gridlist-sortbar,
-.material-gridlist.material-view-list .material-gridlist-sortbar,
+material-gridlist.material-view-list material-gridlist-headers,
+.material-gridlist.material-view-list material-gridlist-headers,
+material-gridlist.material-view-list .material-gridlist-headers,
+.material-gridlist.material-view-list .material-gridlist-headers,
 material-gridlist.material-view-list material-row,
 .material-gridlist.material-view-list material-row,
 material-gridlist.material-view-list .material-row,
@@ -1539,14 +1539,14 @@ material-gridlist.material-view-list .material-row,
       -ms-flex-align: center;
           align-items: center;
 }
-material-gridlist.material-view-list material-gridlist-sortbar material-cell,
-.material-gridlist.material-view-list material-gridlist-sortbar material-cell,
-material-gridlist.material-view-list .material-gridlist-sortbar material-cell,
-.material-gridlist.material-view-list .material-gridlist-sortbar material-cell,
-material-gridlist.material-view-list material-gridlist-sortbar .material-cell,
-.material-gridlist.material-view-list material-gridlist-sortbar .material-cell,
-material-gridlist.material-view-list .material-gridlist-sortbar .material-cell,
-.material-gridlist.material-view-list .material-gridlist-sortbar .material-cell {
+material-gridlist.material-view-list material-gridlist-headers material-cell,
+.material-gridlist.material-view-list material-gridlist-headers material-cell,
+material-gridlist.material-view-list .material-gridlist-headers material-cell,
+.material-gridlist.material-view-list .material-gridlist-headers material-cell,
+material-gridlist.material-view-list material-gridlist-headers .material-cell,
+.material-gridlist.material-view-list material-gridlist-headers .material-cell,
+material-gridlist.material-view-list .material-gridlist-headers .material-cell,
+.material-gridlist.material-view-list .material-gridlist-headers .material-cell {
   color: #787878;
   font-weight: 500;
   text-decoration: none;
