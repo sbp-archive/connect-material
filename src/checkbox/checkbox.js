@@ -40,8 +40,10 @@ define([
                             }
                         };
 
-                        $element.on('click', clickHandler);
-                        $element.on('keypress', keypressHandler);
+                        if (!ng.isDefined($attrs.ngClick)) {
+                            $element.on('click', clickHandler);
+                            $element.on('keypress', keypressHandler);
+                        };
 
                         function clickHandler (e) {
                             if (!$element[0].hasAttribute('disabled')) {
