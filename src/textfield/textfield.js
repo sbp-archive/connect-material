@@ -29,14 +29,13 @@ define([
                                 return disabledParsed($scope.$parent);
                             };
                             $scope.inputType = $attrs.type || "text";
-                            $scope.required = ng.isDefined($attrs.required) ? $attrs.required || 'true' : 'false';
                         }
                     }
                 },
                 template: [
                     '<material-input-group>',
                     '   <label for="{{fid}}" >{{label}}</label>',
-                    '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" required="{{required}}" type="{{inputType}}" />',
+                    '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" />',
                     '</material-input-group>'
                 ].join('')
             };
