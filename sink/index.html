@@ -67,7 +67,7 @@
             }
 
             .sink-gridlist material-gridlist-headers {
-                padding: 0 46px;
+                padding-right: 46px;
             }
 
             .field-birth {
@@ -193,6 +193,7 @@
 
                 <material-gridlist class="sink-gridlist material-view-list">
                     <material-gridlist-headers>
+                        <material-checkbox ng-model="list.headerCheckbox"></material-checkbox>
                         <material-cell class="cell-firstName">First Name</material-cell>
                         <material-cell class="cell-lastName">Last Name</material-cell>
                         <material-cell class="cell-dateOfBirth">Date of Birth</material-cell>
