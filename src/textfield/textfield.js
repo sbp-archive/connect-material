@@ -23,19 +23,57 @@ define([
                     }
 
                     return {
-                        pre: function (scope, element, attrs) {
-                            var disabledParsed = $parse(attrs.ngDisabled);
-                            scope.isDisabled = function () {
-                                return disabledParsed(scope.$parent);
+                        pre: function ($scope, $element, $attrs) {
+                            var disabledParsed = $parse($attrs.ngDisabled);
+                            $scope.isDisabled = function () {
+                                return disabledParsed($scope.$parent);
                             };
-                            scope.inputType = attrs.type || "text";               
+                            $scope.inputType = $attrs.type || "text";
+                            $scope.required = ng.isDefined($attrs.required) ? $attrs.required || 'true' : 'false';
                         }
                     }
                 },
                 template: [
                     '<material-input-group>',
                     '   <label for="{{fid}}" >{{label}}</label>',
-                    '   <material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}"></material-input>',
+                    '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" required="{{required}}" type="{{inputType}}" />',
+                    '</material-input-group>'
+                ].join('')
+            };
+        }
+    ]);
+
+    material.directive('materialTextarea', [
+        '$parse',
+        function ($parse) {
+            return {
+                restrict: 'EA',
+                replace: true,
+                scope : {
+                    fid : '@?fieldId',
+                    label : '@?',
+                    value : '=ngModel'
+                },
+                compile : function (element, attr) {
+                    if (ng.isUndefined(attr.fieldId)) {
+                        attr.fieldId = 'field-' + ++FIELD_ID_COUNTER;
+                    }
+
+                    return {
+                        pre: function ($scope, $element, $attrs) {
+                            var disabledParsed = $parse($attrs.ngDisabled);
+                            $scope.isDisabled = function () {
+                                return disabledParsed($scope.$parent);
+                            };
+                            $scope.inputType = $attrs.type || "text";
+                            $scope.required = ng.isDefined($attrs.required) ? $attrs.required || 'true' : 'false';
+                        }
+                    }
+                },
+                template: [
+                    '<material-input-group>',
+                    '   <label for="{{fid}}" >{{label}}</label>',
+                    '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" required="{{required}}" type="{{inputType}}"></textarea>',
                     '</material-input-group>'
                 ].join('')
             };
@@ -63,9 +101,8 @@ define([
         '$parse',
         function ($parse) {
             return {
-                restrict: 'E',
+                restrict: 'A',
                 replace: true,
-                template: '<input >',
                 require: [
                     '^?materialInputGroup', '?ngModel'
                 ],

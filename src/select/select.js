@@ -1,6 +1,8 @@
 define([
     '../material',
-    'angular'
+    'angular',
+    '../menu/menu',
+    '../textfield/textfield'
 ], function (material, ng) {
     'use strict';
 
@@ -39,14 +41,12 @@ define([
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
                         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
 
-                        $scope.$watch('options', function(value, oldValue) {
-                            if (value.length !== oldValue.length) {
-                                renderValue($scope.value);
-                            }
+                        $scope.$watch('options', function(options) {   
+                            renderValue($scope.value);                       
                         }, true);
 
                         function renderValue(value) {
-                            if (ng.isDefined(value) && $scope.options.length) {
+                            if (ng.isDefined(value) && $scope.options && $scope.options.length) {
                                 var result = $scope.options.filter(function (option) {
                                     if ((ng.isObject(option) && option.value == value) || option == value) {
                                         return true;
@@ -115,15 +115,13 @@ define([
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
                         $scope.$watch('options', function(value, oldValue) {
-                            if (value.length !== oldValue.length) {
-                                ngModelCtrl.$render();
-                            }
+                            ngModelCtrl.$render();
                         }, true);
 
                         ngModelCtrl.$render = function () {
                             var value = ngModelCtrl.$modelValue,
                                 options = $scope.options,
-                                ln = options.length,
+                                ln = options && options.length,
                                 isValid = false,
                                 i, option;
 
