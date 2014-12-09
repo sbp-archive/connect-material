@@ -6,9 +6,8 @@
 material-datepicker,
 .material-datepicker {
 	display: block;
-	width: (@day-cell-size * 7) + 20;
+	width: (@day-cell-size * 7) + @material-content-spacing;
 	background-color: #fff;
-	border: 1px solid @material-gray-lighter;
 }
 
 .material-datepicker-date {
@@ -57,11 +56,13 @@ material-datepicker,
 .material-datepicker-view {
 	height: @day-cell-size * 7;
 	overflow: auto;
-	margin: 10px;
+	margin: @material-content-spacing / 2;
 
 	table {
 		display: block;
 		width: @day-cell-size * 7;
+		border-spacing: 0;
+		overflow: hidden;
 	}
 
 	tr {
@@ -85,24 +86,41 @@ material-datepicker,
 	}
 
 	td {
-		.material-btn.btn-text {
+		.material-button {
 			color: #000;
-			font-weight: normal;
-			padding: 0;
-			text-align: center;
 			height: @day-cell-size;
 			width: @day-cell-size;
+			border-radius: @day-cell-size / 2;
+
+			.material-text {
+				pointer-events: none;
+			}
 
 			&.date-active {
 				background-color: @material-primary-color;
 				color: #fff;
-				border-radius: @day-cell-size / 2;
         		transition: none;
 			}
 
 			&[disabled] {
 				color: @material-gray;	
 			}
+		}
+	}
+
+	ul, li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		.material-button {
+			min-width: 160px;
 		}
 	}
 }
@@ -116,5 +134,19 @@ material-datepicker,
 
 	button {		
         margin-right: 26px;
+	}
+}
+
+material-datefield,
+.material-datefield {
+	display: block;
+	position: relative;
+
+	.material-datefield-mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 }

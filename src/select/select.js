@@ -27,8 +27,8 @@ define([
                 },
                 require: '?ngModel',
                 template: [
-                    '<material-textfield ng-model="label" label="{{fieldLabel}}" ng-click="openSelect($event)" field-config="_fieldConfig"></material-textfield>',
-                    '<material-select select-id="{{selectId}}" menu-config="_menuConfig" select-config="_selectConfig" ng-model="value" options="options"></material-select>'
+                    '<material-textfield ng-model="label" label="{{fieldLabel}}" field-config="_fieldConfig"></material-textfield>',
+                    '<material-select ng-click="openSelect($event)" select-id="{{selectId}}" menu-config="_menuConfig" select-config="_selectConfig" ng-model="value" options="options"></material-select>'
                 ].join(''),
 
                 compile: function ($element, $attrs) {
@@ -45,7 +45,10 @@ define([
                     return function ($scope, $element, $attrs, ngModelCtrl) {
                         configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
 
-                        configs.bridgeConfigs($scope, $attrs, 'menuConfig');
+                        configs.bridgeConfigs($scope, $attrs, 'menuConfig', {
+                            appendToBody: true
+                        });
+
                         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
                         configs.bridgeConfigs($scope, $attrs, 'selectConfig');
 
@@ -76,7 +79,6 @@ define([
 
                         $scope.openSelect = function (e) {
                             e.stopPropagation();
-                            e.preventDefault();
                             menus.open($scope.selectId);
                         };
                     }
@@ -99,7 +101,7 @@ define([
                 },
                 require: '^ngModel',
                 template: [
-                    '<material-menu menu-id="{{selectId}}" menu-config="_menuConfig">',
+                    '<material-menu class="material-select-menu" menu-id="{{selectId}}" menu-config="_menuConfig">',
                         '<material-item ',
                             'ng-if="options" ',
                             'ng-repeat="option in options | materialSelectSort:selected" ',
@@ -120,13 +122,18 @@ define([
                     }
 
                     return function ($scope, $element, $attrs, ngModelCtrl) {
-                        configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
+                        var menu = menus.get($attrs.selectId);
 
+                        configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
                         $scope.$watch('options', function(value, oldValue) {
                             ngModelCtrl.$render();
                         }, true);
+
+                        menu.on('beforeopen', function () {
+                            menu.element.css('width', $element[0].clientWidth + 'px');
+                        });
 
                         ngModelCtrl.$render = function () {
                             var value = ngModelCtrl.$modelValue,
@@ -137,7 +144,7 @@ define([
 
                             for (i = 0; i < ln; i++) {
                                 option = options[i];
-                                if ((ng.isObject(option) && option.value == value) || option == value) {
+                                if ((ng.isObject(option) && option[$scope._valueField] == value) || option == value) {
                                     isValid = true;
                                     break;
                                 }
@@ -150,7 +157,7 @@ define([
                         $scope.select = function (value) {
                             ngModelCtrl.$setViewValue(value);
                             ngModelCtrl.$render();
-                            menus.close($scope.selectId);
+                            menu.close();
                         }
                     };
                 }                

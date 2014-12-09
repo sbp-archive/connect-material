@@ -487,6 +487,7 @@ material-button.material-fab[disabled],
   color: #787878;
   background-color: transparent;
   cursor: not-allowed;
+  pointer-events: none;
 }
 material-buttonbar,
 .material-buttonbar {
@@ -794,11 +795,9 @@ material-tabs.material-tabs-blank .material-tabs-bar .material-tab.material-tab-
   display: block;
   overflow-x: hidden;
   overflow-y: auto;
-  border-color: #dedede;
-  border-style: solid;
-  border-width: 1px 0;
+  border: 0;
   background-color: #fff;
-  min-width: 300px;
+  min-width: 260px;
   max-width: 80%;
   max-height: 80%;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -972,7 +971,6 @@ material-datepicker,
   display: block;
   width: 272px;
   background-color: #fff;
-  border: 1px solid #dedede;
 }
 .material-datepicker-date h4 {
   background-color: #01579b;
@@ -1021,6 +1019,8 @@ material-datepicker,
 .material-datepicker-view table {
   display: block;
   width: 252px;
+  border-spacing: 0;
+  overflow: hidden;
 }
 .material-datepicker-view tr {
   display: -webkit-flex;
@@ -1046,22 +1046,42 @@ material-datepicker,
   vertical-align: middle;
   line-height: 36px;
 }
-.material-datepicker-view td .material-btn.btn-text {
+.material-datepicker-view td .material-button {
   color: #000;
-  font-weight: normal;
-  padding: 0;
-  text-align: center;
   height: 36px;
   width: 36px;
+  border-radius: 18px;
 }
-.material-datepicker-view td .material-btn.btn-text.date-active {
+.material-datepicker-view td .material-button .material-text {
+  pointer-events: none;
+}
+.material-datepicker-view td .material-button.date-active {
   background-color: #03a9f4;
   color: #fff;
-  border-radius: 18px;
   transition: none;
 }
-.material-datepicker-view td .material-btn.btn-text[disabled] {
+.material-datepicker-view td .material-button[disabled] {
   color: #c4c4c4;
+}
+.material-datepicker-view ul,
+.material-datepicker-view li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.material-datepicker-view li {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.material-datepicker-view li .material-button {
+  min-width: 160px;
 }
 .material-datepicker-bar {
   height: 46px;
@@ -1080,6 +1100,19 @@ material-datepicker,
 }
 .material-datepicker-bar button {
   margin-right: 26px;
+}
+material-datefield,
+.material-datefield {
+  display: block;
+  position: relative;
+}
+material-datefield .material-datefield-mask,
+.material-datefield .material-datefield-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 material-input-group,
 .material-input-group {
@@ -1422,20 +1455,20 @@ material-selectfield,
   display: block;
   position: relative;
 }
-material-select,
-.material-select {
+material-selectfield material-select,
+.material-selectfield material-select,
+material-selectfield .material-select,
+.material-selectfield .material-select {
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
 }
-material-select material-menu,
-.material-select material-menu,
-material-select .material-menu,
-.material-select .material-menu {
+material-menu.material-select-menu,
+.material-menu.material-select-menu {
   min-width: 0;
-  width: 100%;
   transition: -webkit-transform 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
   transition: transform 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
   -webkit-transform: scale(1, 0);
@@ -1443,17 +1476,13 @@ material-select .material-menu,
   -webkit-transform-origin: center 24px;
           transform-origin: center 24px;
 }
-material-select material-menu.material-opened,
-.material-select material-menu.material-opened,
-material-select .material-menu.material-opened,
-.material-select .material-menu.material-opened {
+material-menu.material-select-menu.material-opened,
+.material-menu.material-select-menu.material-opened {
   -webkit-transform: scale(1, 1);
           transform: scale(1, 1);
 }
-material-select material-menu material-item .material-text,
-.material-select material-menu material-item .material-text,
-material-select .material-menu material-item .material-text,
-.material-select .material-menu material-item .material-text {
+material-menu.material-select-menu material-item .material-text,
+.material-menu.material-select-menu material-item .material-text {
   line-height: 26px;
 }
 .material-drawer-wrap {

@@ -25,14 +25,16 @@ define([
                 }
 			},
 
-            bridgeConfigs: function ($scope, $attrs, configName) {
+            bridgeConfigs: function ($scope, $attrs, configName, defaults) {
+                defaults = ng.isObject(defaults) ? ng.copy(defaults) : {};
+
                 if (ng.isDefined($attrs[configName])) {
                     $scope.$parent.$watch($attrs[configName], function (value) {
-                        $scope['_' + configName] = ng.copy(value);
+                        $scope['_' + configName] = ng.extend(defaults, ng.copy(value));
                     }, true);
                 }
                 else {
-                    $scope['_' + configName] = {};
+                    $scope['_' + configName] = defaults;
                 }
             }
 		};

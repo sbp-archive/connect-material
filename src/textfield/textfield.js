@@ -28,6 +28,9 @@ define([
                             $scope.isDisabled = function () {
                                 return disabledParsed($scope.$parent);
                             };
+                            $scope.getTabIndex = function () {
+                                return !$scope.isDisabled() ? $attrs.tabindex : -1;
+                            };
                             $scope.inputType = $attrs.type || "text";
                         }
                     }
@@ -114,8 +117,12 @@ define([
 
                     scope.$watch(scope.isDisabled, function (isDisabled) {
                         element.attr('aria-disabled', !!isDisabled);
-                        element.attr('tabindex', !!isDisabled);
                     });
+
+                    scope.$watch(scope.getTabIndex, function (tabindex) {
+                        element.attr('tabindex', tabindex);
+                    });
+
                     element.attr('type', attr.type || element.parent().attr('type') || "text");
 
                     // When the input value changes, check if it "has" a value, and

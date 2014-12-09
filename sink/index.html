@@ -164,6 +164,7 @@
                         <material-title>Card</material-title>
                         <material-searchfield ng-model="search" placeholder="Search..."></material-searchfield>
                         <material-button ng-click="openDialog('custom')">Custom</material-button>
+                        <material-button ng-click="openDialog('datepicker')">Datepicker</material-button>
                         <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
                         <material-button ng-click="openDialog('confirm')" class="material-raised material-primary">Confirm</material-button>
                         <material-button ng-click="openDrawer('right')">Forms</material-button>
@@ -229,6 +230,8 @@
                 </material-buttonbar>
             </material-dialog>
 
+            <material-datepicker-dialog dialog-id="datepicker" ng-model="someDate" datepicker-config="{minDate: 1980, yearRange: 40}"></material-datepicker-dialog>
+
             <material-drawer drawer-id="left" drawer-config="{position:'left', modal: isModal()}">
                 <material-buttonbar>
                     <material-button ng-click="closeDrawer('left')">Close</material-button>
@@ -271,7 +274,7 @@
                     <material-textfield label="Address" ng-model="user.address"></material-textfield>
 
                     <div layout="row">
-                        <material-textfield label="Date of Birth" ng-model="user.dateOfBirth" class="field-birth"></material-textfield>
+                        <material-datefield label="Date of Birth" ng-model="user.dateOfBirth" class="field-birth" datepicker-config="{minDate:1900, maxDate:'now'}"></material-datefield>
                         <material-selectfield label="Gender" ng-model="user.gender" options="['Male', 'Female']" class="field-gender"></material-selectfield>
                     </div>
 

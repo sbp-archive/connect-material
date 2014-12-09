@@ -84,7 +84,7 @@ define([
                 gender: null,
                 receiveEmail: true,
                 receiveNewsletter: false,
-                dateOfBirth: new Date()
+                dateOfBirth: '1986-05-23'
             };
 
             $scope.gridData = [

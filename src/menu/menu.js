@@ -8,9 +8,10 @@ define([
 
     material.directive('materialMenu', [
         '$animate',
+        '$parse',
         'materialConfigService',
         'materialMenuService',
-        function ($animate, configs, menus) {
+        function ($animate, $parse, configs, menus) {
             var ID_GENERATOR = 1;
 
             return {
@@ -26,44 +27,73 @@ define([
 
                     return function ($scope, $element, $attrs) {
                         var id = $attrs.menuId,
-                            menu = $scope._menu = menus.create(id, $element);
+                            menu = $scope._menu = menus.create(id, $element),
+                            originalParent = $element.parent();
 
                         configs.applyConfigs($scope, $attrs.menuConfig, {
+                            appendToBody: false,
+                            closeOnBodyClick: true,
+                            closeOnMenuClick: true,
+                            autoAdjust: true,
                             icons: false
                         });
 
                         function onBodyClick(e) {
-                            $scope.$apply(function () {
-                                menu.close();
-                            });
-                        }
+                            if ($scope._closeOnBodyClick) {
+                                $scope.$apply(function () {
+                                    menu.close();
+                                });
+                            }
+                        };
 
                         menu.on('open', function () {
                             ng.element(window).on('click', onBodyClick);
                         });
 
                         menu.on('close', function () {
+                            if ($scope._appendToBody) {
+                                $element.css({
+                                    top: null,
+                                    left: null
+                                });
+                                originalParent.append($element);
+                            }
+
                             ng.element(window).off('click', onBodyClick);
                         });
-
+                        
                         menu.on('beforeopen', function () {
-                            var containerRect = $element.parent()[0].getBoundingClientRect(),
-                                viewportHeight = document.documentElement.clientHeight,
-                                menuHeight = $element[0].scrollHeight;
-
-                            if (containerRect.top + menuHeight > viewportHeight) {
-                                $element[0].style.height = (viewportHeight - containerRect.top - 10) + 'px';
+                            if ($scope._appendToBody) {
+                                ng.element(document.body).append($element);
                             }
-                            
+
+                            if ($scope._autoAdjust) {
+                                var containerRect = originalParent[0].getBoundingClientRect(),
+                                    viewportHeight = document.documentElement.clientHeight,
+                                    innerMenuHeight = $element[0].scrollHeight;
+
+                                $element.css({
+                                    top: containerRect.top + 'px',
+                                    right: (document.documentElement.clientWidth - containerRect.right) + 'px'
+                                }); 
+
+                                if (containerRect.top + innerMenuHeight > viewportHeight) {
+                                    $element.css('height', (viewportHeight - containerRect.top - 10) + 'px');
+                                } else {
+                                    $element.css('height', innerMenuHeight + 'px');
+                                }                           
+                            }
+
                             $element[0].scrollTop = 0;
                         });
 
                         $element.on('click', function(e) {
                             e.stopPropagation();
-                            e.preventDefault();
-                            $scope.$apply(function() {
-                                menu.close();
-                            });
+                            if ($scope._closeOnMenuClick) {
+                                $scope.$apply(function() {
+                                    menu.close();
+                                });
+                            }
                         });
 
                         // This is a bit ugly I think but it solves the problem

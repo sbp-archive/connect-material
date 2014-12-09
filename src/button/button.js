@@ -5,8 +5,9 @@ define([
     'use strict';
     
     material.directive('materialButton', [
+        '$animate',
         'materialConfigService',
-        function (configs) {
+        function ($animate, configs) {
             return {
                 restrict: 'EA',
                 transclude: true,
@@ -18,6 +19,8 @@ define([
                     '<div class="material-text" ng-transclude></div>',
                 ].join(''),
                 link: function ($scope, $element, $attrs) {
+                    $animate.enabled(false, $element);
+                    
                     $scope.getIconClass = function () {
                         var parts = $scope.icon.split(':'),
                             iconCls = 'icon-' + parts[0];

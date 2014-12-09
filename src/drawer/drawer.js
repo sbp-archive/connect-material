@@ -48,7 +48,8 @@ define([
                         configs.applyConfigs($scope, $attrs.drawerConfig, {
                             position: 'right',
                             modal: true,
-                            closeOnBackdropClick: true
+                            closeOnBackdropClick: true,
+                            onBackdropClick: null
                         });
 
                         // This is a bit ugly I think but it solves the problem
@@ -59,8 +60,13 @@ define([
                         }
 
                         $scope.onBackdropClick = function (e) {
+                            if ($scope._onBackDropClick) {
+                                $parse($scope._onBackdropClick)($scope.$parent, {
+                                    $event: e
+                                });
+                            }
+
                             if ($scope._closeOnBackdropClick) {
-                                e.stopPropagation();
                                 drawer.close();
                             }
                         }
