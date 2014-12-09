@@ -6,6 +6,11 @@ define([
 ], function (material, ng) {
     'use strict';
 
+    var defaultSelectConfig = {
+        valueField: 'value',
+        labelField: 'label'
+    };
+
     material.directive('materialSelectfield', [
         'materialConfigService',
         'materialMenuService',
@@ -23,7 +28,7 @@ define([
                 require: '?ngModel',
                 template: [
                     '<material-textfield ng-model="label" label="{{fieldLabel}}" ng-click="openSelect($event)" field-config="_fieldConfig"></material-textfield>',
-                    '<material-select select-id="{{selectId}}" menu-config="_menuConfig" ng-model="value" options="options"></material-select>'
+                    '<material-select select-id="{{selectId}}" menu-config="_menuConfig" select-config="_selectConfig" ng-model="value" options="options"></material-select>'
                 ].join(''),
 
                 compile: function ($element, $attrs) {
@@ -38,8 +43,11 @@ define([
                     }
 
                     return function ($scope, $element, $attrs, ngModelCtrl) {
+                        configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
+
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
                         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
+                        configs.bridgeConfigs($scope, $attrs, 'selectConfig');
 
                         $scope.$watch('options', function(options) {   
                             renderValue($scope.value);                       
@@ -48,11 +56,11 @@ define([
                         function renderValue(value) {
                             if (ng.isDefined(value) && $scope.options && $scope.options.length) {
                                 var result = $scope.options.filter(function (option) {
-                                    if ((ng.isObject(option) && option.value == value) || option == value) {
+                                    if ((ng.isObject(option) && option[$scope._valueField] == value) || option == value) {
                                         return true;
                                     }
                                 })[0] || null;
-                                $scope.label = ng.isObject(result) && result.label || result;
+                                $scope.label = ng.isObject(result) && result[$scope._labelField] || result;
                             }
                             else {
                                 $scope.label = null;
@@ -95,8 +103,8 @@ define([
                         '<material-item ',
                             'ng-if="options" ',
                             'ng-repeat="option in options | materialSelectSort:selected" ',
-                            'ng-click="select(option.value || option)">',
-                                '{{option.label || option}}',
+                            'ng-click="select(option[_valueField] || option)">',
+                                '{{option[_labelField] || option}}',
                         '</material-item>',
                     '</material-menu>'
                 ].join(''),
@@ -112,6 +120,8 @@ define([
                     }
 
                     return function ($scope, $element, $attrs, ngModelCtrl) {
+                        configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
+
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
                         $scope.$watch('options', function(value, oldValue) {

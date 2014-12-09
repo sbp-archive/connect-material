@@ -170,6 +170,9 @@
                         <material-button ng-click="openDrawer('tabs')" class="material-primary">Tabs</material-button>
                     </material-toolbar>
                     <region class="buttton-examples">
+
+                        <material-selectfield label="State" ng-model="user.state" options="states" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectfield>
+
                         <material-buttonbar layout="row" layout-align="center center">
                             <material-button>Normal</material-button>
                             <material-button class="material-primary">Primary</material-button>
