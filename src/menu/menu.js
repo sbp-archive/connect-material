@@ -72,10 +72,12 @@ define([
                                     viewportHeight = document.documentElement.clientHeight,
                                     innerMenuHeight = $element[0].scrollHeight;
 
-                                $element.css({
-                                    top: containerRect.top + 'px',
-                                    right: (document.documentElement.clientWidth - containerRect.right) + 'px'
-                                }); 
+                                if ($scope._appendToBody) {
+                                    $element.css({
+                                        top: containerRect.top + 'px',
+                                        right: (document.documentElement.clientWidth - containerRect.right) + 'px'
+                                    }); 
+                                }
 
                                 if (containerRect.top + innerMenuHeight > viewportHeight) {
                                     $element.css('height', (viewportHeight - containerRect.top - 10) + 'px');
