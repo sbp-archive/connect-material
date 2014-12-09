@@ -171,8 +171,6 @@
                     </material-toolbar>
                     <region class="buttton-examples">
 
-                        <material-selectfield label="State" ng-model="user.state" options="states" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectfield>
-
                         <material-buttonbar layout="row" layout-align="center center">
                             <material-button>Normal</material-button>
                             <material-button class="material-primary">Primary</material-button>
@@ -278,7 +276,7 @@
                     </div>
 
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
-                    <material-selectfield label="State" ng-model="user.state" options="states"></material-selectfield>
+                    <material-selectfield label="State" ng-model="user.state" options="states" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectfield>
 
                     <material-textfield label="Disabled Field" ng-model="user.address" ng-disabled="true"></material-textfield>
                 </material-content>
