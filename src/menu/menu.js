@@ -53,8 +53,10 @@ define([
                         menu.on('close', function () {
                             if ($scope._appendToBody) {
                                 if ($scope._autoAdjust) {
-                                    $element.css('top', null);
-                                    $element.css('left', null);
+                                    var style = $element[0].style;
+                                    style.top = null;
+                                    style.right = null;
+                                    style.height = null;
                                 }
                                 originalParent.append($element);
                             }
@@ -81,9 +83,7 @@ define([
 
                                 if (containerRect.top + innerMenuHeight > viewportHeight) {
                                     $element.css('height', (viewportHeight - containerRect.top - 10) + 'px');
-                                } else {
-                                    $element.css('height', innerMenuHeight + 'px');
-                                }                           
+                                }                          
                             }
 
                             $element[0].scrollTop = 0;

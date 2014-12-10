@@ -506,8 +506,9 @@ define([
                         });
 
                         menu.on('close', function () {
-                            menu.element.css('top', null);
-                            menu.element.css('right', null);
+                            var style = menu.element[0].style;
+                            style.top = null;
+                            style.right = null;
                         });
 
                         $scope.openPicker = function (e) {
