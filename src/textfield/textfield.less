@@ -81,6 +81,14 @@ material-input-group,
         }
     }
 
+    &:not(.material-input-focused) {
+        input, textarea {
+            &.ng-touched.ng-invalid {
+                border-color: @material-warning-color;
+            }
+        }
+    }
+
     &.material-input-has-value {
         .text-hint(small);
 

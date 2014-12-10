@@ -32,13 +32,14 @@ define([
                                 return !$scope.isDisabled() ? $attrs.tabindex : -1;
                             };
                             $scope.inputType = $attrs.type || "text";
+                            $scope.required = ng.isDefined($attrs.required);
                         }
                     }
                 },
                 template: [
                     '<material-input-group>',
                     '   <label for="{{fid}}" >{{label}}</label>',
-                    '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" />',
+                    '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" ng-required="{{required}}" />',
                     '</material-input-group>'
                 ].join('')
             };
@@ -68,14 +69,13 @@ define([
                                 return disabledParsed($scope.$parent);
                             };
                             $scope.inputType = $attrs.type || "text";
-                            $scope.required = ng.isDefined($attrs.required) ? $attrs.required || 'true' : 'false';
                         }
                     }
                 },
                 template: [
                     '<material-input-group>',
                     '   <label for="{{fid}}" >{{label}}</label>',
-                    '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" required="{{required}}" type="{{inputType}}"></textarea>',
+                    '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}"></textarea>',
                     '</material-input-group>'
                 ].join('')
             };
