@@ -505,6 +505,11 @@ define([
                             });
                         });
 
+                        menu.on('close', function () {
+                            menu.element.css('top', null);
+                            menu.element.css('right', null);
+                        });
+
                         $scope.openPicker = function (e) {
                             e.stopPropagation();
                             menu.open();

@@ -52,10 +52,10 @@ define([
 
                         menu.on('close', function () {
                             if ($scope._appendToBody) {
-                                $element.css({
-                                    top: null,
-                                    left: null
-                                });
+                                if ($scope._autoAdjust) {
+                                    $element.css('top', null);
+                                    $element.css('left', null);
+                                }
                                 originalParent.append($element);
                             }
 
