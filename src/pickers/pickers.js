@@ -432,10 +432,11 @@ define([
     ]);
 
     material.directive('materialDatefield', [
+        '$parse',
         'dateFilter',
         'materialConfigService',
         'materialMenuService',
-        function (dateFilter, configs, menus) {
+        function ($parse, dateFilter, configs, menus) {
             var ID_GENERATOR = 1;
 
             return {
