@@ -491,7 +491,19 @@ define([
                         if (ngModelCtrl) {
                             //Add a $formatter so we don't use up the render function
                             ngModelCtrl.$formatters.push(function (value) {
-                                $scope.dateDisplay = ng.isDefined(value) ? dateFilter(value, $scope._displayFormat) : null;
+                                if (value) {
+                                    var date = new Date(value),
+                                        isValid = !isNaN(date);
+
+                                    if (isValid) {
+                                        $scope.dateDisplay = dateFilter(date, $scope._displayFormat);
+                                    } else {
+                                        console.error('Datefield directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
+                                    }
+                                    ngModelCtrl.$setValidity('date', isValid);
+                                    return date;
+                                }
+                                
                                 return value;                            
                             });
                         }
