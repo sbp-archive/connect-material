@@ -447,7 +447,7 @@ define([
                 },
                 require: '?ngModel',
                 template: [
-                    '<material-textfield tabindex="-1" ng-model="dateDisplay" label="{{label}}" field-config="_fieldConfig"></material-textfield>',
+                    '<material-textfield tabindex="-1" ng-model="dateDisplay" ng-disabled="isDisabled()" label="{{label}}" field-config="_fieldConfig"></material-textfield>',
                     '<div class="material-datefield-mask" ng-click="openPicker($event)"></div>',
                     '<material-menu class="material-datepicker-menu" menu-id="{{menuId}}" menu-config="_menuConfig">',
                         '<material-datepicker ng-model="value" datepicker-config="_datepickerConfig"></material-datepicker>',
@@ -475,11 +475,27 @@ define([
                         });
                         configs.bridgeConfigs($scope, $attrs, 'datepickerConfig');
 
-                        function renderValue(value) {
-                            $scope.dateDisplay = ng.isDefined(value) ? dateFilter(value, $scope._displayFormat) : null;
-                            return value;                            
+                        var disabledParsed = $parse($attrs.ngDisabled);
+                        $scope.isDisabled = function () {
+                            return disabledParsed($scope.$parent);
+                        };
+
+                        $scope.openPicker = function (e) {
+                            if (!$scope.isDisabled()) {
+                                e.stopPropagation();
+                                menu.open();
+                            }
+                        };
+                        
+                        if (ngModelCtrl) {
+                            //Add a $formatter so we don't use up the render function
+                            ngModelCtrl.$formatters.push(function (value) {
+                                $scope.dateDisplay = ng.isDefined(value) ? dateFilter(value, $scope._displayFormat) : null;
+                                return value;                            
+                            });
                         }
 
+                        // This makes sure that we close the picker when you select a date in the day view
                         ng.element($element[0].querySelector('material-menu .material-datepicker-view')).on('click', function (e) {
                             if (ng.element(e.target).hasClass('material-button-day')) {
                                 $scope.$apply(function() {
@@ -488,11 +504,8 @@ define([
                             } 
                         });
 
-                        if (ngModelCtrl) {
-                            //Add a $formatter so we don't use up the render function
-                            ngModelCtrl.$formatters.push(renderValue);
-                        }
-
+                        // Because we appendToBody the menu and set autoAdjust to false we have to set
+                        // the top and right of the menu ourselves for pickers
                         menu.on('beforeopen', function () {
                             var containerRect = $element[0].getBoundingClientRect(),
                                 viewportHeight = document.documentElement.clientHeight,
@@ -510,11 +523,6 @@ define([
                             style.top = null;
                             style.right = null;
                         });
-
-                        $scope.openPicker = function (e) {
-                            e.stopPropagation();
-                            menu.open();
-                        };
                     }
                 }
             };
