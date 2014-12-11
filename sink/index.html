@@ -201,8 +201,9 @@
                         <material-cell class="cell-dateOfBirth">Date of Birth</material-cell>
                         <material-cell class="cell-company">Company</material-cell>                
                     </material-gridlist-headers>
+
                     <material-gridlist-content>
-                        <material-row ng-repeat="user in gridData">
+                        <material-row ng-repeat="user in usersPage">
                             <material-checkbox ng-model="list.selected[asset.id]"></material-checkbox>
 
                             <material-cell class="cell-firstName">{{user.firstName}}</material-cell>
@@ -218,6 +219,8 @@
                             </material-menu-button>
                         </material-row>
                     </material-gridlist-content>
+
+                    <material-gridlist-pagination in-data="gridData" out-data="usersPage" current-page="currentPage" pagination-config="{pageSize:5}"></material-gridlist-pagination>
                 </material-gridlist>
             </div>
 

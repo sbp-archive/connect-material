@@ -1651,3 +1651,23 @@ material-gridlist.material-view-list .material-gridlist-headers material-menu-bu
 .material-gridlist.material-view-list .material-gridlist-headers material-menu-button {
   margin: 0 4px;
 }
+material-gridlist-pagination {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+material-gridlist-pagination material-title {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+material-gridlist-pagination material-button {
+  width: 120px;
+}
