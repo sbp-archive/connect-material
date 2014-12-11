@@ -27,14 +27,19 @@ define([
 
                     $scope.sourceData = [];
 
-                    $scope.$parent.$watch($attrs.inData, function (data) {
-                        $scope.currentPage = 1;
+                    $scope.$parent.$watch($attrs.inData, function (data, oldData) {
+                        if (data && data.length && (!oldData || oldData.length != data.length)) {
+                            $scope.currentPage = 1;
+                        }
                         $scope.totalPages = Math.ceil(data.length / $scope._pageSize);
                         $scope.sourceData = data;
                     }, true);
 
                     $scope.$watch('sourceData', applyPaging);
                     $scope.$watch('currentPage', applyPaging);
+                    $scope.$watch('_pageSize', function() {
+                        applyPaging();
+                    });
 
                     function applyPaging () {
                         var range = $scope.sourceData,
