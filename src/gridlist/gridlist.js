@@ -15,9 +15,9 @@ define([
                     currentPage: '=?'
                 },
                 template: [
-                    '<material-button ng-click="previous()" ng-disabled="currentPage == 1">Previous</material-button>',
+                    '<material-button icon="navigation-black:arrow_back_black" ng-click="previous()" ng-disabled="currentPage == 1"></material-button>',
                     '<material-title>{{currentPage}}</material-title>',
-                    '<material-button ng-click="next()" ng-disabled="currentPage == totalPages">Next</material-button>',
+                    '<material-button icon="navigation-black:arrow_forward_black" ng-click="next()" ng-disabled="currentPage == totalPages"></material-button>',
                 ].join(''),
 
                 link: function ($scope, $element, $attrs) {

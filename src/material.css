@@ -496,10 +496,10 @@ material-button.material-raised[disabled],
 .material-button.material-raised[disabled],
 material-button.material-fab[disabled],
 .material-button.material-fab[disabled] {
-  color: #787878;
   background-color: transparent;
   cursor: not-allowed;
   pointer-events: none;
+  opacity: 0.3;
 }
 material-buttonbar,
 .material-buttonbar {
@@ -1661,13 +1661,12 @@ material-gridlist-pagination {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin: 0 20px;
 }
 material-gridlist-pagination material-title {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  width: 30px;
   text-align: center;
-}
-material-gridlist-pagination material-button {
-  width: 120px;
 }
