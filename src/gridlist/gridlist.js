@@ -15,7 +15,7 @@ define([
                     currentPage: '=?'
                 },
                 template: [
-                    '<material-button icon="navigation-black:arrow_back_black" ng-click="first()" ng-disabled="currentPage == 1"></material-button>',
+                    //'<material-button icon="navigation-black:arrow_back_black" ng-click="first()" ng-disabled="currentPage == 1"></material-button>',
                     '<material-button icon="navigation-black:chevron_left_black" ng-click="previous()" ng-disabled="currentPage == 1"></material-button>',
                     '<material-title>Page {{currentPage}}</material-title>',
                     '<material-button icon="navigation-black:chevron_right_black" ng-click="next()" ng-disabled="currentPage == totalPages"></material-button>',
@@ -37,7 +37,7 @@ define([
 
                         $scope.totalPages = Math.ceil(data.length / $scope._pageSize);
                         $scope.sourceData = data && data.slice() || [];
-                    }, true);
+                    });
 
                     $scope.$watch('sourceData', applyPaging);
                     $scope.$watch('currentPage', function (newPage, oldPage) {
