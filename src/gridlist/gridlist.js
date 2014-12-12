@@ -15,9 +15,10 @@ define([
                     currentPage: '=?'
                 },
                 template: [
-                    '<material-button icon="navigation-black:arrow_back_black" ng-click="previous()" ng-disabled="currentPage == 1"></material-button>',
-                    '<material-title>{{currentPage}}</material-title>',
-                    '<material-button icon="navigation-black:arrow_forward_black" ng-click="next()" ng-disabled="currentPage == totalPages"></material-button>',
+                    '<material-button icon="navigation-black:arrow_back_black" ng-click="first()" ng-disabled="currentPage == 1"></material-button>',
+                    '<material-button icon="navigation-black:chevron_left_black" ng-click="previous()" ng-disabled="currentPage == 1"></material-button>',
+                    '<material-title>Page {{currentPage}}</material-title>',
+                    '<material-button icon="navigation-black:chevron_right_black" ng-click="next()" ng-disabled="currentPage == totalPages"></material-button>',
                 ].join(''),
 
                 link: function ($scope, $element, $attrs) {
@@ -27,18 +28,27 @@ define([
 
                     $scope.sourceData = [];
 
+                    $scope.currentPage = $scope.currentPage || 1;
                     $scope.$parent.$watch($attrs.inData, function (data, oldData) {
-                        if (data && data.length && (!oldData || oldData.length != data.length)) {
+                        data = data && data.slice() || [];
+                        if (data.length && (!oldData || oldData.length != data.length)) {
                             $scope.currentPage = 1;
                         }
+
                         $scope.totalPages = Math.ceil(data.length / $scope._pageSize);
-                        $scope.sourceData = data;
+                        $scope.sourceData = data && data.slice() || [];
                     }, true);
 
                     $scope.$watch('sourceData', applyPaging);
-                    $scope.$watch('currentPage', applyPaging);
-                    $scope.$watch('_pageSize', function() {
-                        applyPaging();
+                    $scope.$watch('currentPage', function (newPage, oldPage) {
+                        if (newPage != oldPage) {
+                            applyPaging();
+                        }
+                    });
+                    $scope.$watch('_pageSize', function (oldValue, newValue) {
+                        if (oldValue != newValue) {
+                            applyPaging();
+                        }
                     });
 
                     function applyPaging () {
@@ -47,7 +57,7 @@ define([
                             start = ($scope.currentPage - 1) * limit,
                             end = start + limit;
 
-                        end = Math.min(range.length - 1, end);
+                        end = Math.min(range.length, end);
 
                         $scope.outData = range.slice(start, end);
                     };
@@ -63,6 +73,10 @@ define([
                             $scope.currentPage++;
                         }
                     };
+
+                    $scope.first = function () {
+                        $scope.currentPage = 1;
+                    }
 
                     $scope.setPage = function (page) {
                         if (page >= 1 && page <= $scope.totalPages) {

@@ -78,12 +78,17 @@ material-gridlist-pagination {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: flex-start;
-	margin: 0 @material-content-spacing;
+	justify-content: center;
+	margin: @material-content-spacing 0;
+	padding: 4px 0;
+
+	background-color: #fff;
+	box-shadow: @material-shadow-card;
 
 	material-title {
-		width: 30px;
 		text-align: center;
+		margin: 0 @material-content-spacing;
+		font-size: 14px;
 	}
 }
 
