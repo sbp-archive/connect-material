@@ -1126,6 +1126,12 @@ material-datefield .material-datefield-mask,
   right: 0;
   bottom: 0;
 }
+material-datefield .material-icon,
+.material-datefield .material-icon {
+  position: absolute;
+  right: 0;
+  top: 18px;
+}
 material-input-group,
 .material-input-group {
   padding-bottom: 2px;
@@ -1483,6 +1489,12 @@ material-selectfield .material-select,
   left: 0;
   right: 0;
   bottom: 0;
+}
+material-selectfield .material-icon,
+.material-selectfield .material-icon {
+  position: absolute;
+  right: 0;
+  top: 18px;
 }
 material-menu.material-select-menu,
 .material-menu.material-select-menu {

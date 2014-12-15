@@ -354,7 +354,7 @@ define([
                     ctrl._refreshView = function () {
                         var minYear = ctrl.minDate && ctrl.minDate.getFullYear() || (new Date()).getFullYear(),
                             maxYear = ctrl.maxDate && ctrl.maxDate.getFullYear() || (minYear + ctrl.yearRange),
-                            range = maxYear - minYear,
+                            range = maxYear - minYear + 1,
                             years = new Array(range);
 
                         for (var i = 0; i < range; i++) {
@@ -449,6 +449,7 @@ define([
                 require: '?ngModel',
                 template: [
                     '<material-textfield tabindex="-1" ng-model="dateDisplay" ng-disabled="isDisabled()" label="{{label}}" field-config="_fieldConfig"></material-textfield>',
+                    '<div class="material-select-carret material-icon icon-navigation-black icon-navigation-black-ic_arrow_drop_down_black_24dp"></div>',
                     '<div class="material-datefield-mask" ng-click="openPicker($event)"></div>',
                     '<material-menu class="material-datepicker-menu" menu-id="{{menuId}}" menu-config="_menuConfig">',
                         '<material-datepicker ng-model="value" datepicker-config="_datepickerConfig"></material-datepicker>',

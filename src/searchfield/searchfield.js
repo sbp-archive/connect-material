@@ -48,6 +48,7 @@ define([
                             $scope.clearField = function(e) {
                                 ngModelCtrl.$setViewValue('');
                                 ngModelCtrl.$render();
+                                setHasValue(false);
                             }
 
                             $scope.getIconCls = function(type) {

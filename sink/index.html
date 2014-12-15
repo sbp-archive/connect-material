@@ -269,7 +269,7 @@
                 </material-buttonbar>
             </material-drawer>
 
-            <material-drawer drawer-id="right" drawer-config="{position:'right'}">
+            <material-drawer drawer-id="form" drawer-config="{position:'right'}">
                 <material-title>Edit User<material-subtitle>Some subtitle</material-subtitle></material-title>
                 <material-content>
                     <material-textfield label="First Name" ng-model="user.firstName" required></material-textfield>
@@ -294,8 +294,8 @@
                 </material-content>
 
                 <material-buttonbar>
-                    <material-button ng-click="closeDrawer('right')">Cancel</material-button>
-                    <material-button ng-click="closeDrawer('right')" class="material-primary">Save</material-button>
+                    <material-button ng-click="closeDrawer('form')">Cancel</material-button>
+                    <material-button ng-click="closeDrawer('form')" class="material-primary">Save</material-button>
                 </material-buttonbar>
             </material-drawer>
         </div>
