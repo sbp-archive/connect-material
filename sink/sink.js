@@ -27,7 +27,8 @@ define([
     'connect-material/checkbox/checkbox',
     'connect-material/dialog/dialog',
     'connect-material/tabs/tabs',
-    'connect-material/gridlist/gridlist'    
+    'connect-material/gridlist/gridlist',
+    'connect-material/progress/progress'
 ], function(ng, domReady) {
     'use strict';
 
