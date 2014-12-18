@@ -5,7 +5,6 @@ module.exports = function (grunt) {
     
     grunt.initConfig(
         {
-
             release: {
                 options: {
                     file: 'bower.json',
@@ -23,18 +22,25 @@ module.exports = function (grunt) {
             less: {
                 material: {
                     files: {
-                        'src/material.css': 'src/material.less'
+                        'build/material.css': 'src/material.less'
+                    },
+                    options: {
+                        sourceMap: true,
+                        outputSourceFiles: true,
+                        sourceMapFilename: 'build/material.css.map',
+                        sourceMapURL: './material.css.map'
                     }
                 }
             },
 
             postcss: {
                 options: {
+                    map: true,
                     processors: [
                         autoprefixer({ browsers: ['last 2 version'] }).postcss
                     ]
                 },
-                dist: { src: 'src/material.css' }
+                dist: { src: 'build/material.css' }
             }
         }
     );

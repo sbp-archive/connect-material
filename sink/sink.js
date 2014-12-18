@@ -43,7 +43,7 @@ define([
         function($scope, drawers, dialogs) {
             $scope.menu = {
                 icons: true
-            }
+            };
             
             $scope.openDrawer = function(id) {
                 drawers.open(id);
