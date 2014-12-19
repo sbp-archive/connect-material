@@ -37,14 +37,14 @@ define([
     ]);
 
     module.controller('SinkCtrl', [
-        '$scope', 
+        '$scope',
         'materialDrawerService',
         'materialDialogService',
         function($scope, drawers, dialogs) {
             $scope.menu = {
                 icons: true
             };
-            
+
             $scope.openDrawer = function(id) {
                 drawers.open(id);
             };
@@ -76,9 +76,6 @@ define([
             $scope.isModal = function() {
                 return modal;
             };
-            
-
-            
 
             $scope.user = {
                 firstName: 'Tommy',
@@ -695,7 +692,7 @@ define([
                 }
             ];
 
-            /** 
+            /**
              * pagination config
              * @type {Object}
              */
