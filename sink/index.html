@@ -237,6 +237,7 @@
                     </material-gridlist-content>
 
                     <material-gridlist-pagination in-data="gridData" out-data="usersPage" current-page="currentPage" pagination-config="{pageSize:5}"></material-gridlist-pagination>
+                    <material-gridlist-pagination on-page-change="pageChange($page)" pagination-config="paginationConfig"></material-gridlist-pagination>
                 </material-gridlist>
             </div>
 

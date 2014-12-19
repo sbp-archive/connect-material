@@ -76,6 +76,7 @@ define([
             $scope.isModal = function() {
                 return modal;
             };
+            
 
             $scope.user = {
                 firstName: 'Tommy',
@@ -691,6 +692,22 @@ define([
                     "company": "Lectus Associates"
                 }
             ];
+
+            /** 
+             * pagination config
+             * @type {Object}
+             */
+            $scope.paginationConfig = {
+                pageSize: 5,
+                totalCount: $scope.gridData.length
+            };
+            /**
+             * On page change handler
+             * @param  {Number} page
+             */
+            $scope.pageChange = function (page) {
+                dialogs.alert('page', page);
+            };
 
             $scope.states = [
                 {name: 'N/A', shortName: 'none'},

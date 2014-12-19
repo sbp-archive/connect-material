@@ -22,69 +22,76 @@ define([
                 ].join(''),
 
                 link: function ($scope, $element, $attrs) {
-                    configs.applyConfigs($scope, $attrs.paginationConfig, {
-                        pageSize: 25
-                    });
-
-                    $scope.sourceData = [];
-
                     $scope.currentPage = $scope.currentPage || 1;
-                    $scope.$parent.$watch($attrs.inData, function (data, oldData) {
-                        data = data && data.slice() || [];
-                        if (data.length && (!oldData || oldData.length != data.length)) {
-                            $scope.currentPage = 1;
-                        }
 
-                        $scope.totalPages = Math.ceil(data.length / $scope._pageSize);
-                        $scope.sourceData = data && data.slice() || [];
+                    configs.applyConfigs($scope, $attrs.paginationConfig, {
+                        pageSize: 25,
+                        totalCount: null
                     });
 
-                    $scope.$watch('sourceData', applyPaging);
-                    $scope.$watch('currentPage', function (newPage, oldPage) {
-                        if (newPage != oldPage) {
-                            applyPaging();
+                    $scope.$watch('_totalCount', function (value) {
+                        if (ng.isNumber(value)) {
+                            updateTotalPages();     
                         }
                     });
-                    $scope.$watch('_pageSize', function (oldValue, newValue) {
+
+                    $scope.$watch('_pageSize', function (newValue, oldValue) {
                         if (oldValue != newValue) {
-                            applyPaging();
+                            updateTotalPages();
+                            updateDataPaging();                            
                         }
                     });
 
-                    function applyPaging () {
+                    $scope.$parent.$watch($attrs.inData, function (data) {
+                        if (ng.isArray(data)) {
+                            $scope.sourceData = data.slice();
+
+                            updateTotalPages();
+                            updateDataPaging();
+                        }
+                    });
+
+                    function setPage (page) {
+                        if (page >= 1 && page <= $scope.totalPages) {
+                            $scope.currentPage = page;
+                            updateDataPaging();
+
+                            if (ng.isDefined($attrs.onPageChange)) {
+                                $scope.$parent.$eval($attrs.onPageChange, {$page: page});
+                            }
+                        }
+                    }
+
+                    function updateTotalPages () {
+                        var totalCount = ng.isArray($scope.sourceData) ? $scope.sourceData.length : $scope._totalCount;
+                        $scope.totalPages = Math.ceil(totalCount / $scope._pageSize);
+                    }
+
+                    function updateDataPaging () {
                         var range = $scope.sourceData,
                             limit = $scope._pageSize,
                             start = ($scope.currentPage - 1) * limit,
                             end = start + limit;
 
-                        end = Math.min(range.length, end);
-
-                        $scope.outData = range.slice(start, end);
-                    };
+                        if (ng.isArray(range) && ng.isDefined($attrs.outData)) {
+                            end = Math.min(range.length, end);
+                            $scope.outData = range.slice(start, end);
+                        }
+                    }
 
                     $scope.previous = function () {
-                        if ($scope.currentPage > 1) {
-                            $scope.currentPage--;
-                        }
+                        setPage($scope.currentPage - 1);
                     };
 
                     $scope.next = function () {
-                        if ($scope.currentPage < $scope.totalPages) {
-                            $scope.currentPage++;
-                        }
+                        setPage($scope.currentPage + 1);
                     };
 
                     $scope.first = function () {
-                        $scope.currentPage = 1;
-                    }
-
-                    $scope.setPage = function (page) {
-                        if (page >= 1 && page <= $scope.totalPages) {
-                            $scope.currentPage = page;
-                        }
+                        setPage(1);
                     };
                 }
-            }
+            };
         }
     ]);
 });
