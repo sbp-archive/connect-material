@@ -22,11 +22,17 @@ define([
                 ].join(''),
 
                 link: function ($scope, $element, $attrs) {
-                    $scope.currentPage = $scope.currentPage || 1;
+                    var innerPage = $scope.currentPage = $scope.currentPage || 1;
 
                     configs.applyConfigs($scope, $attrs.paginationConfig, {
                         pageSize: 25,
                         totalCount: null
+                    });
+
+                    $scope.$watch('currentPage', function (page, previousPage) {
+                        if (page != previousPage) {
+                            setPage(page);
+                        }
                     });
 
                     $scope.$watch('_totalCount', function (value) {
@@ -52,8 +58,9 @@ define([
                     });
 
                     function setPage (page) {
-                        if (page >= 1 && page <= $scope.totalPages) {
-                            $scope.currentPage = page;
+                        if (page >= 1 && page <= $scope.totalPages && page != innerPage) {
+                            $scope.currentPage = innerPage = page;
+                            
                             updateDataPaging();
 
                             if (ng.isDefined($attrs.onPageChange)) {
@@ -70,7 +77,7 @@ define([
                     function updateDataPaging () {
                         var range = $scope.sourceData,
                             limit = $scope._pageSize,
-                            start = ($scope.currentPage - 1) * limit,
+                            start = (innerPage - 1) * limit,
                             end = start + limit;
 
                         if (ng.isArray(range) && ng.isDefined($attrs.outData)) {
@@ -80,11 +87,11 @@ define([
                     }
 
                     $scope.previous = function () {
-                        setPage($scope.currentPage - 1);
+                        setPage(innerPage - 1);
                     };
 
                     $scope.next = function () {
-                        setPage($scope.currentPage + 1);
+                        setPage(innerPage + 1);
                     };
 
                     $scope.first = function () {

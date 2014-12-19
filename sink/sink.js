@@ -89,7 +89,12 @@ define([
                 dateOfBirth: '1986-05-23'
             };
 
-            $scope.gridData = [
+            $scope.list = {
+                currentPage: 1,
+                usersPage: []
+            };
+
+            $scope.list.gridData = [
                 {
                     "firstName": "Dominic",
                     "lastName": "Kent",
@@ -692,13 +697,14 @@ define([
                 }
             ];
 
+            $scope.currentPage = 1;
             /**
              * pagination config
              * @type {Object}
              */
-            $scope.paginationConfig = {
+            $scope.list.paginationConfig = {
                 pageSize: 5,
-                totalCount: $scope.gridData.length
+                totalCount: $scope.list.gridData.length
             };
             /**
              * On page change handler

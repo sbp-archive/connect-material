@@ -219,7 +219,7 @@
                     </material-gridlist-headers>
 
                     <material-gridlist-content>
-                        <material-row ng-repeat="user in usersPage">
+                        <material-row ng-repeat="user in list.usersPage">
                             <material-checkbox ng-model="list.selected[asset.id]"></material-checkbox>
 
                             <material-cell class="cell-firstName">{{user.firstName}}</material-cell>
@@ -236,8 +236,8 @@
                         </material-row>
                     </material-gridlist-content>
 
-                    <material-gridlist-pagination in-data="gridData" out-data="usersPage" current-page="currentPage" pagination-config="{pageSize:5}"></material-gridlist-pagination>
-                    <material-gridlist-pagination on-page-change="pageChange($page)" pagination-config="paginationConfig"></material-gridlist-pagination>
+                    <material-gridlist-pagination current-page="list.currentPage" in-data="list.gridData" out-data="list.usersPage" pagination-config="{pageSize:5}"></material-gridlist-pagination>
+                    <material-gridlist-pagination current-page="list.currentPage" on-page-change="pageChange($page)" pagination-config="list.paginationConfig"></material-gridlist-pagination>
                 </material-gridlist>
             </div>
 
