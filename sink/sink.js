@@ -78,6 +78,8 @@ define([
             };
             
 
+            
+
             $scope.user = {
                 firstName: 'Tommy',
                 lastName: null,
