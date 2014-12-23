@@ -240,7 +240,7 @@ define([
                         input.on('keypress', function(e) {
                             if (e.keyCode === Constants.KEY_CODE.ENTER && $scope.results.length) {
                                 var value = $scope.results[0][$scope._valueField];
-                                ngModelCtrl.$setViewValue();
+                                ngModelCtrl.$setViewValue(value);
                                 ngModelCtrl.$render();
                                 renderValue(value);
                                 menus.close($scope.selectId);
