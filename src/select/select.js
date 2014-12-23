@@ -239,14 +239,12 @@ define([
 
                         input.on('keypress', function(e) {
                             if (e.keyCode === Constants.KEY_CODE.ENTER && $scope.results.length) {
-                                $scope.$apply(function() {
-                                    var value = $scope.results[0][$scope._valueField];
-                                    ngModelCtrl.$setViewValue();
-                                    ngModelCtrl.$render();
-                                    renderValue(value);
-                                    menus.close($scope.selectId);
-                                    input[0].blur();
-                                });
+                                var value = $scope.results[0][$scope._valueField];
+                                ngModelCtrl.$setViewValue();
+                                ngModelCtrl.$render();
+                                renderValue(value);
+                                menus.close($scope.selectId);
+                                input[0].blur();
                             }
                         });
 
