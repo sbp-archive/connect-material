@@ -55,7 +55,7 @@ define([
                         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
                         configs.bridgeConfigs($scope, $attrs, 'selectConfig');
 
-                        $scope.$watch('options', function(options) {   
+                        $scope.$watch('options', function() {   
                             renderValue($scope.value);                       
                         }, true);
 
@@ -84,7 +84,7 @@ define([
                             e.stopPropagation();
                             menus.open($scope.selectId);
                         };
-                    }
+                    };
                 }
             };
         }
@@ -131,7 +131,7 @@ define([
                         configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
                         configs.bridgeConfigs($scope, $attrs, 'menuConfig');
 
-                        $scope.$watch('options', function(value, oldValue) {
+                        $scope.$watch('options', function() {
                             ngModelCtrl.$render();
                         }, true);
 
@@ -148,7 +148,7 @@ define([
 
                             for (i = 0; i < ln; i++) {
                                 option = options[i];
-                                if ((ng.isObject(option) && option[$scope._valueField] == value) || option == value) {
+                                if ((ng.isObject(option) && option[$scope._valueField] === value) || option == value) {
                                     isValid = true;
                                     break;
                                 }
@@ -156,13 +156,13 @@ define([
 
                             $scope.selected = isValid ? option : null;
                             ngModelCtrl.$setValidity('select', isValid);
-                        }
+                        };
 
                         $scope.select = function (value) {
                             ngModelCtrl.$setViewValue(value);
                             ngModelCtrl.$render();
                             menu.close();
-                        }
+                        };
                     };
                 }                
             };
@@ -217,6 +217,10 @@ define([
 
                         var input = ng.element($element[0].querySelector('input'));
 
+                        input.on('click', function(e) {
+                            e.stopPropagation();
+                        });
+
                         input.on('focus', function() {
                             input[0].setSelectionRange(0, input.val().length);
                             $scope.$apply(function() {
@@ -249,7 +253,7 @@ define([
                         function renderValue(value) {
                             if (ng.isDefined(value) && $scope.results && $scope.results.length) {
                                 var result = $scope.results.filter(function (option) {
-                                    if ((ng.isObject(option) && option[$scope._valueField] == value) || option == value) {
+                                    if ((ng.isObject(option) && option[$scope._valueField] === value) || option == value) {
                                         return true;
                                     }
                                 })[0] || null;
@@ -266,7 +270,7 @@ define([
                             //Add a $formatter so we don't use up the render function
                             ngModelCtrl.$formatters.push(renderValue);
                         }
-                    }
+                    };
                 }
             };
         }
