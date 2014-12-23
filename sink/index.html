@@ -139,7 +139,7 @@
                 <material-item>Some Item</material-item>
             </material-menu-button>
 
-            <material-menu-button icon="navigation-white:more_vert_white">
+            <material-menu-button label="Text Button Menu" icon="navigation-white:more_vert_white">
                 <material-item>Menu Item 1</material-item>
                 <material-item>Menu Item 2</material-item>
                 <material-item>Menu Item 3</material-item>
@@ -168,7 +168,7 @@
                         <material-button ng-click="openDialog('datepicker')">Datepicker</material-button>
                         <material-button ng-click="openDialog('alert')" class="material-warn">Alert</material-button>
                         <material-button ng-click="openDialog('confirm')" class="material-raised material-primary">Confirm</material-button>
-                        <material-button ng-click="openDrawer('right')">Forms</material-button>
+                        <material-button ng-click="openDrawer('form')">Forms</material-button>
                         <material-button ng-click="openDrawer('tabs')" class="material-primary">Tabs</material-button>
                     </material-toolbar>
                     <region class="buttton-examples">
@@ -300,7 +300,7 @@
                     </div>
 
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
-                    <material-selectfield label="State" ng-model="user.state" options="states" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectfield>
+                    <material-selectsearch on-search="doSearch($query)" label="State" ng-model="user.state" results="stateSearch" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectsearch>
 
                     <material-textfield label="Disabled Field" ng-model="user.address" ng-disabled="true"></material-textfield>
                 </material-content>

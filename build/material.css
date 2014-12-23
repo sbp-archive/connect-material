@@ -928,6 +928,12 @@ material-menu-button > .material-menu.material-opened,
 .material-menu-button > .material-menu.material-opened {
   opacity: 1;
 }
+material-menu-button > material-button,
+.material-menu-button > material-button {
+  -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
 material-sidenav-button,
 .material-sidenav-button {
   display: block;
@@ -1501,6 +1507,30 @@ material-selectfield .material-icon,
   position: absolute;
   right: 0;
   top: 18px;
+}
+material-selectsearch,
+.material-selectsearch {
+  display: block;
+  position: relative;
+}
+material-selectsearch material-select,
+.material-selectsearch material-select,
+material-selectsearch .material-select,
+.material-selectsearch .material-select {
+  top: 100%;
+  left: 0;
+  right: 0;
+  position: absolute;
+  display: block;
+}
+material-selectsearch .material-icon,
+.material-selectsearch .material-icon {
+  position: absolute;
+  right: 0;
+  top: 18px;
+}
+material-menu.material-selectsearch-menu {
+  max-height: 306px;
 }
 material-menu.material-select-menu,
 .material-menu.material-select-menu {

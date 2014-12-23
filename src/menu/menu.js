@@ -35,6 +35,7 @@ define([
                             closeOnBodyClick: true,
                             closeOnMenuClick: true,
                             autoAdjust: true,
+                            autoPosition: true,
                             icons: false
                         });
 
@@ -65,25 +66,23 @@ define([
                         });
                         
                         menu.on('beforeopen', function () {
+                            var containerRect = originalParent[0].getBoundingClientRect(),
+                                viewportHeight = document.documentElement.clientHeight,
+                                innerMenuHeight = $element[0].scrollHeight;
+
                             if ($scope._appendToBody) {
                                 ng.element(document.body).append($element);
-                            }
 
-                            if ($scope._autoAdjust) {
-                                var containerRect = originalParent[0].getBoundingClientRect(),
-                                    viewportHeight = document.documentElement.clientHeight,
-                                    innerMenuHeight = $element[0].scrollHeight;
-
-                                if ($scope._appendToBody) {
+                                if ($scope._autoPosition) {
                                     $element.css({
                                         top: containerRect.top + 'px',
                                         right: (document.documentElement.clientWidth - containerRect.right) + 'px'
                                     }); 
                                 }
+                            }
 
-                                if (containerRect.top + innerMenuHeight > viewportHeight) {
-                                    $element.css('height', (viewportHeight - containerRect.top - 10) + 'px');
-                                }                          
+                            if ($scope._autoAdjust && containerRect.top + innerMenuHeight > viewportHeight) {
+                                $element.css('height', (viewportHeight - containerRect.top - 10) + 'px');
                             }
 
                             $element[0].scrollTop = 0;
@@ -134,10 +133,11 @@ define([
                 transclude: true,
                 scope: {
                     menuId: '@',
-                    icon: '@'
+                    icon: '@',
+                    label: '@'
                 },
                 template: [
-                    '<material-button ng-click="openMenu($event)" icon="{{icon}}"></material-button>',
+                    '<material-button ng-click="openMenu($event)" icon="{{icon}}">{{label}}</material-button>',
                     '<material-menu menu-id="{{menuId}}" menu-config="_menuConfig" ng-transclude></material-menu>'
                 ].join(''),
                 

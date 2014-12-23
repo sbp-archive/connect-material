@@ -1,5 +1,6 @@
 @import '../variables';
 @import '../mixins';
+@import '../textfield/textfield';
 
 material-selectfield,
 .material-selectfield {
@@ -21,6 +22,31 @@ material-selectfield,
 		right: 0;
 		top: 18px;
 	}
+}
+
+material-selectsearch,
+.material-selectsearch {
+	display: block;
+	position: relative;
+
+	material-select,
+	.material-select {
+		top: 100%;
+		left: 0;
+		right: 0;
+		position: absolute;
+		display: block;
+	}
+
+	.material-icon {
+		position: absolute;
+		right: 0;
+		top: 18px;
+	}
+}
+
+material-menu.material-selectsearch-menu {
+	max-height: 306px;
 }
 
 material-menu.material-select-menu,

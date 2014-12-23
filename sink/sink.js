@@ -77,12 +77,16 @@ define([
                 return modal;
             };
 
+            $scope.doSearch = function(query) {
+                $scope.stateSearch = $scope.states.filter(function (state) {
+                    return state.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+                });
+            }
             $scope.user = {
                 firstName: 'Tommy',
                 lastName: null,
                 address: 'Gedempte Oude Gracht 54a',
                 city: 'Haarlem',
-                state: 'NY',
                 gender: null,
                 receiveEmail: true,
                 receiveNewsletter: false,
@@ -776,6 +780,8 @@ define([
                 {name: 'Wisconsin', shortName: 'WI'},
                 {name: 'Wyoming', shortName: 'WY'}
             ];
+
+            $scope.stateSearch = $scope.states.slice();
         }
     ]);
 
