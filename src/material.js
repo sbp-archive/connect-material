@@ -155,7 +155,6 @@ define([
                         var transition = self.get(id);
 
                         if (transition.opened && !transition.deferred.open) {
-                            console.warn('Opening a transition for ' + id + ' while it is already opened');
                             return $q.reject('Opening a transition for ' + id + ' while it is already opened');
                         }
 
@@ -189,7 +188,6 @@ define([
                         var transition = self.get(id);
 
                         if (!transition.opened && !transition.deferred.close) {
-                            console.warn('Closing a transition for ' + id + ' while it is already closed');
                             return $q.reject('Closing a transition for ' + id + ' while it is already closed');
                         }
 
