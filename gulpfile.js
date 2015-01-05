@@ -5,6 +5,9 @@ var $ = require('gulp-load-plugins')();
 var merge = require('merge-stream');
 var extend = require('util')._extend;
 
+// pass along gulp reference to have tasks imported
+require('gulp-release-tasks')(gulp);
+
 var traceurConfig = {
     script: false,
     strict: false,

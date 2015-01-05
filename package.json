@@ -1,6 +1,6 @@
 {
   "name": "connect-material",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collection of UI components according to google's Material",
   "main": "src/material.js",
   "repository": {
@@ -24,6 +24,7 @@
     "gulp-jshint": "^1.5.3",
     "gulp-less": "^2.0.1",
     "gulp-load-plugins": "^0.7.1",
+    "gulp-release-tasks": "^0.0.3",
     "gulp-rename": "^1.2.0",
     "gulp-size": "^1.1.0",
     "gulp-sourcemaps": "^1.2.8",
