@@ -75,6 +75,7 @@ materialComponents.directive('materialSelectsearch', [
                     input.on('blur', function() {
                         $scope.$apply(function() {
                             menus.close($scope.selectId);
+                            selectValue(ngModelCtrl.$modelValue);
                         });
                     });
 
@@ -116,21 +117,25 @@ materialComponents.directive('materialSelectsearch', [
                         }
                     });
 
-                    function renderValue(value) {
-                        if (angular.isDefined(value) && $scope.results && $scope.results.length) {
-                            var result = $scope.results.filter(function (option) {
-                                if ((angular.isObject(option) && option[$scope._valueField] === value) || option === value) {
-                                    return true;
-                                }
-                            })[0] || null;
+                    function selectValue(value) {
+                        var result = $scope.results.filter(function (option) {
+                            if ((angular.isObject(option) && option[$scope._valueField] === value) || option === value) {
+                                return true;
+                            }
+                        })[0] || null;
 
-                            $scope.label = angular.isObject(result) && result[$scope._labelField] || result;
+                        $scope.label = angular.isObject(result) && result[$scope._labelField] || result;
+                    }
+
+                    function renderValue(value) {
+                        $scope.label = null;
+                        hasRenderedValue = false;
+
+                        if (angular.isDefined(value) && $scope.results && $scope.results.length) {
+                            selectValue(value);
                             hasRenderedValue = true;
                         }
-                        else {
-                            $scope.label = null;
-                            hasRenderedValue = false;
-                        }
+
                         return value;
                     }
 

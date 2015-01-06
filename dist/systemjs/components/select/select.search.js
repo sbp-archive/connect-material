@@ -62,6 +62,7 @@ System.register(["../components", "angular", "../../services/config/config", "..
               input.on('blur', function() {
                 $scope.$apply(function() {
                   menus.close($scope.selectId);
+                  selectValue(ngModelCtrl.$modelValue);
                 });
               });
               input.on('input', function() {
@@ -98,18 +99,20 @@ System.register(["../components", "angular", "../../services/config/config", "..
                   });
                 }
               });
+              function selectValue(value) {
+                var result = $scope.results.filter(function(option) {
+                  if ((angular.isObject(option) && option[$scope._valueField] === value) || option === value) {
+                    return true;
+                  }
+                })[0] || null;
+                $scope.label = angular.isObject(result) && result[$scope._labelField] || result;
+              }
               function renderValue(value) {
+                $scope.label = null;
+                hasRenderedValue = false;
                 if (angular.isDefined(value) && $scope.results && $scope.results.length) {
-                  var result = $scope.results.filter(function(option) {
-                    if ((angular.isObject(option) && option[$scope._valueField] === value) || option === value) {
-                      return true;
-                    }
-                  })[0] || null;
-                  $scope.label = angular.isObject(result) && result[$scope._labelField] || result;
+                  selectValue(value);
                   hasRenderedValue = true;
-                } else {
-                  $scope.label = null;
-                  hasRenderedValue = false;
                 }
                 return value;
               }
