@@ -43,7 +43,9 @@ materialComponents.directive('materialSelectsearch', [
                 return function ($scope, $element, $attrs, ngModelCtrl) {
                     configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
 
-                    configs.bridgeConfigs($scope, $attrs, 'menuConfig');
+                    configs.bridgeConfigs($scope, $attrs, 'menuConfig', {
+                        autoAdjust: true
+                    });
                     configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
                     configs.bridgeConfigs($scope, $attrs, 'selectConfig', {
                         autoAdjust: false,
