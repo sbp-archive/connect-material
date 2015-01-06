@@ -45,12 +45,10 @@ materialComponents.directive('materialMenu', ['$animate', '$parse', 'materialCon
         });
         menu.on('close', function() {
           if ($scope._appendToBody) {
-            if ($scope._autoAdjust) {
-              var style = $element[0].style;
-              style.top = null;
-              style.right = null;
-              style.height = null;
-            }
+            var style = $element[0].style;
+            style.top = null;
+            style.right = null;
+            style.height = null;
             originalParent.append($element);
           }
           angular.element(window).off('click', onBodyClick);

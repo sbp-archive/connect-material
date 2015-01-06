@@ -501,7 +501,9 @@ material-item,
   -webkit-user-select: none;
 }
 material-item:hover,
-.material-item:hover {
+.material-item:hover,
+material-item.selected,
+.material-item.selected {
   background: #f7f7f7;
 }
 material-item.material-has-icon,
@@ -517,6 +519,10 @@ material-item > .material-icon,
 material-item > .material-text,
 .material-item > .material-text {
   line-height: 20px;
+}
+material-item.selected,
+.material-item.selected {
+  color: #03a9f4;
 }
 material-title,
 .material-title {
@@ -1634,20 +1640,13 @@ material-menu.material-selectsearch-menu {
 material-menu.material-select-menu,
 .material-menu.material-select-menu {
   min-width: 0;
-  -webkit-transition: -webkit-transform 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
-          transition: transform 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
-  -webkit-transform: scale(1, 0);
-      -ms-transform: scale(1, 0);
-          transform: scale(1, 0);
-  -webkit-transform-origin: center 24px;
-      -ms-transform-origin: center 24px;
-          transform-origin: center 24px;
+  -webkit-transition: opacity 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
+          transition: opacity 200ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms;
+  opacity: 0;
 }
 material-menu.material-select-menu.material-opened,
 .material-menu.material-select-menu.material-opened {
-  -webkit-transform: scale(1, 1);
-      -ms-transform: scale(1, 1);
-          transform: scale(1, 1);
+  opacity: 1;
 }
 material-menu.material-select-menu material-item .material-text,
 .material-menu.material-select-menu material-item .material-text {

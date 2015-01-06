@@ -20,6 +20,7 @@ materialServices.factory('materialTransitionService', ['$animate', '$q', functio
         transition.element = angular.element(element);
         return transition;
       },
+      extendTransition: function() {},
       get: function(id) {
         if (!id) {
           throw 'Trying to get a ' + serviceName + ' without passing an id';
@@ -30,18 +31,17 @@ materialServices.factory('materialTransitionService', ['$animate', '$q', functio
             element: null,
             id: id,
             opened: false,
-            listeners: {
-              beforeopen: [],
-              open: [],
-              beforeclose: [],
-              close: []
-            },
+            listeners: {},
             deferred: {
               open: null,
               close: null
             },
             on: function(eventName, listener) {
               return self.on(eventName, id, listener);
+            },
+            broadcast: function(eventName) {
+              var args = Array.prototype.slice.call(arguments, 1);
+              return self.broadcast.apply(self, [eventName, id].concat(args));
             },
             open: function() {
               return self.open(id);
@@ -50,6 +50,7 @@ materialServices.factory('materialTransitionService', ['$animate', '$q', functio
               return self.close(id);
             }
           };
+          self.extendTransition(transition);
         }
         return transition;
       },
@@ -106,9 +107,12 @@ materialServices.factory('materialTransitionService', ['$animate', '$q', functio
         return transition.deferred.close.promise;
       },
       on: function(eventName, id, callback) {
-        var transition = self.get(id),
-            listeners = transition && transition.listeners && transition.listeners[eventName];
-        if (listeners) {
+        var transition = self.get(id);
+        if (transition) {
+          var listeners = transition.listeners[eventName];
+          if (!listeners) {
+            listeners = transition.listeners[eventName] = [];
+          }
           listeners.push(callback);
           return function() {
             listeners.splice(listeners.indexOf(callback), 1);
@@ -117,7 +121,7 @@ materialServices.factory('materialTransitionService', ['$animate', '$q', functio
       },
       broadcast: function(eventName, id) {
         var transition = self.get(id),
-            listeners = transition && transition.listeners && transition.listeners[eventName];
+            listeners = transition && transition.listeners[eventName];
         if (listeners && listeners.length) {
           listeners.forEach(function(listener) {
             listener.apply(self, Array.prototype.slice.call(arguments, 1));

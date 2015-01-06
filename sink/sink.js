@@ -36,7 +36,8 @@ define([
 
     var module = ng.module('sink', [
         'material.services',
-        'material.components'
+        'material.components',
+        'material.utils'
     ]);
 
     module.controller('SinkCtrl', [

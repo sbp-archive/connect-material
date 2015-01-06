@@ -1,4 +1,4 @@
-define(['../components', 'angular', '../../services/config/config', '../../services/menu/menu', '../textfield/textfield', './select.menu'], function($__0,$__2,$__4,$__5,$__6,$__7) {
+define(['../components', 'angular', '../../services/config/config', '../../services/menu/menu', '../../utils/constant/constant', '../textfield/textfield', './select.menu'], function($__0,$__2,$__4,$__5,$__6,$__7,$__8) {
   "use strict";
   if (!$__0 || !$__0.__esModule)
     $__0 = {default: $__0};
@@ -12,12 +12,15 @@ define(['../components', 'angular', '../../services/config/config', '../../servi
     $__6 = {default: $__6};
   if (!$__7 || !$__7.__esModule)
     $__7 = {default: $__7};
+  if (!$__8 || !$__8.__esModule)
+    $__8 = {default: $__8};
   var materialComponents = $__0.materialComponents;
   var angular = $__2.default;
   $__4;
   $__5;
   $__6;
-  var defaultSelectConfig = $__7.defaultSelectConfig;
+  $__7;
+  var defaultSelectConfig = $__8.defaultSelectConfig;
   var ID_GENERATOR = 1;
   materialComponents.directive('materialSelectfield', ['materialConfigService', 'materialMenuService', function(configs, menus) {
     return {
@@ -41,7 +44,7 @@ define(['../components', 'angular', '../../services/config/config', '../../servi
         }
         return function($scope, $element, $attrs, ngModelCtrl) {
           configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
-          configs.bridgeConfigs($scope, $attrs, 'menuConfig', {appendToBody: true});
+          configs.bridgeConfigs($scope, $attrs, 'menuConfig');
           configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
           configs.bridgeConfigs($scope, $attrs, 'selectConfig');
           $scope.$watch('options', function() {

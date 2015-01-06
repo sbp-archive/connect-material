@@ -3,6 +3,7 @@ import angular from 'angular';
 
 import '../../services/config/config';
 import '../../services/menu/menu';
+import '../../utils/constant/constant';
 import '../textfield/textfield';
 
 import {defaultSelectConfig} from './select.menu';
@@ -42,10 +43,7 @@ materialComponents.directive('materialSelectfield', [
                 return function ($scope, $element, $attrs, ngModelCtrl) {
                     configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
 
-                    configs.bridgeConfigs($scope, $attrs, 'menuConfig', {
-                        appendToBody: true
-                    });
-
+                    configs.bridgeConfigs($scope, $attrs, 'menuConfig');
                     configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
                     configs.bridgeConfigs($scope, $attrs, 'selectConfig');
 

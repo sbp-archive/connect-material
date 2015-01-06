@@ -26,6 +26,10 @@ materialServices.factory('materialTransitionService', [
                     return transition;
                 },
 
+                // This is a tempalte function that custom TransitionServices (like menu) can
+                // override in order to extend the created transition objects with more functionality
+                extendTransition: function() {},
+
                 get: function(id) {
                     if (!id) {
                         throw 'Trying to get a ' + serviceName + ' without passing an id';
@@ -37,18 +41,17 @@ materialServices.factory('materialTransitionService', [
                             element: null,
                             id: id,
                             opened: false,
-                            listeners: {
-                                beforeopen: [],
-                                open: [],
-                                beforeclose: [],
-                                close: []
-                            },
+                            listeners: {},
                             deferred: {
                                 open: null,
                                 close: null
                             },
                             on: function(eventName, listener) {
                                 return self.on(eventName, id, listener);
+                            },
+                            broadcast: function(eventName) {
+                                var args = Array.prototype.slice.call(arguments, 1);
+                                return self.broadcast.apply(self, [eventName, id].concat(args));
                             },
                             open: function() {
                                 return self.open(id);
@@ -57,6 +60,7 @@ materialServices.factory('materialTransitionService', [
                                 return self.close(id);
                             }
                         };
+                        self.extendTransition(transition);
                     }
 
                     return transition;
@@ -132,10 +136,13 @@ materialServices.factory('materialTransitionService', [
                 },
 
                 on: function(eventName, id, callback) {
-                    var transition = self.get(id),
-                        listeners = transition && transition.listeners && transition.listeners[eventName];
+                    var transition = self.get(id);
+                    if (transition) {
+                        var listeners = transition.listeners[eventName];
+                        if (!listeners) {
+                            listeners = transition.listeners[eventName] = [];
+                        }
 
-                    if (listeners) {
                         listeners.push(callback);
 
                         return function() {
@@ -146,7 +153,7 @@ materialServices.factory('materialTransitionService', [
 
                 broadcast: function(eventName, id) {
                     var transition = self.get(id),
-                        listeners = transition && transition.listeners && transition.listeners[eventName];
+                        listeners = transition && transition.listeners[eventName];
 
                     if (listeners && listeners.length) {
                         listeners.forEach(function(listener) {

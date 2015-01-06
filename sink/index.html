@@ -83,6 +83,12 @@
                 flex: 1;
             }
 
+            .field-state {
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+
             .buttton-examples material-button:not(.material-fab) {
                 min-width: 100px;
             }
@@ -300,7 +306,11 @@
                     </div>
 
                     <material-textfield label="City" ng-model="user.city"></material-textfield>
-                    <material-selectsearch on-search="doSearch($query)" label="State" ng-model="user.state" results="stateSearch" select-config="{valueField: 'shortName', labelField: 'name'}"></material-selectsearch>
+
+                    <div layout="row">
+                        <material-selectfield label="State (select)" ng-model="user.state" options="states" select-config="{valueField: 'shortName', labelField: 'name'}" class="field-state"></material-selectfield>
+                        <material-selectsearch label="State (selectsearch)" ng-model="user.state" on-search="doSearch($query)" results="stateSearch" select-config="{valueField: 'shortName', labelField: 'name'}" class="field-state"></material-selectsearch>
+                    </div>
 
                     <material-textfield label="Disabled Field" ng-model="user.address" ng-disabled="true"></material-textfield>
                 </material-content>

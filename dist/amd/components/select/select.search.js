@@ -1,4 +1,4 @@
-define(['../components', 'angular', '../../services/config/config', '../../services/menu/menu', '../textfield/textfield', './select.menu'], function($__0,$__2,$__4,$__5,$__6,$__7) {
+define(['../components', 'angular', '../../services/config/config', '../../services/menu/menu', '../../utils/constant/constant', '../textfield/textfield', './select.menu'], function($__0,$__2,$__4,$__5,$__6,$__7,$__8) {
   "use strict";
   if (!$__0 || !$__0.__esModule)
     $__0 = {default: $__0};
@@ -12,12 +12,15 @@ define(['../components', 'angular', '../../services/config/config', '../../servi
     $__6 = {default: $__6};
   if (!$__7 || !$__7.__esModule)
     $__7 = {default: $__7};
+  if (!$__8 || !$__8.__esModule)
+    $__8 = {default: $__8};
   var materialComponents = $__0.materialComponents;
   var angular = $__2.default;
   $__4;
   $__5;
   $__6;
-  var defaultSelectConfig = $__7.defaultSelectConfig;
+  $__7;
+  var defaultSelectConfig = $__8.defaultSelectConfig;
   var ID_GENERATOR = 1;
   materialComponents.directive('materialSelectsearch', ['materialConfigService', 'materialMenuService', 'materialConstants', function(configs, menus, Constants) {
     return {
@@ -40,41 +43,67 @@ define(['../components', 'angular', '../../services/config/config', '../../servi
         }
         return function($scope, $element, $attrs, ngModelCtrl) {
           configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
-          configs.bridgeConfigs($scope, $attrs, 'menuConfig', {
-            appendToBody: true,
-            autoAdjust: false
-          });
+          configs.bridgeConfigs($scope, $attrs, 'menuConfig');
           configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
           configs.bridgeConfigs($scope, $attrs, 'selectConfig', {
+            autoAdjust: false,
             emptyText: 'No results found...',
             menuCls: 'material-selectsearch-menu'
           });
           var input = angular.element($element[0].querySelector('input'));
+          var hasRenderedValue = false;
+          function selectInputText() {
+            setTimeout(function() {
+              input[0].setSelectionRange(0, input.val().length);
+            }, 0);
+          }
           input.on('click', function(e) {
             e.stopPropagation();
           });
-          input.on('focus', function() {
-            input[0].setSelectionRange(0, input.val().length);
+          input.on('focus', function(e) {
+            e.preventDefault();
+            selectInputText();
             $scope.$apply(function() {
               menus.open($scope.selectId);
             });
           });
+          input.on('blur', function() {
+            $scope.$apply(function() {
+              menus.close($scope.selectId);
+            });
+          });
           input.on('input', function() {
-            var value = input.val();
-            if (value.length && $attrs.onSearch) {
+            hasRenderedValue = false;
+            if ($attrs.onSearch) {
               $scope.$apply(function() {
                 $scope.$parent.$eval($attrs.onSearch, {$query: input.val()});
               });
             }
           });
           input.on('keypress', function(e) {
-            if (e.keyCode === Constants.KEY_CODE.ENTER && $scope.results.length) {
-              var value = $scope.results[0][$scope._valueField];
-              ngModelCtrl.$setViewValue(value);
-              ngModelCtrl.$render();
-              renderValue(value);
-              menus.close($scope.selectId);
+            if (e.keyCode === Constants.KEY_CODE.ENTER) {
+              if (!hasRenderedValue && $scope.results.length) {
+                var value = $scope.results[0][$scope._valueField];
+                ngModelCtrl.$setViewValue(value);
+                ngModelCtrl.$render();
+                renderValue(value);
+              }
               input[0].blur();
+            }
+          });
+          input.on('keydown', function(e) {
+            if (e.keyCode === Constants.KEY_CODE.DOWN_ARROW) {
+              e.preventDefault();
+              $scope.$evalAsync(function() {
+                menus.selectNext($scope.selectId);
+                selectInputText();
+              });
+            } else if (e.keyCode === Constants.KEY_CODE.UP_ARROW) {
+              e.preventDefault();
+              $scope.$evalAsync(function() {
+                menus.selectPrevious($scope.selectId);
+                selectInputText();
+              });
             }
           });
           function renderValue(value) {
@@ -85,8 +114,10 @@ define(['../components', 'angular', '../../services/config/config', '../../servi
                 }
               })[0] || null;
               $scope.label = angular.isObject(result) && result[$scope._labelField] || result;
+              hasRenderedValue = true;
             } else {
               $scope.label = null;
+              hasRenderedValue = false;
             }
             return value;
           }

@@ -11,7 +11,8 @@ export var defaultSelectConfig = {
     valueField: 'value',
     labelField: 'label',
     emptyText: '',
-    menuCls: ''
+    menuCls: '',
+    autoAdjust: true
 };
 
 materialComponents.directive('materialSelect', [
@@ -28,8 +29,10 @@ materialComponents.directive('materialSelect', [
             template: [
                 '<material-menu class="material-select-menu {{_menuCls}}" menu-id="{{selectId}}" menu-config="_menuConfig">',
                     '<material-item ',
+                        'data-index="{{$index}}" ',
                         'ng-if="options" ',
-                        'ng-repeat="option in options | materialSelectSort:selected" ',
+                        'ng-repeat="option in options" ',
+                        'ng-class="{selected:option === selected}" ',
                         'ng-click="select(option[_valueField] || option)">',
                             '{{option[_labelField] || option}}',
                     '</material-item>',
@@ -51,14 +54,82 @@ materialComponents.directive('materialSelect', [
                     var menu = menus.get($attrs.selectId);
 
                     configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
-                    configs.bridgeConfigs($scope, $attrs, 'menuConfig');
+                    configs.bridgeConfigs($scope, $attrs, 'menuConfig', {
+                        autoAdjust: false,
+                        autoPosition: false,
+                        appendToBody: true
+                    });
 
                     $scope.$watch('options', function() {
                         ngModelCtrl.$render();
                     }, true);
 
+                    function getSelectedOptionIndex () {
+                        return $scope.selected ? $scope.options.indexOf($scope.selected) : -1;
+                    }
+
+                    function getSelectedOptionEl () {
+                        var menuEl = menu.element;
+                        var selectedIndex = getSelectedOptionIndex();
+                        return (selectedIndex !== -1) ? menuEl[0].querySelector('material-item[data-index="' + selectedIndex + '"]') : null;
+                    }
+
+                    function selectValue(value) {
+                        ngModelCtrl.$setViewValue(value);
+                        ngModelCtrl.$render();
+
+                        getSelectedOptionEl().scrollIntoView(false);
+                    }
+
                     menu.on('beforeopen', function () {
-                        menu.element.css('width', $element[0].clientWidth + 'px');
+                        var menuEl = menu.element;
+                        var containerRect = $element[0].getBoundingClientRect();
+                        var topPosition = containerRect.top;
+
+                        if ($scope._autoAdjust) {
+                            var innerMenuHeight = menuEl[0].scrollHeight;
+                            var maxHeight = document.documentElement.clientHeight - 20;
+                            var selectedOptionEl = getSelectedOptionEl();
+
+                            if (innerMenuHeight > maxHeight) {
+                                menuEl.css('height', maxHeight + 'px');
+                                topPosition = 10;
+
+                                if (selectedOptionEl) {
+                                    // We need to set the scrollTop to try and position the item
+                                    // under our cursor
+                                    menuEl[0].scrollTop = selectedOptionEl.offsetTop - containerRect.top;
+                                }
+                                else {
+                                    menuEl[0].scrollTop = 0;
+                                }
+                            }
+                            else if (selectedOptionEl) {
+                                topPosition -= selectedOptionEl.offsetTop;
+                            }
+                        }
+
+                        menuEl.css({
+                            width: $element[0].clientWidth + 'px',
+                            top: topPosition + 'px',
+                            right: (document.documentElement.clientWidth - containerRect.right) + 'px'
+                        });
+                    });
+
+                    menu.on('selectnext', function() {
+                        var option = $scope.options[getSelectedOptionIndex() + 1];
+                        if (!option) {
+                            option = $scope.options[0];
+                        }
+                        selectValue((angular.isObject(option) && option[$scope._valueField]) || option);
+                    });
+
+                    menu.on('selectprev', function() {
+                        var option = $scope.options[getSelectedOptionIndex() - 1];
+                        if (!option) {
+                            option = $scope.options[$scope.options.length - 1];
+                        }
+                        selectValue((angular.isObject(option) && option[$scope._valueField]) || option);
                     });
 
                     ngModelCtrl.$render = function () {
@@ -81,8 +152,7 @@ materialComponents.directive('materialSelect', [
                     };
 
                     $scope.select = function (value) {
-                        ngModelCtrl.$setViewValue(value);
-                        ngModelCtrl.$render();
+                        selectValue(value);
                         menu.close();
                     };
                 };
@@ -90,16 +160,3 @@ materialComponents.directive('materialSelect', [
         };
     }
 ]);
-
-materialComponents.filter('materialSelectSort', function () {
-    return function (options, selected) {
-        if (angular.isUndefined(selected) || selected === null) {
-            return options;
-        }
-
-        var results = options.slice();
-        results.splice(options.indexOf(selected), 1);
-        results.unshift(selected);
-        return results;
-    };
-});

@@ -1,4 +1,4 @@
-System.register(["../components", "angular", "../../services/config/config", "../../services/menu/menu", "../textfield/textfield", "./select.menu"], function($__export) {
+System.register(["../components", "angular", "../../services/config/config", "../../services/menu/menu", "../../utils/constant/constant", "../textfield/textfield", "./select.menu"], function($__export) {
   "use strict";
   var materialComponents,
       angular,
@@ -9,7 +9,7 @@ System.register(["../components", "angular", "../../services/config/config", "..
       materialComponents = m.materialComponents;
     }, function(m) {
       angular = m.default;
-    }, function(m) {}, function(m) {}, function(m) {}, function(m) {
+    }, function(m) {}, function(m) {}, function(m) {}, function(m) {}, function(m) {
       defaultSelectConfig = m.defaultSelectConfig;
     }],
     execute: function() {
@@ -36,7 +36,7 @@ System.register(["../components", "angular", "../../services/config/config", "..
             }
             return function($scope, $element, $attrs, ngModelCtrl) {
               configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
-              configs.bridgeConfigs($scope, $attrs, 'menuConfig', {appendToBody: true});
+              configs.bridgeConfigs($scope, $attrs, 'menuConfig');
               configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
               configs.bridgeConfigs($scope, $attrs, 'selectConfig');
               $scope.$watch('options', function() {

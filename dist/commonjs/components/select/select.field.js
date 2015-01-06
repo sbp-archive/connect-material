@@ -3,12 +3,14 @@ var $___46__46__47_components__,
     $__angular__,
     $___46__46__47__46__46__47_services_47_config_47_config__,
     $___46__46__47__46__46__47_services_47_menu_47_menu__,
+    $___46__46__47__46__46__47_utils_47_constant_47_constant__,
     $___46__46__47_textfield_47_textfield__,
     $__select_46_menu__;
 var materialComponents = ($___46__46__47_components__ = require("../components"), $___46__46__47_components__ && $___46__46__47_components__.__esModule && $___46__46__47_components__ || {default: $___46__46__47_components__}).materialComponents;
 var angular = ($__angular__ = require("angular"), $__angular__ && $__angular__.__esModule && $__angular__ || {default: $__angular__}).default;
 ($___46__46__47__46__46__47_services_47_config_47_config__ = require("../../services/config/config"), $___46__46__47__46__46__47_services_47_config_47_config__ && $___46__46__47__46__46__47_services_47_config_47_config__.__esModule && $___46__46__47__46__46__47_services_47_config_47_config__ || {default: $___46__46__47__46__46__47_services_47_config_47_config__});
 ($___46__46__47__46__46__47_services_47_menu_47_menu__ = require("../../services/menu/menu"), $___46__46__47__46__46__47_services_47_menu_47_menu__ && $___46__46__47__46__46__47_services_47_menu_47_menu__.__esModule && $___46__46__47__46__46__47_services_47_menu_47_menu__ || {default: $___46__46__47__46__46__47_services_47_menu_47_menu__});
+($___46__46__47__46__46__47_utils_47_constant_47_constant__ = require("../../utils/constant/constant"), $___46__46__47__46__46__47_utils_47_constant_47_constant__ && $___46__46__47__46__46__47_utils_47_constant_47_constant__.__esModule && $___46__46__47__46__46__47_utils_47_constant_47_constant__ || {default: $___46__46__47__46__46__47_utils_47_constant_47_constant__});
 ($___46__46__47_textfield_47_textfield__ = require("../textfield/textfield"), $___46__46__47_textfield_47_textfield__ && $___46__46__47_textfield_47_textfield__.__esModule && $___46__46__47_textfield_47_textfield__ || {default: $___46__46__47_textfield_47_textfield__});
 var defaultSelectConfig = ($__select_46_menu__ = require("./select.menu"), $__select_46_menu__ && $__select_46_menu__.__esModule && $__select_46_menu__ || {default: $__select_46_menu__}).defaultSelectConfig;
 var ID_GENERATOR = 1;
@@ -34,7 +36,7 @@ materialComponents.directive('materialSelectfield', ['materialConfigService', 'm
       }
       return function($scope, $element, $attrs, ngModelCtrl) {
         configs.applyConfigs($scope, $attrs.selectConfig, defaultSelectConfig);
-        configs.bridgeConfigs($scope, $attrs, 'menuConfig', {appendToBody: true});
+        configs.bridgeConfigs($scope, $attrs, 'menuConfig');
         configs.bridgeConfigs($scope, $attrs, 'fieldConfig');
         configs.bridgeConfigs($scope, $attrs, 'selectConfig');
         $scope.$watch('options', function() {
