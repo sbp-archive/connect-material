@@ -74,13 +74,6 @@ materialComponents.directive('materialSelectsearch', [
                         });
                     });
 
-                    input.on('blur', function() {
-                        $scope.$apply(function() {
-                            menus.close($scope.selectId);
-                            selectValue(ngModelCtrl.$modelValue);
-                        });
-                    });
-
                     input.on('input', function() {
                         hasRenderedValue = false;
                         if ($attrs.onSearch) {
@@ -92,13 +85,16 @@ materialComponents.directive('materialSelectsearch', [
 
                     input.on('keypress', function(e) {
                         if (e.keyCode === Constants.KEY_CODE.ENTER) {
-                            if (!hasRenderedValue && $scope.results.length) {
-                                var value = $scope.results[0][$scope._valueField];
-                                ngModelCtrl.$setViewValue(value);
-                                ngModelCtrl.$render();
-                                renderValue(value);
-                            }
-                            input[0].blur();
+                            $scope.$apply(function() {
+                                if (!hasRenderedValue && $scope.results.length) {
+                                    var value = $scope.results[0][$scope._valueField];
+                                    menus.select($scope.selectId, value);
+                                }
+                                else {
+                                    menus.close($scope.selectId);
+                                }
+                                input[0].blur();
+                            });
                         }
                     });
 

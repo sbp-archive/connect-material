@@ -74,12 +74,17 @@ materialComponents.directive('materialSelect', [
                         return (selectedIndex !== -1) ? menuEl[0].querySelector('material-item[data-index="' + selectedIndex + '"]') : null;
                     }
 
-                    function selectValue(value) {
+                    function selectValue (value) {
                         ngModelCtrl.$setViewValue(value);
                         ngModelCtrl.$render();
 
                         getSelectedOptionEl().scrollIntoView(false);
                     }
+
+                    $scope.select = function (value) {
+                        selectValue(value);
+                        menu.close();
+                    };
 
                     menu.on('beforeopen', function () {
                         var menuEl = menu.element;
@@ -116,6 +121,8 @@ materialComponents.directive('materialSelect', [
                         });
                     });
 
+                    menu.on('select', $scope.select);
+
                     menu.on('selectnext', function() {
                         var option = $scope.options[getSelectedOptionIndex() + 1];
                         if (!option) {
@@ -149,11 +156,6 @@ materialComponents.directive('materialSelect', [
 
                         $scope.selected = isValid ? option : null;
                         ngModelCtrl.$setValidity('select', isValid);
-                    };
-
-                    $scope.select = function (value) {
-                        selectValue(value);
-                        menu.close();
                     };
                 };
             }

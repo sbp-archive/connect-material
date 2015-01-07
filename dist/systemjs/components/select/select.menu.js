@@ -60,6 +60,10 @@ System.register(["../components", "angular", "../../services/config/config", "..
                 ngModelCtrl.$render();
                 getSelectedOptionEl().scrollIntoView(false);
               }
+              $scope.select = function(value) {
+                selectValue(value);
+                menu.close();
+              };
               menu.on('beforeopen', function() {
                 var menuEl = menu.element;
                 var containerRect = $element[0].getBoundingClientRect();
@@ -86,6 +90,7 @@ System.register(["../components", "angular", "../../services/config/config", "..
                   right: (document.documentElement.clientWidth - containerRect.right) + 'px'
                 });
               });
+              menu.on('select', $scope.select);
               menu.on('selectnext', function() {
                 var option = $scope.options[getSelectedOptionIndex() + 1];
                 if (!option) {
@@ -116,10 +121,6 @@ System.register(["../components", "angular", "../../services/config/config", "..
                 }
                 $scope.selected = isValid ? option : null;
                 ngModelCtrl.$setValidity('select', isValid);
-              };
-              $scope.select = function(value) {
-                selectValue(value);
-                menu.close();
               };
             };
           }

@@ -127,10 +127,11 @@ System.register(["angular", "../services"], function($__export) {
             },
             broadcast: function(eventName, id) {
               var transition = self.get(id),
-                  listeners = transition && transition.listeners[eventName];
+                  listeners = transition && transition.listeners[eventName],
+                  listenerArgs = Array.prototype.slice.call(arguments, 2);
               if (listeners && listeners.length) {
                 listeners.forEach(function(listener) {
-                  listener.apply(self, Array.prototype.slice.call(arguments, 1));
+                  listener.apply(self, listenerArgs);
                 });
               }
             }
