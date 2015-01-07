@@ -1413,7 +1413,7 @@ material-input-group.material-input-has-value:not(.material-input-focused) label
 }
 material-input-group.material-input-has-value:not(.material-input-focused) label,
 .material-input-group.material-input-has-value:not(.material-input-focused) label {
-  color: #c4c4c4;
+  color: #787878;
 }
 material-input-group[disabled] input,
 .material-input-group[disabled] input,
