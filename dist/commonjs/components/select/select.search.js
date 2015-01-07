@@ -69,7 +69,7 @@ materialComponents.directive('materialSelectsearch', ['materialConfigService', '
         });
         input.on('keypress', function(e) {
           if (e.keyCode === Constants.KEY_CODE.ENTER) {
-            $scope.$apply(function() {
+            $scope.$evalAsync(function() {
               if (!hasRenderedValue && $scope.results.length) {
                 var value = $scope.results[0][$scope._valueField];
                 menus.select($scope.selectId, value);
