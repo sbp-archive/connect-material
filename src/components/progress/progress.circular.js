@@ -33,7 +33,7 @@ materialComponents.directive('materialProgressCircular', [
                     '</div>',
                 '</div>'
             ].join(''),
-            compile: function ($element, $attrs) {
+            compile: function ($element/*, $attrs*/) {
                 $element.attr('aria-valuemin', 0);
                 $element.attr('aria-valuemax', 100);
                 $element.attr('role', 'progressbar');

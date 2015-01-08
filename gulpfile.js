@@ -61,6 +61,7 @@ gulp.task('jshint', function() {
 gulp.task('clean', require('del').bind(null, ['dist']));
 
 gulp.task('build', ['clean', 'jshint'], function() {
+    gulp.start('styles');
     gulp.start('transpile');
     return gulp.src('dist/**/*').pipe($.size({
         title: 'build',

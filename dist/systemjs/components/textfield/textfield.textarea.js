@@ -18,7 +18,8 @@ System.register(["../components", "angular", "./textfield.textarea", "./textfiel
           scope: {
             fid: '@?fieldId',
             label: '@?',
-            value: '=ngModel'
+            value: '=ngModel',
+            ngChange: '&'
           },
           compile: function(element, attr) {
             if (angular.isUndefined(attr.fieldId)) {
@@ -36,7 +37,7 @@ System.register(["../components", "angular", "./textfield.textarea", "./textfiel
                 $scope.required = angular.isDefined($attrs.required);
               }};
           },
-          template: ['<material-input-group>', '   <label for="{{fid}}" >{{label}}</label>', '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" ng-required="{{required}}"></textarea>', '</material-input-group>'].join('')
+          template: ['<material-input-group>', '   <label for="{{fid}}" >{{label}}</label>', '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-change="ngChange()" ng-model="value" type="{{inputType}}" ng-required="{{required}}"></textarea>', '</material-input-group>'].join('')
         };
       }]);
     }

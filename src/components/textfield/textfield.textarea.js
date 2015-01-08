@@ -16,7 +16,8 @@ materialComponents.directive('materialTextarea', [
             scope : {
                 fid : '@?fieldId',
                 label : '@?',
-                value : '=ngModel'
+                value : '=ngModel',
+                ngChange : '&'
             },
             compile : function (element, attr) {
                 if (angular.isUndefined(attr.fieldId)) {
@@ -40,7 +41,7 @@ materialComponents.directive('materialTextarea', [
             template: [
                 '<material-input-group>',
                 '   <label for="{{fid}}" >{{label}}</label>',
-                '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" ng-required="{{required}}"></textarea>',
+                '   <textarea material-input id="{{fid}}" ng-disabled="isDisabled()" ng-change="ngChange()" ng-model="value" type="{{inputType}}" ng-required="{{required}}"></textarea>',
                 '</material-input-group>'
             ].join('')
         };

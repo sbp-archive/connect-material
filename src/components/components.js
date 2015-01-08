@@ -1,4 +1,4 @@
-import angular from 'angular'
+import angular from 'angular';
 import 'angular-animate';
 import '../services/services';
 import '../utils/utils';
