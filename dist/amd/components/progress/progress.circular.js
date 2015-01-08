@@ -21,7 +21,7 @@ define(['../components', '../../services/config/config', '../../utils/constant/c
     return {
       restrict: 'E',
       template: ['<div class="material-progress-wrapper">', '<div class="material-progress-inner">', '<div class="material-progress-gap"></div>', '<div class="material-progress-left">', '<div class="material-progress-half-circle"></div>', '</div>', '<div class="material-progress-right">', '<div class="material-progress-half-circle"></div>', '</div>', '</div>', '</div>'].join(''),
-      compile: function($element, $attrs) {
+      compile: function($element) {
         $element.attr('aria-valuemin', 0);
         $element.attr('aria-valuemax', 100);
         $element.attr('role', 'progressbar');

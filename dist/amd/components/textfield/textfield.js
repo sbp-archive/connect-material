@@ -23,7 +23,8 @@ define(['../components', 'angular', './textfield.inputgroup', './textfield.input
       scope: {
         fid: '@?fieldId',
         label: '@?',
-        value: '=ngModel'
+        value: '=ngModel',
+        ngChange: '&'
       },
       compile: function(element, attr) {
         if (angular.isUndefined(attr.fieldId)) {
@@ -41,7 +42,7 @@ define(['../components', 'angular', './textfield.inputgroup', './textfield.input
             $scope.required = angular.isDefined($attrs.required);
           }};
       },
-      template: ['<material-input-group>', '   <label for="{{fid}}" >{{label}}</label>', '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" type="{{inputType}}" ng-required="{{required}}" />', '</material-input-group>'].join('')
+      template: ['<material-input-group>', '   <label for="{{fid}}" >{{label}}</label>', '   <input material-input id="{{fid}}" ng-disabled="isDisabled()" ng-model="value" ng-change="ngChange()" type="{{inputType}}" ng-required="{{required}}" />', '</material-input-group>'].join('')
     };
   }]);
   return {};

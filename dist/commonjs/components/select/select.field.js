@@ -21,10 +21,11 @@ materialComponents.directive('materialSelectfield', ['materialConfigService', 'm
       selectId: '@?',
       fieldLabel: '@?label',
       value: '=ngModel',
-      options: '=options'
+      options: '=options',
+      ngChange: '&'
     },
     require: '?ngModel',
-    template: ['<material-textfield ng-model="label" label="{{fieldLabel}}" field-config="_fieldConfig"></material-textfield>', '<div class="material-select-carret material-icon icon-navigation-black icon-navigation-black-ic_arrow_drop_down_black_24dp"></div>', '<material-select ng-click="openSelect($event)" select-id="{{selectId}}" menu-config="_menuConfig" select-config="_selectConfig" ng-model="value" options="options"></material-select>'].join(''),
+    template: ['<material-textfield ng-model="label" label="{{fieldLabel}}" field-config="_fieldConfig"></material-textfield>', '<div class="material-select-carret material-icon icon-navigation-black icon-navigation-black-ic_arrow_drop_down_black_24dp"></div>', '<material-select ng-click="openSelect($event)" ng-change="ngChange()" select-id="{{selectId}}" menu-config="_menuConfig" select-config="_selectConfig" ng-model="value" options="options"></material-select>'].join(''),
     compile: function($element, $attrs) {
       if (angular.isUndefined($attrs.selectId)) {
         $attrs.selectId = 'material-selectfield-' + ID_GENERATOR++;
